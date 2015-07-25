@@ -1,0 +1,10 @@
+I wish to build a working prototype of a home automation application using
+a Microsoft Surface Pro as a GUI, and at least one Arduino and Ethernet shield
+to control the communication between program and Arduino. The GUI would be programmed
+in Java, C#, or html. Communication to the Arduino would be through the Ethernet shield's
+internet capabilities, and its communication to the Arduino. The Arduino works on a C-like
+programming language. As a final project, this project is designed to create a modular
+interface to allow for easy expansion into new platforms and easy additions to GUI for
+future home and device additions. The final project will be able to allow for the switching on
+and off of light switches, as well as timed settings such as turning on a coffee machine at 
+6 am.

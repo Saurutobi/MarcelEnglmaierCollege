@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../src/ring-buffer.h
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+
+/home/saurutobi/Dropbox/College/Undergraduate/Year2/Spring2013/CS2240/Ringbuffer/RingBufferTar/tests/test-create.c
+ring-buffer.h
+/home/saurutobi/Dropbox/College/Undergraduate/Year2/Spring2013/CS2240/Ringbuffer/RingBufferTar/tests/ring-buffer.h
+

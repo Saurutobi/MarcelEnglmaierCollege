@@ -1,0 +1,120 @@
+Script started on Sat Sep 22 20:55:19 2012
+bronco:~> cat assgn1.c
+#include<stdio.h>
+
+int ComputeExpr(int, int, int);
+
+int main(int argc, char * argv[])
+{
+	printf("2*4 + 2*1 + 2*7 = %d \n", ComputeExpr(4,1,7));
+	printf("2*2 + 2*3 + 2*4 = %d \n", ComputeExpr(2,3,4));
+	printf("2*10 + 2*12 + 2*71 = %d \n", ComputeExpr(10,12,71));
+	printf("2*28 + 2*123 + 2*40 = %d \n", ComputeExpr(28,123,40));
+}
+bronco:~> cat E[KCompue[KteExpr.s
+	.global ComputeExpr
+
+ComputeExpr:	save %sp, -1024, %sp
+
+	call Double	!calls Double first time
+	mov %i0, %o0	!moves imput to output before save is made so output becomes input at save
+	mov %o0, %l0	!moves output(doubled) to a local to be added later
+
+	call Double	!calls Double second time
+	mov %i1, %o0	!moves imput to output before save is made so output becomes input at save
+	mov %o0, %l1	!moves output(doubled) to a local to be added later
+
+	call Double	!calls Double third time
+	mov %i2, %o0	!moves imput to output before save is made so output becomes input at save
+	mov %o0, %l2	!moves output(doubled) to a local to be added later
+
+	add %l0, %l1, %i0	!adds first two locals
+	add %i0, %l2, %i0	!adds third local to the first two to make the final result
+
+	ret
+	restore
+
+Double:	save %sp, -1024, %sp
+
+	add %i0, %i0, %i0	!adds the input '0' to itself to effectivly double, saves it to input
+				!so the restore moves it to output '0'
+	ret
+	restore
+	bronco:~> gcc -c assgn1.s[Kc
+bronco:~> gcc -c ComputeExpr.s
+bronco:~> gcc assgn1.o ComputeExpr.o -o assgn[K[Kignment1
+bronco:~> ./assignment1
+2*4 + 2*1 + 2*7 = 24 
+2*2 + 2*3 + 2*4 = 18 
+2*10 + 2*12 + 2*71 = 186 
+2*28 + 2*123 + 2*40 = 382 
+bronco:~> exit
+exit
+
+script done on Sat Sep 22 20:56:21 2012
+
+
+
+
+
+The Above script is the original and has a few glitches(), so I copied and 
+pasted it and fixed it.
+
+
+
+
+
+Script started on Sat Sep 22 20:55:19 2012
+bronco:~> cat assgn1.c
+#include<stdio.h>
+
+int ComputeExpr(int, int, int);
+
+int main(int argc, char * argv[])
+{
+	printf("2*4 + 2*1 + 2*7 = %d \n", ComputeExpr(4,1,7));
+	printf("2*2 + 2*3 + 2*4 = %d \n", ComputeExpr(2,3,4));
+	printf("2*10 + 2*12 + 2*71 = %d \n", ComputeExpr(10,12,71));
+	printf("2*28 + 2*123 + 2*40 = %d \n", ComputeExpr(28,123,40));
+}
+bronco:~> cat ComputeExpr.s
+	.global ComputeExpr
+
+ComputeExpr:	save %sp, -1024, %sp
+
+	call Double	!calls Double first time
+	mov %i0, %o0	!moves imput to output before save is made so output becomes input at save
+	mov %o0, %l0	!moves output(doubled) to a local to be added later
+
+	call Double	!calls Double second time
+	mov %i1, %o0	!moves imput to output before save is made so output becomes input at save
+	mov %o0, %l1	!moves output(doubled) to a local to be added later
+
+	call Double	!calls Double third time
+	mov %i2, %o0	!moves imput to output before save is made so output becomes input at save
+	mov %o0, %l2	!moves output(doubled) to a local to be added later
+
+	add %l0, %l1, %i0	!adds first two locals
+	add %i0, %l2, %i0	!adds third local to the first two to make the final result
+
+	ret
+	restore
+
+Double:	save %sp, -1024, %sp
+
+	add %i0, %i0, %i0	!adds the input '0' to itself to effectivly double, saves it to input
+				!so the restore moves it to output '0'
+	ret
+	restore
+bronco:~> gcc -c assgn1.c
+bronco:~> gcc -c ComputeExpr.s
+bronco:~> gcc assgn1.o ComputeExpr.o -o assignment1
+bronco:~> ./assignment1
+2*4 + 2*1 + 2*7 = 24 
+2*2 + 2*3 + 2*4 = 18 
+2*10 + 2*12 + 2*71 = 186 
+2*28 + 2*123 + 2*40 = 382 
+bronco:~> exit
+exit
+
+script done on Sat Sep 22 20:56:21 2012

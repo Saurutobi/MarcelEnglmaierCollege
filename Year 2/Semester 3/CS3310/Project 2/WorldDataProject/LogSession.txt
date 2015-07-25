@@ -1,0 +1,309 @@
+***** LogSession.txt FILE opened
+***** Setup PROGRAM started
+***** A2ZRawData.csv FILE opened
+***** A2ZMainData.bin FILE opened
+***** A2ZMainData.bin FILE closed
+***** A2ZRawData.bin FILE closed
+***** Saving CodeIndex to A2ZIndexBackup.bin FILE
+***** Setup PROGRAM ended - 26 items processed - 26 OK - 0 DUPLICATES
+***** LogSession.txt FILE closed
+
+Ok, opened inputFile and outputFile
+
+A2ZMain Data Storage - N is 26, MaxID is 39
+[RRN]   ID      CODE    NAME                    CONTINENT       REGION          AREA            INDEP   POPULATION      L.EXP   
+------------------------------------------------------------------------------------------------------------------------------------------------
+[001]   001     XVI     Hex Land                North Ameri     CyberSpace      1               1969    1966514816      0.0     
+[002]   EMPTY
+[003]   003     CHN     China                   Asia            Eastern As      9572900         -1523   1277558000      71.4    
+[004]   004     IND     India                   Asia            Southern a      3287263         1947    1013662000      62.5    
+[005]   EMPTY
+[006]   006     USA     United States           North Ameri     North Amer      9363520         1776    278357000       77.1    
+[007]   EMPTY
+[008]   008     RUS     Russian Federatio       Europe          Eastern Eu      17075400        1991    146934000       67.2    
+[009]   009     JPN     Japan                   Asia            Eastern As      377829          -660    126714000       80.7    
+[010]   EMPTY
+[011]   EMPTY
+[012]   012     MEX     Mexico                  North Ameri     Central Am      1958201         1810    98881000        71.5    
+[013]   013     DEU     Germany                 Europe          Western Eu      357022          1955    82164700        77.4    
+[014]   EMPTY
+[015]   015     EGY     Egypt                   Africa          Northern A      1001449         1922    68470000        63.3    
+[016]   EMPTY
+[017]   017     GBR     United Kingdom          Europe          British Is      242900          1066    59623400        77.7    
+[018]   EMPTY
+[019]   019     FRA     France                  Europe          Western Eu      551500          843     59225700        78.8    
+[020]   020     POL     Poland                  Europe          Eastern Eu      323250          1918    38653600        73.2    
+[021]   021     KEN     Kenya                   Africa          Eastern Af      580367          1963    30080000        48.0    
+[022]   022     VEN     Venezuela               South Ameri     South Amer      912050          1811    24170000        73.1    
+[023]   EMPTY
+[024]   024     YEM     Yemen                   Asia            Middle Eas      527968          1918    18112000        59.8    
+[025]   025     ZWE     Zimbabwe                Africa          Eastern Af      390757          1980    11669000        37.8    
+[026]   EMPTY
+[027]   027     BEL     Belgium                 Europe          Western Eu      30518           1830    10239000        77.8    
+[028]   028     SOM     Somalia                 Africa          Eastern Af      637657          1960    10097000        46.2    
+[029]   EMPTY
+[030]   030     HTI     Haiti                   North Ameri     Caribbean       27750           1804    8222000         49.2    
+[031]   031     NIC     Nicaragua               North Ameri     Central Am      130000          1838    5074000         68.7    
+[032]   032     LBN     Lebanon                 Asia            Middle Eas      10400           1941    3282000         71.3    
+[033]   033     OMN     Oman                    Asia            Middle Eas      309500          1951    2542000         71.8    
+[034]   EMPTY
+[035]   035     QAT     Qatar                   Asia            Middle Eas      11000           1971    599000          72.4    
+[036]   036     WSM     Samoa                   Oceania         Polynesia       2831            1962    180000          69.2    
+[037]   037     TCA     Turks and Caicos        North Ameri     Caribbean       430             0       17000           73.3    
+[038]   EMPTY
+[039]   039     ATA     Antarctica              Antarctica      Antarctica      13120000        0       0               0.0     
+- - -
+* * * * * * * * * * * * * * * * * * * * * * * * * * * THE END OF DATA * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+OK, starting ShowFilesUtility
+
+The Next empty slot is: 26
+The Root Pointer is: 0
+
+Index  LChPTr KeyValue DRP    RChPtr 
+------------------------------------
+0      1      MEX      12     3      
+1      5      CHN      3      2      
+2      4      JPN      9      13     
+3      9      USA      6      8      
+4      12     FRA      19     6      
+5      25     BEL      27     -1     
+6      -1     GBR      17     7      
+7      -1     HTI      30     14     
+8      -1     VEN      22     11     
+9      -1     NIC      31     10     
+10     15     POL      20     17     
+11     18     YEM      24     22     
+12     16     EGY      15     -1     
+13     19     LBN      32     -1     
+14     -1     IND      4      -1     
+15     -1     OMN      33     -1     
+16     -1     DEU      13     -1     
+17     21     SOM      28     24     
+18     -1     WSM      36     20     
+19     -1     KEN      21     -1     
+20     -1     XVI      1      -1     
+21     -1     QAT      35     23     
+22     -1     ZWE      25     -1     
+23     -1     RUS      8      -1     
+24     -1     TCA      37     -1     
+25     -1     ATA      39     -1     
+------------------------------------
+ * * * * * THE END OF DATA * * * * *
+
+
+***** LogSession.txt FILE opened
+***** Setup PROGRAM started
+***** SpecialRawData.csv FILE opened
+***** SpecialMainData.bin FILE opened
+  ERROR - duplicate id for United States (not inserted) - id 9 is Malaysia         
+  ERROR - duplicate id for France (not inserted) - id 7 is SmallerThan A-Z  
+  ERROR - duplicate id for Belgium (not inserted) - id 12 is Between 9 and A  
+  ERROR - duplicate id for United Kingdom (not inserted) - id 9 is Malaysia         
+  ERROR - duplicate id for China (not inserted) - id 3 is Saudi Arabia     
+***** SpecialMainData.bin FILE closed
+***** SpecialRawData.bin FILE closed
+***** Saving CodeIndex to SpecialIndexBackup.bin FILE
+***** Setup PROGRAM ended - 17 items processed - 12 OK - 5 DUPLICATES
+***** LogSession.txt FILE closed
+
+Ok, opened inputFile and outputFile
+
+SpecialMain Data Storage - N is 12, MaxID is 17
+[RRN]   ID      CODE    NAME                    CONTINENT       REGION          AREA            INDEP   POPULATION      L.EXP   
+------------------------------------------------------------------------------------------------------------------------------------------------
+[001]   001     NGA     Nigeria                 Africa          Western Af      923768          1960    111506000       51.6    
+[002]   002     {{{     BiggerThan a-z          Europe          WestOfIrel      1               2012    10              0.0     
+[003]   003     SAU     Saudi Arabia            Asia            Middle Eas      2149690         1932    21607000        67.8    
+[004]   004     ROM     Romania                 Europe          Eastern Eu      238391          1878    22455500        69.9    
+[005]   005     aaa     BiggerThan A-Z          Europe          WestOfIrel      2               2012    20              0.0     
+[006]   EMPTY
+[007]   007     444     SmallerThan A-Z         Europe          WestOfIrel      3               2012    30              0.0     
+[008]   008     DEU     Germany                 Europe          Western Eu      357022          1955    82164700        77.4    
+[009]   009     MYS     Malaysia                Asia            Southeast       329758          1957    22244000        70.8    
+[010]   EMPTY
+[011]   EMPTY
+[012]   012     :::     Between 9 and A         Europe          WestOfIrel      6               2012    60              0.0     
+[013]   013     DOM     Dominican Republi       North Ameri     Caribbean       48511           1844    8495000         73.2    
+[014]   EMPTY
+[015]   015     [[[     Between Z and a         Europe          WestOfIrel      5               2012    50              0.0     
+[016]   EMPTY
+[017]   017     (((     SmallerThan 0-9         Europe          WestOfIrel      4               2012    40              0.0     
+- - -
+* * * * * * * * * * * * * * * * * * * * * * * * * * * THE END OF DATA * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+OK, starting ShowFilesUtility
+
+The Next empty slot is: 12
+The Root Pointer is: 0
+
+Index  LChPTr KeyValue DRP    RChPtr 
+------------------------------------
+0      1      MYS      9      3      
+1      2      DOM      13     -1     
+2      8      DEU      8      -1     
+3      5      ROM      4      4      
+4      -1     SAU      3      6      
+5      -1     NGA      1      -1     
+6      7      {{{      2      -1     
+7      10     aaa      5      -1     
+8      9      444      7      11     
+9      -1     (((      17     -1     
+10     -1     [[[      15     -1     
+11     -1     :::      12     -1     
+------------------------------------
+ * * * * * THE END OF DATA * * * * *
+
+
+***** LogSession.txt FILE opened
+***** SpecialTransData FILE opened
+***** UserApp PROGRAM started
+***** SpecialMainData.bin FILE opened
+***** SpecialIndexBackup.bin FILE opened
+
+QC MYS
+  009 MYS Malaysia         	Asia       	Southeast 	329758      	1957  	22244000    	70.8    
+  >>>1 Nodes Visited
+QC {{{
+  002 {{{ BiggerThan a-z   	Europe     	WestOfIrel	1           	2012  	10          	0.0     
+  >>>4 Nodes Visited
+QC aaa
+  005 aaa BiggerThan A-Z   	Europe     	WestOfIrel	2           	2012  	20          	0.0     
+  >>>5 Nodes Visited
+QC 444
+  007 444 SmallerThan A-Z  	Europe     	WestOfIrel	3           	2012  	30          	0.0     
+  >>>4 Nodes Visited
+QC (((
+  017 ((( SmallerThan 0-9  	Europe     	WestOfIrel	4           	2012  	40          	0.0     
+  >>>5 Nodes Visited
+QC [[[
+  015 [[[ Between Z and a  	Europe     	WestOfIrel	5           	2012  	50          	0.0     
+  >>>6 Nodes Visited
+QC :::
+  012 ::: Between 9 and A  	Europe     	WestOfIrel	6           	2012  	60          	0.0     
+  >>>5 Nodes Visited
+QC DEU
+  008 DEU Germany          	Europe     	Western Eu	357022      	1955  	82164700    	77.4    
+  >>>3 Nodes Visited
+QC ~~~
+  ERROR – no country with that id
+  >>>5 Nodes Visited
+QC ^^^
+  ERROR – no country with that id
+  >>>7 Nodes Visited
+QC ===
+  ERROR – no country with that id
+  >>>6 Nodes Visited
+QC )))
+  ERROR – no country with that id
+  >>>6 Nodes Visited
+QC &&&
+  ERROR – no country with that id
+  >>>6 Nodes Visited
+QC ]]]
+  ERROR – no country with that id
+  >>>7 Nodes Visited
+QC 999
+  ERROR – no country with that id
+  >>>6 Nodes Visited
+QC WMU
+  ERROR – no country with that id
+  >>>7 Nodes Visited
+QC zzz
+  ERROR – no country with that id
+  >>>6 Nodes Visited
+IN 11,UGA,Uganda,Africa,Eastern Africa,241038,1962,21778000,42.9,6313,Uganda,Republic,Yoweri Museveni,3425,UG
+  OK, country inserted
+  OK, code inserted
+  >>>6 Nodes Visited
+IN 20,PSE,Palestine,Asia,Middle East,6257,NULL,3101000,71.4,4173,Filastin,Autonomous Area,Yasser (Yasir) Arafat,4074,PS
+  OK, country inserted
+  OK, code inserted
+  >>>7 Nodes Visited
+IN 18,NOR,Norway,Europe,Nordic Countries,323877,1905,4478500,78.7,145895,Norge,Constitutional Monarchy,Harald V,2807,NO
+  OK, country inserted
+  OK, code inserted
+  >>>8 Nodes Visited
+IN 20,AUS,Australia,Oceania,Australia and New Zealand,7741220,1901,18886000,79.8,351182,Australia,Constitutional Monarchy - Federation,Elisabeth II,135,AU
+  ERROR - duplicate id for Australia (not inserted) - id 20 is Palestine        
+IN 3,CXR,Christmas Island,Oceania,Australia and New Zealand,135,NULL,2500,NULL,0,Christmas Island,Territory of Australia,Elisabeth II,1791,CX
+  ERROR - duplicate id for Christmas Island (not inserted) - id 3 is Saudi Arabia     
+LC
+  ID CODE NAME             	CONTINENT  	REGION    	AREA        	INDEP 	POPULATION  	L.EXP   
+  017 ((( SmallerThan 0-9  	Europe     	WestOfIrel	4           	2012  	40          	0.0     
+  011 UGA Uganda           	Africa     	Eastern Af	241038      	1962  	21778000    	42.9    
+  018 NOR Norway           	Europe     	Nordic Cou	323877      	1905  	4478500     	78.7    
+  020 PSE Palestine        	Asia       	Middle Eas	6257        	0     	3101000     	71.4    
+  007 444 SmallerThan A-Z  	Europe     	WestOfIrel	3           	2012  	30          	0.0     
+  012 ::: Between 9 and A  	Europe     	WestOfIrel	6           	2012  	60          	0.0     
+  008 DEU Germany          	Europe     	Western Eu	357022      	1955  	82164700    	77.4    
+  013 DOM Dominican Republi	North Ameri	Caribbean 	48511       	1844  	8495000     	73.2    
+  009 MYS Malaysia         	Asia       	Southeast 	329758      	1957  	22244000    	70.8    
+  001 NGA Nigeria          	Africa     	Western Af	923768      	1960  	111506000   	51.6    
+  004 ROM Romania          	Europe     	Eastern Eu	238391      	1878  	22455500    	69.9    
+  003 SAU Saudi Arabia     	Asia       	Middle Eas	2149690     	1932  	21607000    	67.8    
+  015 [[[ Between Z and a  	Europe     	WestOfIrel	5           	2012  	50          	0.0     
+  005 aaa BiggerThan A-Z   	Europe     	WestOfIrel	2           	2012  	20          	0.0     
+  002 {{{ BiggerThan a-z   	Europe     	WestOfIrel	1           	2012  	10          	0.0     
+- - -
++ + + + + + + + + + + + + + + + + + + THE END OF DATA + + + + + + + + + + + + + + + + + + + + + +
+
+***** SpecialMainData.bin FILE closed
+***** SpecialIndexBackup.bin FILE closed
+***** UserApp Program ended - 23 transactions processed
+***** SpecialTransData.txt FILE closed
+***** LogSession.txt FILE closed
+
+Ok, opened inputFile and outputFile
+
+SpecialMain Data Storage - N is 15, MaxID is 20
+[RRN]   ID      CODE    NAME                    CONTINENT       REGION          AREA            INDEP   POPULATION      L.EXP   
+------------------------------------------------------------------------------------------------------------------------------------------------
+[001]   001     NGA     Nigeria                 Africa          Western Af      923768          1960    111506000       51.6    
+[002]   002     {{{     BiggerThan a-z          Europe          WestOfIrel      1               2012    10              0.0     
+[003]   003     SAU     Saudi Arabia            Asia            Middle Eas      2149690         1932    21607000        67.8    
+[004]   004     ROM     Romania                 Europe          Eastern Eu      238391          1878    22455500        69.9    
+[005]   005     aaa     BiggerThan A-Z          Europe          WestOfIrel      2               2012    20              0.0     
+[006]   EMPTY
+[007]   007     444     SmallerThan A-Z         Europe          WestOfIrel      3               2012    30              0.0     
+[008]   008     DEU     Germany                 Europe          Western Eu      357022          1955    82164700        77.4    
+[009]   009     MYS     Malaysia                Asia            Southeast       329758          1957    22244000        70.8    
+[010]   EMPTY
+[011]   011     UGA     Uganda                  Africa          Eastern Af      241038          1962    21778000        42.9    
+[012]   012     :::     Between 9 and A         Europe          WestOfIrel      6               2012    60              0.0     
+[013]   013     DOM     Dominican Republi       North Ameri     Caribbean       48511           1844    8495000         73.2    
+[014]   EMPTY
+[015]   015     [[[     Between Z and a         Europe          WestOfIrel      5               2012    50              0.0     
+[016]   EMPTY
+[017]   017     (((     SmallerThan 0-9         Europe          WestOfIrel      4               2012    40              0.0     
+[018]   018     NOR     Norway                  Europe          Nordic Cou      323877          1905    4478500         78.7    
+[019]   EMPTY
+[020]   020     PSE     Palestine               Asia            Middle Eas      6257            0       3101000         71.4    
+- - -
+* * * * * * * * * * * * * * * * * * * * * * * * * * * THE END OF DATA * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+OK, starting ShowFilesUtility
+
+The Next empty slot is: 15
+The Root Pointer is: 0
+
+Index  LChPTr KeyValue DRP    RChPtr 
+------------------------------------
+0      1      MYS      9      3      
+1      2      DOM      13     -1     
+2      8      DEU      8      -1     
+3      5      ROM      4      4      
+4      -1     SAU      3      6      
+5      -1     NGA      1      -1     
+6      7      {{{      2      -1     
+7      10     aaa      5      -1     
+8      9      444      7      11     
+9      -1     (((      17     12     
+10     -1     [[[      15     -1     
+11     -1     :::      12     -1     
+12     -1     11       2816   3328   
+13     3634   0       -1     -1     
+------------------------------------
+ * * * * * THE END OF DATA * * * * *
+
+

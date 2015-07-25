@@ -1,0 +1,127 @@
+The Science:
+I looked at the Gradient Descent model which was slightly impossible to implement, so I built my own version of Gradient Descent. My program has a simple if statement that descides whether the error went down, and will adjust accordingly
+
+
+
+The Output:
+error= 13.80 Avg Error= 13.49 Bias= 0.98
+error= 13.80 Avg Error= 13.49 Bias= 0.98
+error= 12.60 Avg Error= 13.49 Bias= 0.97
+error= 14.00 Avg Error= 13.49 Bias= 0.98
+error= 14.00 Avg Error= 13.49 Bias= 0.98
+error= 13.70 Avg Error= 13.49 Bias= 0.97
+error= 14.80 Avg Error= 13.50 Bias= 0.98
+error= 12.90 Avg Error= 13.50 Bias= 0.97
+error= 14.40 Avg Error= 13.50 Bias= 0.98
+error= 13.80 Avg Error= 13.50 Bias= 0.97
+error= 14.20 Avg Error= 13.50 Bias= 0.98
+error= 13.80 Avg Error= 13.51 Bias= 0.97
+error= 14.90 Avg Error= 13.51 Bias= 0.98
+error= 14.00 Avg Error= 13.51 Bias= 0.97
+error= 13.60 Avg Error= 13.51 Bias= 0.96
+error= 15.00 Avg Error= 13.52 Bias= 0.97
+error= 14.10 Avg Error= 13.52 Bias= 0.96
+error= 14.00 Avg Error= 13.53 Bias= 0.95
+error= 14.60 Avg Error= 13.53 Bias= 0.96
+error= 15.00 Avg Error= 13.54 Bias= 0.97
+error= 14.40 Avg Error= 13.54 Bias= 0.96
+error= 13.10 Avg Error= 13.54 Bias= 0.95
+error= 13.40 Avg Error= 13.54 Bias= 0.96
+error= 14.90 Avg Error= 13.54 Bias= 0.97
+error= 13.90 Avg Error= 13.55 Bias= 0.96
+error= 13.30 Avg Error= 13.54 Bias= 0.95
+error= 15.00 Avg Error= 13.55 Bias= 0.96
+error= 14.80 Avg Error= 13.56 Bias= 0.95
+error= 13.00 Avg Error= 13.55 Bias= 0.94
+error= 14.40 Avg Error= 13.56 Bias= 0.95
+error= 14.30 Avg Error= 13.56 Bias= 0.94
+error= 13.00 Avg Error= 13.56 Bias= 0.93
+error= 13.20 Avg Error= 13.56 Bias= 0.94
+error= 13.90 Avg Error= 13.56 Bias= 0.95
+error= 14.30 Avg Error= 13.56 Bias= 0.96
+error= 13.10 Avg Error= 13.56 Bias= 0.95
+error= 13.60 Avg Error= 13.56 Bias= 0.96
+error= 14.20 Avg Error= 13.56 Bias= 0.97
+error= 14.30 Avg Error= 13.57 Bias= 0.98
+error= 14.20 Avg Error= 13.57 Bias= 0.97
+error= 14.10 Avg Error= 13.57 Bias= 0.96
+error= 14.50 Avg Error= 13.57 Bias= 0.97
+
+--The above is the running program, after a while, it plateued at:
+
+error= 14.00 Avg Error= 13.93 Bias= 0.75
+error= 14.00 Avg Error= 13.93 Bias= 0.75
+error= 14.00 Avg Error= 13.93 Bias= 0.75
+error= 14.00 Avg Error= 13.93 Bias= 0.75
+error= 14.00 Avg Error= 13.93 Bias= 0.75
+error= 14.00 Avg Error= 13.93 Bias= 0.75
+error= 14.00 Avg Error= 13.93 Bias= 0.75
+error= 14.00 Avg Error= 13.93 Bias= 0.75
+error= 14.00 Avg Error= 13.93 Bias= 0.75
+error= 14.00 Avg Error= 13.93 Bias= 0.75
+error= 14.00 Avg Error= 13.93 Bias= 0.75
+error= 14.00 Avg Error= 13.93 Bias= 0.75
+error= 14.00 Avg Error= 13.93 Bias= 0.75
+error= 14.00 Avg Error= 13.93 Bias= 0.75
+error= 14.00 Avg Error= 13.93 Bias= 0.75
+
+
+
+The Code:
+import sys
+
+import numpy as np
+import cPickle, random 
+
+class Perceptron(object):
+	def __init__(self, idim):
+		self.idim = idim
+		self.w = np.zeros((10, idim))
+		self.b = np.zeros((10))
+		
+	def predict(self, x):
+		return np.argmax(np.dot(self.w, x) + self.b)
+		
+	def update(self, x, y):
+		p = self.predict(x)
+		if p != y:
+			self.w[p] -= x
+			self.w[y] += x
+			self.b[p] -= Bias
+			self.b[y] += Bias
+
+if __name__ == '__main__':
+	with open('./littlemnist.pkl', 'rb') as f:
+		(trainX, trainY), (validX, validY), (testX, testY) = cPickle.load(f)
+
+	D = zip(trainX, trainY)
+	V = zip(validX, validY)
+
+	clf = Perceptron(len(trainX[0]))
+
+	sum_ = 0
+	i = 0
+	lastError = 0
+	biasOffset = .01
+	Bias = 1
+	while True:
+		random.shuffle(D)
+
+		for x, y in D:
+			clf.update(x, y)
+      
+		error = 0
+		for x, y in V:
+			error += int(y != clf.predict(x))
+       
+		i += 1
+		e = error/float(len(V))
+		if e > lastError:
+			Bias = Bias + biasOffset
+		if e < lastError:
+			Bias = Bias - biasOffset
+		lastError = e
+		sum_ += e
+		print "error=", '{0:0.02f}'.format(e*100), "Avg Error=", '{0:0.02f}'.format((sum_/i)*100), "Bias=", '{0:0.02f}'.format(Bias)
+		#print >> sys.stderr, "error = ", '{0:0.02f}'.format(e), "\r",
+

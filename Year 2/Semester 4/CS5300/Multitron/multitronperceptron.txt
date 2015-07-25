@@ -1,0 +1,45 @@
+import numpy as np
+import cPickle, random
+
+class Perceptron(object):
+    def __init__(self, idim):
+        self.idim = idim
+        self.weight = np.zeros(idim)
+        self.bias = 0
+
+    def predict(self, x):
+        return np.sign(np.dot(self.weight, x) + self.bias)
+        #np.sign returns +1, 0,- 1 as value is > 0, 0, <0
+
+    def update(self, x, y):
+        p = self.predict(x)
+        if p != y:
+            self.weight = y - x
+            self.bias = y - 1
+
+if __name__ == '__main__':
+    with open('./littlemnist.pkl', 'rb') as f:
+        (trainX, trainY), (validX, validY), (testX, testY) = cPickle.load(f)
+   
+    #D = [(x, 1 if y == 4 else -1) for x, y in zip(trainX, trainY) if y == 4 or y == 9]
+   
+    D = []
+    for x, y in zip(trainX, trainY):
+        if y == 4 or y == 9:
+            if y == 4:
+                D.append((x, 1))
+            else:
+                D.append((x, -1))
+   
+    V = [(x, 1 if y == 4 else -1) for x, y in zip(validX, validY) if y == 4 or y == 9]
+   
+    clf = Perceptron(len(trainX[0]))
+
+    while True:
+        random.shuffle(D)
+        for x, y in D:
+            clf.update(x, y)
+        error = 0
+        for x, y in V:
+            error += int(y != clf.predict(x))
+        print error / float(len(V)), len(V)

@@ -1,0 +1,44 @@
+For the DEMO,
+1 - run TempSetupUtility program
+2 - run TempUserApp program
+3 - print out LogSession file
+    (eliminate wrap-around by using landscape and/or
+     a smaller font as needed)
+4 - print out the 2 programs & the CodeIndex class
+
+
+PACKET TO HAND IN - IN THIS ORDER:
+1 – cover page
+2 - LogSession
+3 – 3 required code files
+4 - any other code files you added
+
+
+QUESTIONS?
+1 – Does A4 need status messages?  NO
+2 – How big should the arrays be (in CodeIndex) if static arrays
+    are used for a node?
+    MAX_M = 20 should suffice (a constant at the top
+        of CodeIndex class which could easily be changed).
+3 - How many nodes do I need room for in CodeIndex?  ONLY ONE
+4 - What's the CodeIndex? file used in TempUserApp?  BINARY file(s)
+
+
+CIRCLE THE FOLLOWING
+1 – the internal BTree node storage in CodeIndex class
+2 – the offset calculations for seeking
+	in CodeIndex file
+	in MainData file
+3 – the 2 Seeks for CodeIndex & MainData files
+4 – anything that you were NOT supposed to do,
+    so I can more easily take off lots of points – like:
+    - any explicit mention of 5 or 8 or 9 in your program
+      (you’re supposed to use M or some function of M)
+    - any linear searching of the CodeIndex file or MainData file
+    - internal storage for the WHOLE code index
+      or the WHOLE actual data storage
+    - any reading of the CodeIndex file NOT done INSIDE ReadOneNode
+      method (except for reading the header record in the constructor)
+    - any 5-way or 8-way or 9-way if… else/if… else/if…  used in
+      SearchOneNode
+

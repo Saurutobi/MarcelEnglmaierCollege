@@ -1,0 +1,745 @@
+****************************************************************************************************************
+LOGSESSION.TXT:
+****************************************************************************************************************
+
+[nHomeRec]: 11
+[nCollRec]: 15
+[MAX_N_HOME_LOC]: 20
+
+[Index]  [CODE]  [DRP]  [LINK]
+   0      JPN      9     33
+   1      ---      -1     -1
+   2      ---      -1     -1
+   3      ---      -1     -1
+   4      MEX      12     28
+   5      ---      -1     -1
+   6      ---      -1     -1
+   7      ---      -1     -1
+   8      LBN      32     -1
+   9      SOM      28     -1
+   10      KEN      21     31
+   11      EGY      15     -1
+   12      CHN      3     25
+   13      ---      -1     -1
+   14      OMN      33     -1
+   15      USA      6     -1
+   16      ---      -1     -1
+   17      YEM      24     27
+   18      NIC      31     -1
+   19      FRA      19     -1
+   20      BEL      27     -1
+   21      GBR      17     -1
+   22      HTI      30     20
+   23      VEN      22     21
+   24      POL      20     19
+   25      IND      4     23
+   26      DEU      13     24
+   27      WSM      36     -1
+   28      XVI      1     22
+   29      QAT      35     26
+   30      ZWE      25     -1
+   31      RUS      8     30
+   32      TCA      37     29
+   33      ATA      39     32
+   34      ---      -1     -1
+
+
+QC MEX >>> 12 [2 nodes visited]
+QC ATA >>> 39 [2 nodes visited]
+QC JPN >>> 9 [2 nodes visited]
+QC QAT >>> 35 [6 nodes visited]
+QC WMU >>> INVALID COUNTRY CODE [1 nodes visited]
+QC FRA >>> 19 [12 nodes visited]
+QC POL >>> 20 [10 nodes visited]
+QC LBN >>> 32 [2 nodes visited]
+QC YEM >>> 24 [2 nodes visited]
+QC WSM >>> 36 [2 nodes visited]
+QC NPJ >>> INVALID COUNTRY CODE [7 nodes visited]
+QC NLB >>> INVALID COUNTRY CODE [1 nodes visited]
+QC EMY >>> INVALID COUNTRY CODE [2 nodes visited]
+QC QQQ >>> INVALID COUNTRY CODE [1 nodes visited]
+QC IQQ >>> INVALID COUNTRY CODE [1 nodes visited]
+DC JPN >>> OK, JPN deleted [1 nodes Visited]
+DC WMU >>> INVALID COUNTRY CODE [1 nodes Visited]
+DC FRA >>> OK, FRA deleted [6 nodes Visited]
+DC POL >>> OK, POL deleted [5 nodes Visited]
+DC NIC >>> OK, NIC deleted [1 nodes Visited]
+QC JPN >>> INVALID COUNTRY CODE [7 nodes visited]
+QC FRA >>> INVALID COUNTRY CODE [7 nodes visited]
+QC POL >>> INVALID COUNTRY CODE [7 nodes visited]
+QC NIC >>> INVALID COUNTRY CODE [1 nodes visited]
+QC CIN >>> INVALID COUNTRY CODE [1 nodes visited]
+DC EMY >>> INVALID COUNTRY CODE [2 nodes Visited]
+IN 74,JOR,Jordan,Asia,Middle East,88946,1946,5083000,77.4,7526,Al-Urdunn,Constitutional Monarchy,Abdullah II,1786,JO
+    >>> OK, JOR inserted [1 nodes Visited]
+IN 927,GRC,Greece,Europe,Southern Europe,131626,1830,10545700,78.4,120724,Ell?da,Republic,Kostis Stefanopoulos,2401,GR
+    >>> OK, GRC inserted [6 nodes Visited]
+IN 925,MYS,Malaysia,Asia,Southeast Asia,329758,1957,22244000,70.8,69213,Malaysia,Constitutional Monarchy - Federation,Salahuddin Abdul Aziz Shah Alhaj,2464,MY
+    >>> OK, MYS inserted [17 nodes Visited]
+QC JOR >>> 74 [2 nodes visited]
+QC GRC >>> 927 [2 nodes visited]
+QC MYS >>> 925 [2 nodes visited]
++ + + + + + + + + + + + + + + + + + + THE END OF DATA + + + + + + + + + + + + + + + + + + + + + +
+
+
+[nHomeRec]: 11
+[nCollRec]: 18
+[MAX_N_HOME_LOC]: 20
+
+[Index]  [CODE]  [DRP]  [LINK]
+   0      ---      -1     33
+   1      ---      -1     -1
+   2      ---      -1     -1
+   3      ---      -1     -1
+   4      MEX      12     28
+   5      ---      -1     -1
+   6      ---      -1     -1
+   7      ---      -1     -1
+   8      LBN      32     -1
+   9      SOM      28     -1
+   10      KEN      21     31
+   11      EGY      15     -1
+   12      CHN      3     19
+   13      ---      -1     -1
+   14      OMN      33     24
+   15      USA      6     -1
+   16      ---      -1     -1
+   17      YEM      24     27
+   18      ---      -1     -1
+   19      JOR      74     35
+   20      BEL      27     -1
+   21      GBR      17     -1
+   22      HTI      30     20
+   23      VEN      22     21
+   24      GRC      927     -1
+   25      IND      4     23
+   26      DEU      13     24
+   27      WSM      36     -1
+   28      XVI      1     22
+   29      QAT      35     26
+   30      ZWE      25     -1
+   31      RUS      8     30
+   32      TCA      37     29
+   33      ATA      39     32
+   34      ---      -1     -1
+   35      MYS      925     25
+   36      ---      -1     -1
+   37      ---      -1     -1
+
+****************************************************************************************************************
+SETUP.JAVA:
+****************************************************************************************************************
+
+/* PROJECT: WorldDataProject #3         PROGRAM: Setup
+ * Written By: Marcel Englmaier
+ * PROJECT CLASSES USED: RawData, CodeIndex
+ * FILES ACCESSED: none
+ * DESCRIPTION: this class gets one line from RawData, and passes it to CodeIndex
+ ******************************************************************************/
+package Setup;
+
+import OOPClasses.CodeIndex;
+import OOPClasses.RawData;
+import java.io.*;
+
+
+public class Setup {
+
+    //**************************** PUBLIC DECLARATIONS ************************
+    //None
+ 
+    
+    //**************************** PRIVATE DECLARATIONS ************************
+    private static String [] currentRecord;
+    private static RawData input;
+    
+    
+    //****************************** PUBLIC Main *******************************
+    public static void main(String[] args) throws IOException
+    {    
+        //initialize RawData Object
+        input = new RawData();
+
+        //initialize CodeIndex Object
+        CodeIndex output = new CodeIndex(true);
+
+        //loop til EOF of RawData file
+        read();
+        while(!input.isRawDataReadingDone())
+        {
+            output.insert1Country(currentRecord);
+            read();
+        }
+        
+        //close all files
+        input.close();
+        output.close();
+    }
+    
+
+    //**************************** PUBLIC GET/SET METHODS **********************
+    //None
+    
+
+    //**************************** PUBLIC SERVICE METHODS **********************
+    //None
+    
+
+    //**************************** PRIVATE METHODS *****************************
+    private static void read()
+    {
+        //gets one line from RawData
+        currentRecord = input.read1Line().split(",");
+    }
+}
+
+****************************************************************************************************************
+USERAPP.JAVA:
+****************************************************************************************************************
+
+/* PROJECT: WorldDataProject #3         PROGRAM: UserApp
+ * Written By: Marcel Englmaier
+ * PROJECT CLASSES USED:CodeIndex, UserInterface
+ * FILES ACCESSED:none
+ * DESCRIPTION:This Class takes in data, and sends commands to CodeIndex accordingly
+ * TRANSACTION HANDLERS:DC, QC, IN
+ *******************************************************************************/
+package UserApp;
+
+import OOPClasses.CodeIndex;
+import OOPClasses.UserInterface;
+import java.io.*;
+
+public class UserApp {
+    
+    private static CodeIndex indexOfCode;
+    private static UserInterface ui;
+
+    public static void main(String[] args) throws FileNotFoundException, IOException
+    {
+ 
+        ui = new UserInterface();
+        
+        indexOfCode = new CodeIndex(false);
+
+        // initialize transaction counter
+        int transProcessed = 0;
+
+        // core algorithm described above
+        String transaction = ui.read1Trans();
+        while(transaction != null)
+        {
+            indexOfCode.reset();
+            switch (transaction.split(" ")[0])
+            {
+                case "QC": //query, but use code
+                    queryByCode(transaction.split(" ")[1]);
+                    break;
+                case "DC":
+                    deleteByCode(transaction.split(" ")[1]);
+                    break;
+                case "IN": // insert at id
+                    insert(transaction.substring(3));
+                    break;
+            }
+            transProcessed++;
+            transaction = ui.read1Trans();
+        }
+
+        if (transProcessed > 0)
+        {
+            ui.writeToLog("+ + + + + + + + + + + + + + + + + + + THE END OF DATA + + + + + + + + + + + + + + + + + + + + + +\n\n");
+        }
+        
+        indexOfCode.close();
+        ui.close();
+    }    
+
+    private static void insert(String record) throws IOException
+    {
+        indexOfCode.insert1Country(record.split(","));
+        ui.writeToLog("IN " + record);
+        ui.writeToLog("    >>> OK, " + record.split(",")[1] + " inserted [" + indexOfCode.getNodesVisited() + " nodes Visited]");
+    }
+    
+    private static void queryByCode(String id) throws IOException
+    {
+        if(indexOfCode.queryByCode(id) == -1)
+        {
+            ui.writeToLog("QC " + id + " >>> INVALID COUNTRY CODE [" + indexOfCode.getNodesVisited() + " nodes visited]");
+        }
+        else
+        {
+            ui.writeToLog("QC " + id + " >>> " + indexOfCode.queryByCode(id) + " [" + indexOfCode.getNodesVisited() + " nodes visited]");
+        }
+        
+    }
+    
+    private static void deleteByCode(String id) throws IOException
+    {
+        if(indexOfCode.deleteByCode(id))
+        {
+            ui.writeToLog("DC " + id + " >>> OK, " + id + " deleted [" + indexOfCode.getNodesVisited() + " nodes Visited]");
+        }
+        else
+        {
+            ui.writeToLog("DC " + id + " >>> INVALID COUNTRY CODE [" + indexOfCode.getNodesVisited() + " nodes Visited]");
+        }
+    }
+}
+
+****************************************************************************************************************
+RAWDATA.JAVA:
+****************************************************************************************************************
+
+/* PROJECT: WorldDataProject #3         CLASS: RawData
+ * Written By: Marcel Englmaier
+ * FILES ACCESSED: RawData.csv
+ * FILE STRUCTURE: OOP
+ * DESCRIPTION: This class reads 1 line at a time and returns a boolean if the
+ *          pointer is at the end of the file.
+ *******************************************************************************/
+package OOPClasses;
+
+import java.io.*;
+
+public class RawData {
+   
+    //**************************** PUBLIC DECLARATIONS ************************
+    //None
+    
+    
+    //**************************** PRIVATE DECLARATIONS ************************
+    private BufferedReader rawDataReader;
+    private String currentLine;
+    private boolean readingIsDone;
+    
+    
+    //**************************** PUBLIC CONSTRUCTOR(S) ***********************
+    public RawData() throws FileNotFoundException
+    {
+        //initializes a new Reader for the RawData.csv
+        rawDataReader = new BufferedReader(new FileReader("RawData.csv"));
+        readingIsDone = false;
+    }
+    
+    
+    //**************************** PUBLIC GET/SET METHODS **********************
+    public boolean isRawDataReadingDone()
+    {
+        //returns whether  or not the reading is past the end of file
+        return readingIsDone;
+    }
+    
+    
+    //**************************** PUBLIC SERVICE METHODS **********************
+    public String read1Line()
+    {
+        try
+        {
+            //reads one line
+            currentLine = rawDataReader.readLine();
+            //if the line isn't 'bad', return it, otherwise set the EOF boolean to true
+            if (currentLine != null)
+            {
+                return currentLine;
+            }
+            else
+            {
+                readingIsDone = true;
+            }
+        }
+        catch(IOException e)
+        {
+            readingIsDone = true;
+        }
+        return "";
+    }
+    
+//******************************************************************************
+    
+    public void close() throws IOException
+    {
+        //close the file
+        rawDataReader.close();
+    }
+    
+    
+    //**************************** PRIVATE METHODS *****************************
+    //None
+    
+    
+}
+
+****************************************************************************************************************
+CODEINDEX.JAVA
+****************************************************************************************************************
+
+/* PROJECT: WorldDataProject #3         CLASS: CodeIndex
+* Written By: Marcel Englmaier
+* FILES ACCESSED:IndexBackup.bin
+* INDEX STRUCTURE: HashTable
+* DESCRIPTION: this class gets data and inserts it into a hashtable, but can also
+		delete or find data when given the 3-Character Code
+*******************************************************************************/
+
+package OOPClasses;
+
+import java.io.*;
+
+public class CodeIndex {
+
+    //**************************** PUBLIC DECLARATIONS ************************
+    //None
+    
+    
+    //**************************** PRIVATE DECLARATIONS ************************
+    //Finals
+    private final int MAX_ARRAY_SIZE = 300;
+    private final int MAX_N_HOME_LOC = 20;
+    
+    //3 Parallel arrays
+    private static String [] keyValue;
+    private static int [] DRP;
+    private static int [] link;
+    
+    //2 Counters
+    private static int nHomeRec;
+    private static int nCollRec;
+    private static int nodesVisited;
+    
+    //saveFile
+    private RandomAccessFile saveFile;
+    
+    
+    //**************************** PUBLIC CONSTRUCTOR(S) ***********************
+    public CodeIndex(boolean setup)  throws IOException
+    {
+        //initialize saveFile for reading/writing
+        saveFile = new RandomAccessFile(new File("IndexBackup.bin"), "rw");
+        //if setup calls CodeIndex
+        if(setup)
+        {
+            //initialize arrays and counters
+            keyValue = new String[MAX_ARRAY_SIZE];
+            DRP = new int[MAX_ARRAY_SIZE];
+            link = new int[MAX_ARRAY_SIZE];
+            nHomeRec = 0;
+            nCollRec = 0;
+            for(int i = 0; i < MAX_ARRAY_SIZE; i++)
+            {
+                keyValue[i] = "";
+                DRP[i] = -1;
+                link[i] = -1;
+            }
+            nodesVisited = 0;
+        }
+        //else UserApp must be running CodeIndex, so load up the .bin
+        else
+        {
+            nodesVisited = 0;
+            load();
+        }
+    }
+    
+    
+    //**************************** PUBLIC GET/SET METHODS **********************
+    public void reset()
+    {
+        //resets the count
+        nodesVisited = 0;
+    }
+    
+//******************************************************************************
+    
+    public int getNHomeRec()
+    {
+        //returns number of home locations written to
+        return nHomeRec;
+    }
+    
+//******************************************************************************
+    
+    public int getNCollRec()
+    {
+        //returns number of collisions
+        return nCollRec;
+    }
+    
+//******************************************************************************
+    
+    public int getNodesVisited()
+    {
+        //returns number of nodes visited
+        return nodesVisited;
+    }
+    
+    
+    //**************************** PUBLIC SERVICE METHODS **********************
+    public boolean insert1Country(String [] record)
+    {
+        //finds home address through hashFunction
+        int indexHomeAddress = hashFunction(record[1], MAX_N_HOME_LOC);
+        //checks home location for tombstone or emptiness
+        if(keyValue[indexHomeAddress] == "" || keyValue[indexHomeAddress] == "---")
+        {
+            //insert the information, making sure to leave the pointer untouched
+            keyValue[indexHomeAddress] = record[1];
+            DRP[indexHomeAddress] = Integer.parseInt(record[0]);
+            //advance the counts
+            nHomeRec++;
+            nodesVisited++;
+            return true;
+        }
+        //if home address is taken, go to collision zone
+        else
+        {
+            //loop through collision zone until next empty node
+            for(int i = MAX_N_HOME_LOC - 1; i < MAX_ARRAY_SIZE;i++)
+            {
+                //advance count
+                nodesVisited++;
+                //if location is empty, insert information making sure to fix pointers
+                if(keyValue[i] == "" || keyValue[i] == "---")
+                {
+                    keyValue[i] = record[1];
+                    DRP[i] = Integer.parseInt(record[0]);
+                    link[i] = link[indexHomeAddress];
+                    link[indexHomeAddress] = i;
+                    nCollRec++;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+//******************************************************************************
+    
+    public boolean deleteByCode(String code)
+    {
+        boolean notFound = true;
+        int homeIndex = hashFunction(code, MAX_N_HOME_LOC);
+        int previousIndex = 0;
+        //check homeAddress 
+        if(keyValue[homeIndex].equalsIgnoreCase(code))
+        {
+            //if it's there, advance nodesVisited and return the DRP
+            nodesVisited++;
+            keyValue[homeIndex] = "---";
+            DRP[homeIndex] = -1;
+            return true;
+        }
+        //if it's not there follow pointers on to collision area
+        else
+        {
+            previousIndex = homeIndex;
+            while(notFound)
+            {
+                //advance count
+                nodesVisited++;
+                //if the last item in chain had been visited
+                if(link[previousIndex] == -1)
+                {
+                    //return tombstone or empty identifier
+                    return false;
+                }
+                //if the item is there, return the DRP
+                else if(keyValue[link[previousIndex]].equalsIgnoreCase(code))
+                {
+                    previousIndex = link[previousIndex];
+                    keyValue[previousIndex] = "---";
+                    DRP[previousIndex] = -1;
+                    return true;
+                }
+                //if it's not at the end of the chain and not there, advance chain
+                else
+                {
+                    previousIndex = link[previousIndex];
+                }
+            }
+        }
+        return false;
+    }
+    
+//******************************************************************************
+    
+    public int queryByCode(String code)
+    {
+        boolean notFound = true;
+        int homeIndex = hashFunction(code, MAX_N_HOME_LOC);
+        int previousIndex = 0;
+        //check homeAddress 
+        if(keyValue[homeIndex].equalsIgnoreCase(code))
+        {
+            //if it's there, advance nodesVisited and return the DRP
+            nodesVisited++;
+            return DRP[homeIndex];
+        }
+        //if it's not there follow pointers on to collision area
+        else
+        {
+            previousIndex = homeIndex;
+            while(notFound)
+            {
+                //advance count
+                nodesVisited++;
+                //if the last item in chain had been visited
+                if(link[previousIndex] == -1)
+                {
+                    //return tombstone or empty identifier
+                    return -1;
+                }
+                //if the item is there, return the DRP
+                else if(keyValue[link[previousIndex]].equalsIgnoreCase(code))
+                {
+                    return DRP[link[previousIndex]];
+                }
+                //if it's not at the end of the chain and not there, advance chain
+                else
+                {
+                    previousIndex = link[previousIndex];
+                }
+            }
+        }
+        return -1;
+    }
+    
+//******************************************************************************
+    
+    public void close() throws IOException
+    {
+        saveFile.seek(0);
+        //write header
+        saveFile.writeInt(nHomeRec);
+        saveFile.writeInt(nCollRec);
+        saveFile.writeInt(MAX_N_HOME_LOC);
+        int temp = MAX_N_HOME_LOC + nCollRec;
+        //write all the info
+        for(int i = 0; i < temp; i++)
+        {
+            //if the info is empty, write a tombstone
+            if(keyValue[i] == "")
+            {
+                saveFile.writeChar('-');
+                saveFile.writeChar('-');
+                saveFile.writeChar('-');
+                saveFile.writeInt(-1);
+                saveFile.writeInt(-1);
+            }
+            //otherwise write the good information
+            else
+            {
+                saveFile.writeChar(keyValue[i].charAt(0));
+                saveFile.writeChar(keyValue[i].charAt(1));
+                saveFile.writeChar(keyValue[i].charAt(2));
+                saveFile.writeInt(DRP[i]);
+                saveFile.writeInt(link[i]);
+            }
+        }
+        //close the file
+        saveFile.close();
+    }
+    
+    
+    //**************************** PRIVATE METHODS *****************************
+    private int hashFunction(String code, int maxHome)
+    {
+        //hashFunction
+        return (int)(code.charAt(0) * code.charAt(1) * code.charAt(2))%MAX_N_HOME_LOC;
+    }
+    
+//******************************************************************************
+    
+    private void load() throws IOException
+    {
+        saveFile.seek(0);
+        //initialize arrays
+        keyValue = new String[MAX_ARRAY_SIZE];
+        DRP = new int[MAX_ARRAY_SIZE];
+        link = new int[MAX_ARRAY_SIZE];
+        for(int i = 0; i < MAX_ARRAY_SIZE; i++)
+        {
+            keyValue[i] = "";
+            DRP[i] = -1;
+            link[i] = -1;
+        }
+        //read header
+        nHomeRec = saveFile.readInt();
+        nCollRec = saveFile.readInt();
+        int temp = saveFile.readInt();
+        //read all the info
+        for(int i = 0; i < (MAX_N_HOME_LOC + nCollRec); i++)
+        {
+            keyValue[i] = String.valueOf(saveFile.readChar()) + 
+                          String.valueOf(saveFile.readChar()) + 
+                          String.valueOf(saveFile.readChar());
+            DRP[i] = saveFile.readInt();
+            link[i] = saveFile.readInt();
+        }
+    }
+}
+
+****************************************************************************************************************
+USERINTERFACE.JAVA:
+****************************************************************************************************************
+
+/* PROJECT: WorldDataProject #3         CLASS: UserInterface
+ * Authored By: Quincy Campbell
+ * Edited By: Marcel Englmaier
+ * FILES ACCESSED:Transdata.txt and LogSession.txt
+ * DESCRIPTION:the class writes log entries and reads transdata on command
+ *******************************************************************************/
+package OOPClasses;
+
+import java.io.*;
+import java.util.*;
+
+public class UserInterface {
+    
+    //**************************** PUBLIC DECLARATIONS ************************
+    //None
+    
+    
+    //**************************** PRIVATE DECLARATIONS ************************
+    private PrintWriter logger;
+    private BufferedReader transDataReader;
+    
+    
+    //**************************** PUBLIC CONSTRUCTOR(S) ***********************
+    public UserInterface() throws IOException
+    {
+        logger = new PrintWriter(new FileWriter(new File("LogSession.txt"), true));
+        transDataReader = new BufferedReader(new FileReader(new File("TransData.txt")));
+    }
+    
+    
+    //**************************** PUBLIC GET/SET METHODS **********************
+    //None
+    
+    
+    //**************************** PUBLIC SERVICE METHODS **********************
+    public void writeToLog(String message) throws IOException
+    {
+        logger.println(message);
+        System.out.println("Logged|| " + message);
+    }
+
+    // closes log file
+    public void close() throws IOException
+    {
+        transDataReader.close();
+        logger.close();
+    }
+     
+    public String read1Trans() throws IOException
+    {
+         return transDataReader.readLine();
+    }
+    
+    
+    //**************************** PRIVATE METHODS *****************************
+    //None
+    
+    
+}

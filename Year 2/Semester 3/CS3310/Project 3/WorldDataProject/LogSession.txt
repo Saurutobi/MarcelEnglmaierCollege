@@ -1,0 +1,123 @@
+[nHomeRec]: 11
+[nCollRec]: 15
+[MAX_N_HOME_LOC]: 20
+
+[Index]  [CODE]  [DRP]  [LINK]
+   0      JPN      9     33
+   1      ---      -1     -1
+   2      ---      -1     -1
+   3      ---      -1     -1
+   4      MEX      12     28
+   5      ---      -1     -1
+   6      ---      -1     -1
+   7      ---      -1     -1
+   8      LBN      32     -1
+   9      SOM      28     -1
+   10      KEN      21     31
+   11      EGY      15     -1
+   12      CHN      3     25
+   13      ---      -1     -1
+   14      OMN      33     -1
+   15      USA      6     -1
+   16      ---      -1     -1
+   17      YEM      24     27
+   18      NIC      31     -1
+   19      FRA      19     -1
+   20      BEL      27     -1
+   21      GBR      17     -1
+   22      HTI      30     20
+   23      VEN      22     21
+   24      POL      20     19
+   25      IND      4     23
+   26      DEU      13     24
+   27      WSM      36     -1
+   28      XVI      1     22
+   29      QAT      35     26
+   30      ZWE      25     -1
+   31      RUS      8     30
+   32      TCA      37     29
+   33      ATA      39     32
+   34      ---      -1     -1
+
+
+QC MEX >>> 12 [2 nodes visited]
+QC ATA >>> 39 [2 nodes visited]
+QC JPN >>> 9 [2 nodes visited]
+QC QAT >>> 35 [6 nodes visited]
+QC WMU >>> INVALID COUNTRY CODE [1 nodes visited]
+QC FRA >>> 19 [12 nodes visited]
+QC POL >>> 20 [10 nodes visited]
+QC LBN >>> 32 [2 nodes visited]
+QC YEM >>> 24 [2 nodes visited]
+QC WSM >>> 36 [2 nodes visited]
+QC NPJ >>> INVALID COUNTRY CODE [7 nodes visited]
+QC NLB >>> INVALID COUNTRY CODE [1 nodes visited]
+QC EMY >>> INVALID COUNTRY CODE [2 nodes visited]
+QC QQQ >>> INVALID COUNTRY CODE [1 nodes visited]
+QC IQQ >>> INVALID COUNTRY CODE [1 nodes visited]
+DC JPN >>> OK, JPN deleted [1 nodes Visited]
+DC WMU >>> INVALID COUNTRY CODE [1 nodes Visited]
+DC FRA >>> OK, FRA deleted [6 nodes Visited]
+DC POL >>> OK, POL deleted [5 nodes Visited]
+DC NIC >>> OK, NIC deleted [1 nodes Visited]
+QC JPN >>> INVALID COUNTRY CODE [7 nodes visited]
+QC FRA >>> INVALID COUNTRY CODE [7 nodes visited]
+QC POL >>> INVALID COUNTRY CODE [7 nodes visited]
+QC NIC >>> INVALID COUNTRY CODE [1 nodes visited]
+QC CIN >>> INVALID COUNTRY CODE [1 nodes visited]
+DC EMY >>> INVALID COUNTRY CODE [2 nodes Visited]
+IN 74,JOR,Jordan,Asia,Middle East,88946,1946,5083000,77.4,7526,Al-Urdunn,Constitutional Monarchy,Abdullah II,1786,JO
+    >>> OK, JOR inserted [1 nodes Visited]
+IN 927,GRC,Greece,Europe,Southern Europe,131626,1830,10545700,78.4,120724,Ell�da,Republic,Kostis Stefanopoulos,2401,GR
+    >>> OK, GRC inserted [6 nodes Visited]
+IN 925,MYS,Malaysia,Asia,Southeast Asia,329758,1957,22244000,70.8,69213,Malaysia,Constitutional Monarchy - Federation,Salahuddin Abdul Aziz Shah Alhaj,2464,MY
+    >>> OK, MYS inserted [17 nodes Visited]
+QC JOR >>> 74 [2 nodes visited]
+QC GRC >>> 927 [2 nodes visited]
+QC MYS >>> 925 [2 nodes visited]
++ + + + + + + + + + + + + + + + + + + THE END OF DATA + + + + + + + + + + + + + + + + + + + + + +
+[nHomeRec]: 11
+[nCollRec]: 18
+[MAX_N_HOME_LOC]: 20
+
+[Index]  [CODE]  [DRP]  [LINK]
+   0      ---      -1     33
+   1      ---      -1     -1
+   2      ---      -1     -1
+   3      ---      -1     -1
+   4      MEX      12     28
+   5      ---      -1     -1
+   6      ---      -1     -1
+   7      ---      -1     -1
+   8      LBN      32     -1
+   9      SOM      28     -1
+   10      KEN      21     31
+   11      EGY      15     -1
+   12      CHN      3     19
+   13      ---      -1     -1
+   14      OMN      33     24
+   15      USA      6     -1
+   16      ---      -1     -1
+   17      YEM      24     27
+   18      ---      -1     -1
+   19      JOR      74     35
+   20      BEL      27     -1
+   21      GBR      17     -1
+   22      HTI      30     20
+   23      VEN      22     21
+   24      GRC      927     -1
+   25      IND      4     23
+   26      DEU      13     24
+   27      WSM      36     -1
+   28      XVI      1     22
+   29      QAT      35     26
+   30      ZWE      25     -1
+   31      RUS      8     30
+   32      TCA      37     29
+   33      ATA      39     32
+   34      ---      -1     -1
+   35      MYS      925     25
+   36      ---      -1     -1
+   37      ---      -1     -1
+
+

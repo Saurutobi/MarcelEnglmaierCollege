@@ -1,0 +1,52 @@
+http://www.cs.wmich.edu/~mmorgan/
+Group 7:
+	People: Marissa Morgan, Iain MacQuarrie, Justin McNett
+	Notes: Login credentials on the main page. colors are decent, but very dark. works nicely
+
+http://whanton.comuf.com/Admin.html?
+Group 1:
+	People:Matt Schell, Joe McPherson, Daniel Yap
+	Notes:Colors are not very nice, Submit/View All buttons very difficult to differenciate.
+		Instructions difficult to read and don't really make sense
+
+http://cs.wmich.edu/~jhughes/rate-yourself/
+Group 10:
+	People: Jason.h.hughes@wmich.edu, Max.rowland@wmich.edu, Aliun.shen@wmich.edu
+	Notes: colors are not great, but work and are readable. first time i went on all the
+		buttons dissapeared, but then i made an account, it worked. entered stuff, but
+		didn't get a confirmation of such, and couldn't see anybody else's results. very
+		bland
+		
+http://cs.wmich.edu/~nbreuer/
+Group 2:
+	People: nicholas.s.breuer@wmich.edu, zackariah.a.ruppert@wmich.edu, jon.t.sneathen@wmich.edu
+	Notes: colors work but are bland. font is slightly annoying. I recieved a few MySQL errors,
+		I can't view my own results. Showing multiple results is not user friendly.
+		
+http://cs.wmich.edu/~mmiller/skills.php
+Group 11:
+	People: merrilee.a.miller@wmich.edu, brian.c.blake@wmich.edu, stephen.castronovo@wmich.edu
+	Notes: couldn't create an account, it didn't wanna work. colors were bad but readable,
+		class display was interestingly poor at best. wasn't formatted correctly
+		
+http://cs.wmich.edu/~havildse/login.html
+Group 3:
+	People: Hans Avildsen, Doug Losey, William Naylor
+	Notes: submit is broken, don't like cycling buttons. colors not easy to read on login.
+		I had admin privleges...
+		
+http://cs.wmich.edu/~jrancour/passpage.html
+Group 5:
+	People: jason.w.rancour@wmich.edu, mkatanbaf@gmail.com, walter.j.pabis@wmich.edu
+	Notes: horrible size, colors are terrible, text parsing
+	
+http://www.cs.wmich.edu/~zhodge/login
+Group 6:
+	People: zachary.t.hodge@wmich.edu, patrick.s.coady@wmich.edu, jordan.t.hinds@wmich.edu
+	Notes: ewwwwwwwwwwwwww, pretty much horrible
+	
+http://cs.wmich.edu/~smartin/
+Group 8:
+	People: yousef.a.amani@wmich.edu, seth.e.martin@wmich.edu, joseph.w.meyer@wmich.edu
+	Notes: doesn't work
+	

@@ -1,0 +1,688 @@
+-----------------------------------------------------------------------------------------
+LogSession.txt
+-----------------------------------------------------------------------------------------
+
+
++ + + + + + + + + + + + + + + + + + THE START OF SETUP + + + + + + + + + + + + + + + + + + + + + +
+
+CodeIndex1.bin     M is 5, rootPTR is 11, N is 22
+
+-------5 TP's------- |  -----4 KV's----- | -----4 DRPs-----
+-1  -1  -1  -1  -1   |  ANN ANT APT ARE  |  3   4   19  1   
+-1  -1  -1  -1  -1   |  BOT BUG ]]] ]]]  |  5   2   0   0   
+18  1   9   2   6    |  AND ART BEG BUN  |  9   7   43  44  
+-1  -1  -1  -1  -1   |  EEK EGG FAN FAT  |  22  69  16  48  
+17  4   12  22  -1   |  DVD FIT HAT ]]]  |  26  11  59  0   
+-1  -1  -1  -1  -1   |  CAM CAT ]]] ]]]  |  20  21  0   0   
+-1  -1  -1  -1  -1   |  NOT ONE OWN RAM  |  49  66  13  27  
+-1  -1  -1  -1  -1   |  INK ITS JAM ]]]  |  37  60  14  0   
+-1  -1  -1  -1  -1   |  BAM BAT ]]] ]]]  |  42  41  0   0   
+8   7   21  -1  -1   |  JET RAT ]]] ]]]  |  17  35  0   0   
+3   5   10  14  -1   |  CON IMP SAT ]]]  |  18  10  6   0   
+-1  -1  -1  -1  -1   |  GET GIG GOT HAM  |  15  24  58  68  
+-1  -1  -1  -1  -1   |  WEB WOW WWW YES  |  55  54  33  61  
+15  16  20  13  19   |  TON USE WAN YOU  |  65  64  31  30  
+-1  -1  -1  -1  -1   |  SUN SYS TAN THE  |  51  38  39  8   
+-1  -1  -1  -1  -1   |  TWO USA ]]] ]]]  |  34  29  0   0   
+-1  -1  -1  -1  -1   |  CPU DAT DIP DOG  |  47  23  70  46  
+-1  -1  -1  -1  -1   |  ALL AMY ]]] ]]]  |  40  45  0   0   
+-1  -1  -1  -1  -1   |  YUP ZAK ZEN ZIP  |  56  63  32  62  
+-1  -1  -1  -1  -1   |  VAT VEG ]]] ]]]  |  52  53  0   0   
+-1  -1  -1  -1  -1   |  RED ROM SAM ]]]  |  50  28  36  0   
+-1  -1  -1  -1  -1   |  HIP HOP HOT ICE  |  25  57  12  67  
+
++ + + + + + + + + + + + + + + + + + THE END OF SETUP + + + + + + + + + + + + + + + + + + + + + +
+
+
+
+
++ + + + + + + + + + + + + + + + + + THE START OF SETUP + + + + + + + + + + + + + + + + + + + + + +
+
+CodeIndex2.bin     M is 8, rootPTR is 1, N is 1
+
+-------------8 TP's------------- |  -----------7 KV's----------- | -----------7 DRPs-----------
+-1  -1  -1  -1  -1  -1  -1  -1   |  BAR CAR DAT GET HOT RUN ZAP  |  12  23  34  45  56  67  78  
+
++ + + + + + + + + + + + + + + + + + THE END OF SETUP + + + + + + + + + + + + + + + + + + + + + +
+
+
+
+
++ + + + + + + + + + + + + + + + + + THE START OF SETUP + + + + + + + + + + + + + + + + + + + + + +
+
+CodeIndex3.bin     M is 9, rootPTR is 4, N is 9
+
+---------------9 TP's--------------- |  -------------8 KV's------------- | -------------8 DRPs-------------
+-1  -1  -1  -1  -1  -1  -1  -1  -1   |  BUN CAM CAT CON CPU DAT DIP DOG  |  12  23  34  45  56  67  48  25  
+-1  -1  -1  -1  -1  -1  -1  -1  -1   |  IMP INK ITS JAM ]]] ]]] ]]] ]]]  |  38  32  36  35  0   0   0   0   
+-1  -1  -1  -1  -1  -1  -1  -1  -1   |  JET JOT JUT KIM KIT KZO ]]] ]]]  |  68  66  64  62  60  61  0   0   
+6   1   9   7   2   3   5   8   -1   |  BOX DVD GET IKE JAR LAM RAN ]]]  |  1   2   3   4   5   6   7   0   
+-1  -1  -1  -1  -1  -1  -1  -1  -1   |  LAN LAP LIP MAN MET ]]] ]]] ]]]  |  41  42  43  44  46  0   0   0   
+-1  -1  -1  -1  -1  -1  -1  -1  -1   |  ALL AMY AND ART ASK BAT BEG ]]]  |  11  22  33  37  55  54  21  0   
+-1  -1  -1  -1  -1  -1  -1  -1  -1   |  GIG GOT GUY HAM HEM HUB ]]] ]]]  |  19  29  39  49  57  28  0   0   
+-1  -1  -1  -1  -1  -1  -1  -1  -1   |  RUN SAM TAN TON TOP WMU YOU ZIP  |  10  20  30  40  50  53  24  31  
+-1  -1  -1  -1  -1  -1  -1  -1  -1   |  EEK EGG FAN FAR FAT FIR FIX FUN  |  26  27  13  14  15  16  17  18  
+
++ + + + + + + + + + + + + + + + + + THE END OF SETUP + + + + + + + + + + + + + + + + + + + + + +
+
+
+
+
++ + + + + + + + + + + + + + + + + + + THE START OF TRANS + + + + + + + + + + + + + + + + + + + + +
+
+QC RED >>> INVALID COUNTRY CODE [2 nodes visited]
+QC ZIP >>> INVALID COUNTRY CODE [1 nodes visited]
+QC ALL >>> 40 ALL for 1      49162 [3 nodes visited]
+QC CAA >>> INVALID COUNTRY CODE [3 nodes visited]
+QC SAT >>> 06 SAT awhile     49128 [1 nodes visited]
+QC JAZ >>> INVALID COUNTRY CODE [3 nodes visited]
+QC YOU >>> INVALID COUNTRY CODE [1 nodes visited]
+QC DVD >>> 26 DVD or CD      49148 [2 nodes visited]
+QC AAA >>> INVALID COUNTRY CODE [3 nodes visited]
+QC ZZZ >>> INVALID COUNTRY CODE [1 nodes visited]
+QC CON >>> 18 CON artist     49140 [1 nodes visited]
+QC HAT >>> 59 HAT & coat     49181 [2 nodes visited]
+QC RAT >>> 35 RAT you dirty  49157 [2 nodes visited]
+QC AND >>> 09 AND so on      49131 [2 nodes visited]
+QC SAM >>> INVALID COUNTRY CODE [2 nodes visited]
+QC YOZ >>> INVALID COUNTRY CODE [1 nodes visited]
+QC WOZ >>> INVALID COUNTRY CODE [1 nodes visited]
+QC CAZ >>> INVALID COUNTRY CODE [3 nodes visited]
+QC BEG >>> 43 BEG for candy  49165 [2 nodes visited]
+
+----19 Transactions processed----
++ + + + + + + + + + + + + + + + + + + THE END OF TRANS + + + + + + + + + + + + + + + + + + + + + +
+
+
++ + + + + + + + + + + + + + + + + + + THE START OF TRANS + + + + + + + + + + + + + + + + + + + + +
+
+QC ZAP >>> INVALID COUNTRY CODE [1 nodes visited]
+QC BAR >>> 12 BAR none       12345 [1 nodes visited]
+QC HOT >>> 56 HOT and cold   56789 [1 nodes visited]
+QC ZIP >>> INVALID COUNTRY CODE [1 nodes visited]
+QC ABE >>> INVALID COUNTRY CODE [1 nodes visited]
+QC RAN >>> INVALID COUNTRY CODE [1 nodes visited]
+QC RUN >>> 67 RUN spot run   67890 [1 nodes visited]
+
+----7 Transactions processed----
++ + + + + + + + + + + + + + + + + + + THE END OF TRANS + + + + + + + + + + + + + + + + + + + + + +
+
+
++ + + + + + + + + + + + + + + + + + + THE START OF TRANS + + + + + + + + + + + + + + + + + + + + +
+
+QC BOX >>> 01 BOX o bits     10001 [1 nodes visited]
+QC BEG >>> 21 BEG borrow     10021 [2 nodes visited]
+QC AAA >>> INVALID COUNTRY CODE [2 nodes visited]
+QC HAM >>> 49 HAM spam       10049 [2 nodes visited]
+QC ZZZ >>> INVALID COUNTRY CODE [1 nodes visited]
+QC ALL >>> 11 ALL in fun     10011 [2 nodes visited]
+QC HUB >>> 28 HUB usb        10028 [2 nodes visited]
+QC RUN >>> INVALID COUNTRY CODE [1 nodes visited]
+QC LZZ >>> INVALID COUNTRY CODE [2 nodes visited]
+QC IKE >>> 04 IKE for Pres   10004 [1 nodes visited]
+QC ZIP >>> INVALID COUNTRY CODE [1 nodes visited]
+QC LAA >>> INVALID COUNTRY CODE [2 nodes visited]
+QC MUT >>> INVALID COUNTRY CODE [2 nodes visited]
+
+----13 Transactions processed----
++ + + + + + + + + + + + + + + + + + + THE END OF TRANS + + + + + + + + + + + + + + + + + + + + + +
+
+
+-----------------------------------------------------------------------------------------
+TempSetupUtility.java
+-----------------------------------------------------------------------------------------
+
+
+/* PROJECT: WorldDataProject #4         PROGRAM: TempSetupUtility
+ * Written By: Marcel Englmaier
+ * PROJECT CLASSES USED: 
+ * FILES ACCESSED: CodeIndex?.txt, CodeIndex?.bin, LogSession.txt
+ * DESCRIPTION: this class gets one line from RawData, and passes it to CodeIndex, then prints CodeIndex
+ ******************************************************************************/
+package TempSetupUtility;
+
+import java.io.*;
+
+public class TempSetupUtility
+{
+
+    //<editor-fold defaultstate="collapsed" desc="Public Declarations">
+    
+    
+    //**************************** PUBLIC DECLARATIONS ************************
+    //None
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Private Declarations">
+    
+    
+    //**************************** PRIVATE DECLARATIONS ************************
+    //private files
+    private static BufferedReader input;
+    private static RandomAccessFile output;
+    
+    //private boolean
+    private static boolean readingIsDone;
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Public Main">
+    
+    
+    //****************************** PUBLIC Main *******************************
+    public static void main(String[] args) throws IOException
+    {
+        loadCodeIndex("CodeIndex1");
+        loadCodeIndex("CodeIndex2");
+        loadCodeIndex("CodeIndex3");
+        
+        //Read CodeIndex1.bin and print it
+        logCodeIndex("CodeIndex1.bin");
+        //Read CodeIndex2.bin and print it
+        logCodeIndex("CodeIndex2.bin");
+        //Read CodeIndex3.bin and print it
+        logCodeIndex("CodeIndex3.bin");
+    }
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Public Get/Set Methods">
+    
+    
+    //**************************** PUBLIC GET/SET METHODS **********************
+    //None
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Public Service Methods">
+    
+    
+    //**************************** PUBLIC SERVICE METHODS **********************
+    //None
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Private Methods">
+    
+    
+    //**************************** PRIVATE METHODS *****************************
+    private static void loadCodeIndex(String fileName) throws IOException
+    {
+        input = new BufferedReader(new FileReader(fileName + ".txt"));
+        output = new RandomAccessFile(new File(fileName + ".bin"), "rw");
+        String [] currentLine = input.readLine().split(" ");
+        int m = Integer.parseInt(currentLine[0]);
+        output.writeShort(m);
+        output.writeShort(Integer.parseInt(currentLine[1]));
+        output.writeShort(Integer.parseInt(currentLine[2]));
+        String temp = input.readLine();
+        int tracking = 0;
+        while(temp != null)
+        {
+            currentLine = temp.split(" ");
+            tracking = 0;
+            for(int i = 0; i < m - 1; i++)
+            {
+                output.writeShort(Integer.parseInt(currentLine[tracking]));
+                output.writeChar(currentLine[tracking + 1].charAt(0));
+                output.writeChar(currentLine[tracking + 1].charAt(1));
+                output.writeChar(currentLine[tracking + 1].charAt(2));
+                output.writeShort(Integer.parseInt(currentLine[tracking + 2]));
+                tracking = tracking + 3;
+            }
+            output.writeShort(Integer.parseInt(currentLine[currentLine.length - 1]));
+            temp = input.readLine();
+        }
+        
+        //close input then log the CodeIndex
+        input.close();
+    }
+    
+    private static void logCodeIndex(String fileName)
+    {
+        try
+        {
+            //initialize reader and logger for use
+            RandomAccessFile indexBackup = new RandomAccessFile(new File(fileName), "rw");
+            BufferedWriter logger = new BufferedWriter(new FileWriter("LogSession.txt", true));
+	
+            String line = "";
+            //read header
+            int m = indexBackup.readShort();
+            int rootPTR = indexBackup.readShort();
+            int n = indexBackup.readShort();
+            line = ("+ + + + + + + + + + + + + + + + + + THE START OF SETUP + + + + + + + + + + + + + + + + + + + + + +\n\n");
+            //line = formatSize("------------------------------------------------------------"
+            //        + "------------------------------------------------------", (4 * m) + 8 + (8 * (m - 1))) + "\n";
+            logger.write(line);
+            System.out.print(line);
+            line = fileName + "     M is " + m + ", rootPTR is " + rootPTR + ", N is " + n + "\n\n";
+            logger.write(line);
+            System.out.print(line);
+	
+            line = formatSize("---------------------------------------------------", ((4 * m)/2) - 3) + 
+                   m + " TP's" + 
+                   formatSize("---------------------------------------------------", ((4 * m)/2) - 3) + 
+                   " |  " + 
+                   formatSize("---------------------------------------------------", ((4 * (m - 1))/2) - 3) + 
+                   (m-1) + " KV's" + 
+                   formatSize("---------------------------------------------------", ((4 * (m - 1))/2) - 3) + 
+                   " | " + 
+                   formatSize("---------------------------------------------------", ((4 * (m - 1))/2) - 3) + 
+                   (m-1) + " DRPs" + 
+                   formatSize("---------------------------------------------------", ((4 * (m - 1))/2) - 3) + "\n";
+            logger.write(line);
+            System.out.print(line);
+            short [] TP = new short[m];
+            String [] KV = new String[m-1];
+            short [] DRP = new short[m-1];
+            for(int i = 0; i < n; i++)
+            {
+                for(int j = 0; j < m - 1; j++)
+                {
+                    TP[j] = indexBackup.readShort();
+                    KV[j] = String.valueOf(indexBackup.readChar()) + String.valueOf(indexBackup.readChar()) + String.valueOf(indexBackup.readChar());
+                    DRP[j] = indexBackup.readShort();
+                }
+                TP[m-1] = indexBackup.readShort();
+                line = "";
+                for(int x = 0; x < m; x++)
+                {
+                    line = line + formatSize(String.valueOf(TP[x]), 3) + " ";
+                }
+                line = line + " |  ";
+                for(int x = 0; x < m - 1; x++)
+                {
+                    line = line + formatSize(KV[x], 3) + " ";
+                }
+                line = line + " |  ";
+                for(int x = 0; x < m - 1; x++)
+                {
+                    line = line + formatSize(String.valueOf(DRP[x]), 3) + " ";
+                }
+                line = line + "\n";
+                logger.write(line);
+                System.out.print(line);
+            }
+            
+            line = ("\n+ + + + + + + + + + + + + + + + + + THE END OF SETUP + + + + + + + + + + + + + + + + + + + + + +\n\n\n");
+                
+            //line = line + formatSize("------------------------------------------------------------"
+            //        + "------------------------------------------------------", (4 * m) + 4 + (4 * (m - 1)) + 4 + (4 * (m - 1))) + "\n\n";
+            logger.write(line);
+            System.out.print(line);
+             
+            //close up the file
+            logger.write("\n\n");
+            indexBackup.close();
+            logger.close();
+        }
+        catch(EOFException e)
+        {
+            String line = "End Of File Error-IF THIS HAPPENS SOMETHING'S VERY, VERY WRONG!!!!!!!!!1!1\n";
+            System.out.println(line);
+        }
+        catch (IOException e)
+        {
+            System.out.append("\n\n\nThere was some sort of problem running ShowIndexFilesUtility\n\n\n");
+            e.printStackTrace();
+        }
+    }
+    
+    private static String formatSize(String input, int length)
+    {
+       //formats input String to a given size and returns it, either clipping it for too long Strings, or adding spaces for too short Strings
+       char [] output = new char[length];
+       for(int i = 0; i < length; i++)
+       {
+           if(i < input.length())
+           {
+               output[i] = input.charAt(i);
+           }
+           else
+           {
+               output[i] = ' ';
+           }
+       }
+       return new String(output);
+   }
+    
+    //</editor-fold>
+}
+
+
+-----------------------------------------------------------------------------------------
+TempUserApp.java
+-----------------------------------------------------------------------------------------
+
+
+/* PROJECT: WorldDataProject #4         PROGRAM: TempUserApp
+ * Written By: Marcel Englmaier
+ * PROJECT CLASSES USED: CodeIndex, UserInterface
+ * FILES ACCESSED: MainData.txt, TransData?.txt, LogSession.txt
+ * DESCRIPTION: This Class takes in data, and sends commands to CodeIndex accordingly
+ * TRANSACTION HANDLERS: QC
+ *******************************************************************************/
+package TempUserApp;
+
+import OOPClasses.CodeIndex;
+import java.io.*;
+
+public class TempUserApp 
+{
+
+    //<editor-fold defaultstate="collapsed" desc="Public Declarations">
+    
+    
+    //**************************** PUBLIC DECLARATIONS ************************
+    //None
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Private Declarations">
+    
+    
+    //**************************** PRIVATE DECLARATIONS ************************
+    //files
+    private static PrintWriter logger;
+    private static BufferedReader transDataReader;
+    private static RandomAccessFile raf;
+    
+    //CodeIndex
+    private static CodeIndex CI;
+    
+    //finals
+    private static final int RECORD_SIZE = 25;
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Public Main">
+    
+    
+    //****************************** PUBLIC Main *******************************
+    public static void main(String[] args) throws IOException
+    {
+        logger = new PrintWriter(new FileWriter(new File("LogSession.txt"), true));
+        doOne("1");
+        doOne("2");
+        doOne("3");
+        logger.close();
+    }
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Public Get/Set Methods">
+    
+    
+    //**************************** PUBLIC GET/SET METHODS **********************
+    //None
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Public Service Methods">
+    
+    
+    //**************************** PUBLIC SERVICE METHODS **********************
+    //None
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Private Methods">
+    
+    
+    //**************************** PRIVATE METHODS *****************************
+    private static void doOne(String fileName) throws IOException
+    {
+        transDataReader = new BufferedReader(new FileReader(new File("TransData" + fileName + ".txt")));
+        CI = new CodeIndex(fileName);
+        raf = new RandomAccessFile(new File("MainData" + fileName + ".txt"), "rw");
+        
+        writeToLog("+ + + + + + + + + + + + + + + + + + + THE START OF TRANS + + + + + + + + + + + + + + + + + + + + +\n");
+        
+        // initialize transaction counter
+        int transProcessed = 0;
+
+        // core algorithm described above
+        String transaction = transDataReader.readLine();
+        while(transaction != null)
+        {
+            CI.reset();
+            //writeToLog(transaction + "");
+            queryByCode(transaction.split(" ")[1]);
+            transProcessed++;
+            transaction = transDataReader.readLine();
+        }
+        if (transProcessed > 0)
+        {
+            writeToLog("\n----" + transProcessed + " Transactions processed----");
+            writeToLog("+ + + + + + + + + + + + + + + + + + + THE END OF TRANS + + + + + + + + + + + + + + + + + + + + + +\n\n");
+        }
+        
+        closeOut();
+    }
+    
+    private static void queryByCode(String id) throws IOException
+    {
+        CI.setCode(id);
+        int result = CI.queryByCode();
+        if(result == -1)
+        {
+            writeToLog("QC " + id + " >>> INVALID COUNTRY CODE [" + CI.getNodesVisited() + " nodes visited]");
+        }
+        else
+        {
+            raf.seek((result - 1) * RECORD_SIZE);
+            writeToLog("QC " + id + " >>> " + raf.readLine() + " [" + CI.getNodesVisited() + " nodes visited]");
+        }
+    }
+    
+    private static void closeOut() throws IOException
+    {
+        transDataReader.close();
+        CI.close();
+        raf.close();
+    }
+    
+    private static void writeToLog(String message) throws IOException
+    {
+        logger.println(message);
+        System.out.println(message);
+    }
+    
+    //</editor-fold>
+}
+
+
+-----------------------------------------------------------------------------------------
+CodeIndex.java
+-----------------------------------------------------------------------------------------
+
+
+/* PROJECT: WorldDataProject #4         CLASS: CodeIndex
+* Written By: Marcel Englmaier
+* FILES ACCESSED: CodeIndex?.bin
+* FILE STRUCTURE: OOP
+* INDEX STRUCTURE: B-Tree  
+* DESCRIPTION: Creates a hash table and makes    
+*******************************************************************************/
+
+package OOPClasses;
+
+import java.io.*;
+
+public class CodeIndex 
+{
+    //<editor-fold defaultstate="collapsed" desc="Public Declarations">
+    
+    
+    //**************************** PUBLIC DECLARATIONS ************************
+    //None
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Private Declarations">
+    
+    
+    //**************************** PRIVATE DECLARATIONS ************************
+    //3 Parallel arrays
+    private static short [] TP;
+    private static String [] KV;
+    private static short [] DRP;
+    
+    //Integers
+    private static int nodesVisited;
+    private static short m;
+    private static short rootPTR;
+    private static short n;
+    
+    //String
+    private String code;
+    
+    //saveFile
+    private RandomAccessFile file;
+    
+    //finals
+    private int RECORD_SIZE;
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Public Constructor(s)">
+    
+    
+    //**************************** PUBLIC CONSTRUCTOR(S) ***********************
+    public CodeIndex(String fileName)  throws IOException
+    {
+        //initialize saveFile for reading/writing
+        file = new RandomAccessFile(new File("CodeIndex" + fileName + ".bin"), "rw");
+        nodesVisited = 0;
+        startUp();
+        RECORD_SIZE = ((10 * m - 10) + 2);
+    }
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Public Get/Set Methods">
+    
+    
+    //**************************** PUBLIC GET/SET METHODS **********************
+    public void setCode(String id)
+    {
+        code = id;
+    }
+    public void reset()
+    {
+        //resets the count
+        nodesVisited = 0;
+    }
+    
+    public int getNodesVisited()
+    {
+        //returns number of nodes visited
+        return nodesVisited;
+    }
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Public Service Methods">
+    
+    
+    //**************************** PUBLIC SERVICE METHODS **********************
+    public int queryByCode() throws IOException
+    {
+        int DRP = 0;
+        DRP = searchOneNode(rootPTR);
+        return DRP;
+    }
+    
+//******************************************************************************
+    
+    public void close() throws IOException
+    {
+        //close the file
+        file.close();
+    }
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Private Methods">
+    
+    
+    //**************************** PRIVATE METHODS *****************************
+    private void startUp() throws IOException
+    {
+        file.seek(0);
+        m = file.readShort();
+        rootPTR = file.readShort();
+        n = file.readShort();
+    }
+    
+    //******************************************************************************
+    
+    private void readOneNode(int RRN) throws IOException
+    {
+        file.seek(6 + ((RRN - 1) * RECORD_SIZE));
+        TP = new short[m];
+        KV = new String[m-1];
+        DRP = new short[m-1];
+        for(int i = 0; i < m-1; i++)
+        {
+            TP[i] = file.readShort();
+            KV[i] = String.valueOf(file.readChar()) + String.valueOf(file.readChar()) + String.valueOf(file.readChar());
+            DRP[i] = file.readShort();
+        }
+        TP[m-1] = file.readShort();
+        nodesVisited++;
+    }
+    
+    //******************************************************************************
+    
+    private int searchOneNode(int ptr) throws IOException
+    {
+        readOneNode(ptr);
+        for(int i = 0; i < m-2; i++)
+        {
+            if(code.equalsIgnoreCase(KV[i]))
+            {
+                return DRP[i];
+            }
+            else if(code.compareToIgnoreCase(KV[i]) < 0)
+            {
+                if(TP[i] == -1)
+                {
+                    return -1;
+                }
+                else
+                {
+                    return searchOneNode(TP[i]);
+                }
+            }
+        }
+        if(TP[m-1] == -1)
+        {
+            return -1;
+        }
+        else
+        {
+            return searchOneNode(TP[m-1]);
+        }
+    }
+    
+    
+    //</editor-fold>
+}

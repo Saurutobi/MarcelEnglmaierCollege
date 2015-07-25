@@ -1,0 +1,649 @@
+Opening Log Session
+
+Setup Program Started
+
+**** Opening A2ZRawData.csv
+
+**** Opening A2ZMainData.bin
+
+**** Closing A2ZRawData.csv
+
+**** Closing A2ZMainData.bin
+
+26 items written, 0 errors
+
+**** Closing Setup
+
+**** Closing Log Session
+
+
+Opening Log Session
+
+Opening  A2ZTransData.txt
+
+OK, starting UserApp
+
+QI: 12
+      MEX Mexico            North Ameri Central Am 1958 18 98881000 71.5
+
+QI: 23
+      No Country with that ID
+
+QI: 1
+      XVI Hex Land          North Ameri CyberSpace 1    19 19665148 0.0 
+
+QI: 2
+      No Country with that ID
+
+QI: 39
+      ATA Antarctica        Antarctica  Antarctica 1312 0  0        0.0 
+
+QI: 40
+      No Country with that ID
+
+QI: 4
+      IND India             Asia        Southern a 3287 19 10136620 62.5
+
+QI: 11
+      No Country with that ID
+
+DeleteByID not yet implemented
+
+QI: 20
+      POL Poland            Europe      Eastern Eu 3232 19 38653600 73.2
+
+QI: 13
+      DEU Germany           Europe      Western Eu 3570 19 82164700 77.4
+
+LI: 
+
+    Code   Name                 Continent      Region        Area       Indep   Population  L.exp
+
+    XVI    Hex Land             North Ameri    CyberSpace    1          1969    19665148    0.0 
+
+    CHN    China                Asia           Eastern As    9572900    -152    12775580    71.4
+
+    IND    India                Asia           Southern a    3287263    1947    10136620    62.5
+
+    USA    United States        North Ameri    North Amer    9363520    1776    27835700    77.1
+
+    RUS    Russian Federatio    Europe         Eastern Eu    1707540    1991    14693400    67.2
+
+    JPN    Japan                Asia           Eastern As    377829     -660    12671400    80.7
+
+    MEX    Mexico               North Ameri    Central Am    1958201    1810    98881000    71.5
+
+    DEU    Germany              Europe         Western Eu    357022     1955    82164700    77.4
+
+    EGY    Egypt                Africa         Northern A    1001449    1922    68470000    63.3
+
+    GBR    United Kingdom       Europe         British Is    242900     1066    59623400    77.7
+
+    FRA    France               Europe         Western Eu    551500     843     59225700    78.8
+
+    POL    Poland               Europe         Eastern Eu    323250     1918    38653600    73.2
+
+    KEN    Kenya                Africa         Eastern Af    580367     1963    30080000    48.0
+
+    VEN    Venezuela            South Ameri    South Amer    912050     1811    24170000    73.1
+
+    YEM    Yemen                Asia           Middle Eas    527968     1918    18112000    59.8
+
+    ZWE    Zimbabwe             Africa         Eastern Af    390757     1980    11669000    37.8
+
+    BEL    Belgium              Europe         Western Eu    30518      1830    10239000    77.8
+
+    SOM    Somalia              Africa         Eastern Af    637657     1960    10097000    46.2
+
+    HTI    Haiti                North Ameri    Caribbean     27750      1804    8222000     49.2
+
+    NIC    Nicaragua            North Ameri    Central Am    130000     1838    5074000     68.7
+
+    LBN    Lebanon              Asia           Middle Eas    10400      1941    3282000     71.3
+
+    OMN    Oman                 Asia           Middle Eas    309500     1951    2542000     71.8
+
+    QAT    Qatar                Asia           Middle Eas    11000      1971    599000      72.4
+
+    WSM    Samoa                Oceania        Polynesia     2831       1962    180000      69.2
+
+    TCA    Turks and Caicos     North Ameri    Caribbean     430        0       17000       73.3
+
+**** Closing A2ZMainData.bin
+
+**** Closing UserApp - 49 items Processed
+
+**** Closing Log Session
+
+
+Opening ShowFiles.txt and LogSessionFile.txt
+
+A2ZMain Data Storage - N is 0, MaxID is 39
+[RRN]   ID      CODE    NAME                    CONTINENT       REGION          AREA            INDEP   POPULATION      L.EXP   
+------------------------------------------------------------------------------------------------------------------------------------------------
+[001]   1       XVI     Hex Land                North Ameri     CyberSpace      1               1969    1966514816      0.0     
+EMPTY
+[003]   3       CHN     China                   Asia            Eastern As      9572900         -1523   1277558000      71.4    
+[004]   4       IND     India                   Asia            Southern a      3287263         1947    1013662000      62.5    
+EMPTY
+[006]   6       USA     United States           North Ameri     North Amer      9363520         1776    278357000       77.1    
+EMPTY
+[008]   8       RUS     Russian Federatio       Europe          Eastern Eu      17075400        1991    146934000       67.2    
+[009]   9       JPN     Japan                   Asia            Eastern As      377829          -660    126714000       80.7    
+EMPTY
+EMPTY
+[012]   12      MEX     Mexico                  North Ameri     Central Am      1958201         1810    98881000        71.5    
+[013]   13      DEU     Germany                 Europe          Western Eu      357022          1955    82164700        77.4    
+EMPTY
+[015]   15      EGY     Egypt                   Africa          Northern A      1001449         1922    68470000        63.3    
+EMPTY
+[017]   17      GBR     United Kingdom          Europe          British Is      242900          1066    59623400        77.7    
+EMPTY
+[019]   19      FRA     France                  Europe          Western Eu      551500          843     59225700        78.8    
+[020]   20      POL     Poland                  Europe          Eastern Eu      323250          1918    38653600        73.2    
+[021]   21      KEN     Kenya                   Africa          Eastern Af      580367          1963    30080000        48.0    
+[022]   22      VEN     Venezuela               South Ameri     South Amer      912050          1811    24170000        73.1    
+EMPTY
+[024]   24      YEM     Yemen                   Asia            Middle Eas      527968          1918    18112000        59.8    
+[025]   25      ZWE     Zimbabwe                Africa          Eastern Af      390757          1980    11669000        37.8    
+EMPTY
+[027]   27      BEL     Belgium                 Europe          Western Eu      30518           1830    10239000        77.8    
+[028]   28      SOM     Somalia                 Africa          Eastern Af      637657          1960    10097000        46.2    
+EMPTY
+[030]   30      HTI     Haiti                   North Ameri     Caribbean       27750           1804    8222000         49.2    
+[031]   31      NIC     Nicaragua               North Ameri     Central Am      130000          1838    5074000         68.7    
+[032]   32      LBN     Lebanon                 Asia            Middle Eas      10400           1941    3282000         71.3    
+[033]   33      OMN     Oman                    Asia            Middle Eas      309500          1951    2542000         71.8    
+EMPTY
+[035]   35      QAT     Qatar                   Asia            Middle Eas      11000           1971    599000          72.4    
+[036]   36      WSM     Samoa                   Oceania         Polynesia       2831            1962    180000          69.2    
+[037]   37      TCA     Turks and Caicos        North Ameri     Caribbean       430             0       17000           73.3    
+EMPTY
+[039]   39      ATA     Antarctica              Antarctica      Antarctica      13120000        0       0               0.0     
+- - -
+* * * * * * * * * * * * * * * * * * * * * * * * * * * THE END OF DATA * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+Opening Log Session
+
+Setup Program Started
+
+**** Opening A2ZRawData.csv
+
+**** Opening A2ZMainData.bin
+
+**** Closing A2ZRawData.csv
+
+**** Closing A2ZMainData.bin
+
+26 items written, 0 errors
+
+**** Closing Setup
+
+**** Closing Log Session
+
+
+Opening Log Session
+
+Opening  A2ZTransData.txt
+
+OK, starting UserApp
+
+QI: 12
+      MEX Mexico            North Ameri Central Am 1958 18 98881000 71.5
+
+QI: 23
+      No Country with that ID
+
+QI: 1
+      XVI Hex Land          North Ameri CyberSpace 1    19 19665148 0.0 
+
+QI: 2
+      No Country with that ID
+
+QI: 39
+      ATA Antarctica        Antarctica  Antarctica 1312 0  0        0.0 
+
+QI: 40
+      No Country with that ID
+
+QI: 4
+      IND India             Asia        Southern a 3287 19 10136620 62.5
+
+QI: 11
+      No Country with that ID
+
+DeleteByID not yet implemented
+
+QI: 20
+      POL Poland            Europe      Eastern Eu 3232 19 38653600 73.2
+
+QI: 13
+      DEU Germany           Europe      Western Eu 3570 19 82164700 77.4
+
+LI: 
+
+    Code   Name                 Continent      Region        Area       Indep   Population  L.exp
+
+    XVI    Hex Land             North Ameri    CyberSpace    1          1969    19665148    0.0 
+
+    CHN    China                Asia           Eastern As    9572900    -152    12775580    71.4
+
+    IND    India                Asia           Southern a    3287263    1947    10136620    62.5
+
+    USA    United States        North Ameri    North Amer    9363520    1776    27835700    77.1
+
+    RUS    Russian Federatio    Europe         Eastern Eu    1707540    1991    14693400    67.2
+
+    JPN    Japan                Asia           Eastern As    377829     -660    12671400    80.7
+
+    MEX    Mexico               North Ameri    Central Am    1958201    1810    98881000    71.5
+
+    DEU    Germany              Europe         Western Eu    357022     1955    82164700    77.4
+
+    EGY    Egypt                Africa         Northern A    1001449    1922    68470000    63.3
+
+    GBR    United Kingdom       Europe         British Is    242900     1066    59623400    77.7
+
+    FRA    France               Europe         Western Eu    551500     843     59225700    78.8
+
+    POL    Poland               Europe         Eastern Eu    323250     1918    38653600    73.2
+
+    KEN    Kenya                Africa         Eastern Af    580367     1963    30080000    48.0
+
+    VEN    Venezuela            South Ameri    South Amer    912050     1811    24170000    73.1
+
+    YEM    Yemen                Asia           Middle Eas    527968     1918    18112000    59.8
+
+    ZWE    Zimbabwe             Africa         Eastern Af    390757     1980    11669000    37.8
+
+    BEL    Belgium              Europe         Western Eu    30518      1830    10239000    77.8
+
+    SOM    Somalia              Africa         Eastern Af    637657     1960    10097000    46.2
+
+    HTI    Haiti                North Ameri    Caribbean     27750      1804    8222000     49.2
+
+    NIC    Nicaragua            North Ameri    Central Am    130000     1838    5074000     68.7
+
+    LBN    Lebanon              Asia           Middle Eas    10400      1941    3282000     71.3
+
+    OMN    Oman                 Asia           Middle Eas    309500     1951    2542000     71.8
+
+    QAT    Qatar                Asia           Middle Eas    11000      1971    599000      72.4
+
+    WSM    Samoa                Oceania        Polynesia     2831       1962    180000      69.2
+
+    TCA    Turks and Caicos     North Ameri    Caribbean     430        0       17000       73.3
+
+**** Closing A2ZMainData.bin
+
+**** Closing UserApp - 49 items Processed
+
+**** Closing Log Session
+
+
+Opening ShowFiles.txt and LogSessionFile.txt
+
+A2ZMain Data Storage - N is 0, MaxID is 39
+[RRN]   ID      CODE    NAME                    CONTINENT       REGION          AREA            INDEP   POPULATION      L.EXP   
+------------------------------------------------------------------------------------------------------------------------------------------------
+[001]   1       XVI     Hex Land                North Ameri     CyberSpace      1               1969    1966514816      0.0     
+EMPTY
+[003]   3       CHN     China                   Asia            Eastern As      9572900         -1523   1277558000      71.4    
+[004]   4       IND     India                   Asia            Southern a      3287263         1947    1013662000      62.5    
+EMPTY
+[006]   6       USA     United States           North Ameri     North Amer      9363520         1776    278357000       77.1    
+EMPTY
+[008]   8       RUS     Russian Federatio       Europe          Eastern Eu      17075400        1991    146934000       67.2    
+[009]   9       JPN     Japan                   Asia            Eastern As      377829          -660    126714000       80.7    
+EMPTY
+- - -
+* * * * * * * * * * * * * * * * * * * * * * * * * * * THE END OF DATA * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+Opening Log Session
+
+Setup Program Started
+
+**** Opening AllRawData.csv
+
+**** Opening AllMainData.bin
+
+**** Closing AllRawData.csv
+
+**** Closing AllMainData.bin
+
+239 items written, 0 errors
+
+**** Closing Setup
+
+**** Closing Log Session
+
+
+Opening Log Session
+
+Opening  AllTransData.txt
+
+OK, starting UserApp
+
+QI: 115
+      DZA Algeria           Africa      Northern A 2381 19 31471000 69.7
+
+QI: 23
+      VEN Venezuela         South Ameri South Amer 9120 18 24170000 73.1
+
+QI: 240
+      No Country with that ID
+
+QI: 0
+      No Country with that ID
+
+QI: 1
+      CHN China             Asia        Eastern As 9572 -1 12775580 71.4
+
+QI: 239
+      GUF French Guiana     South Ameri South Amer 9000 0  181000   76.1
+
+DeleteByID not yet implemented
+
+DeleteByID not yet implemented
+
+**** Closing AllMainData.bin
+
+**** Closing UserApp - 7 items Processed
+
+**** Closing Log Session
+
+
+Opening ShowFiles.txt and LogSessionFile.txt
+
+AllMain Data Storage - N is 0, MaxID is 239
+[RRN]   ID      CODE    NAME                    CONTINENT       REGION          AREA            INDEP   POPULATION      L.EXP   
+------------------------------------------------------------------------------------------------------------------------------------------------
+[001]   1       CHN     China                   Asia            Eastern As      9572900         -1523   1277558000      71.4    
+[002]   2       ETH     Ethiopia                Africa          Eastern Af      1104300         -1000   62565000        45.2    
+[003]   3       JPN     Japan                   Asia            Eastern As      377829          -660    126714000       80.7    
+[004]   4       DNK     Denmark                 Europe          Nordic Cou      43094           800     5330000         76.5    
+[005]   5       SWE     Sweden                  Europe          Nordic Cou      449964          836     8861400         79.6    
+[006]   6       FRA     France                  Europe          Western Eu      551500          843     59225700        78.8    
+[007]   7       SMR     San Marino              Europe          Southern E      61              885     27000           81.1    
+[008]   8       GBR     United Kingdom          Europe          British Is      242900          1066    59623400        77.7    
+[009]   9       PRT     Portugal                Europe          Southern E      91982           1143    9997600         75.8    
+[010]   10      AND     Andorra                 Europe          Southern E      468             1278    78000           83.5    
+[011]   11      THA     Thailand                Asia            Southeast       513115          1350    61399000        68.6    
+[012]   12      ESP     Spain                   Europe          Southern E      505992          1492    39441700        78.8    
+[013]   13      CHE     Switzerland             Europe          Western Eu      41284           1499    7160400         79.6    
+[014]   14      NLD     Netherlands             Europe          Western Eu      41526           1581    15864000        78.3    
+[015]   15      NPL     Nepal                   Asia            Southern a      147181          1769    23930000        57.8    
+[016]   16      USA     United States           North Ameri     North Amer      9363520         1776    278357000       77.1    
+[017]   17      HTI     Haiti                   North Ameri     Caribbean       27750           1804    8222000         49.2    
+[018]   18      LIE     Liechtenstein           Europe          Western Eu      160             1806    32300           78.8    
+[019]   19      MEX     Mexico                  North Ameri     Central Am      1958201         1810    98881000        71.5    
+[020]   20      CHL     Chile                   South Ameri     South Amer      756626          1810    15211000        75.7    
+[021]   21      COL     Colombia                South Ameri     South Amer      1138914         1810    42321000        70.3    
+[022]   22      PRY     Paraguay                South Ameri     South Amer      406752          1811    5496000         73.7    
+[023]   23      VEN     Venezuela               South Ameri     South Amer      912050          1811    24170000        73.1    
+[024]   24      ARG     Argentina               South Ameri     South Amer      2780400         1816    37032000        75.1    
+[025]   25      CRI     Costa Rica              North Ameri     Central Am      51100           1821    4023000         75.8    
+[026]   26      GTM     Guatemala               North Ameri     Central Am      108889          1821    11385000        66.2    
+[027]   27      PER     Peru                    South Ameri     South Amer      1285216         1821    25662000        70.0    
+[028]   28      BRA     Brazil                  South Ameri     South Amer      8547403         1822    170115000       62.9    
+[029]   29      ECU     Ecuador                 South Ameri     South Amer      283561          1822    12646000        71.1    
+[030]   30      BOL     Bolivia                 South Ameri     South Amer      1098581         1825    8329000         63.7    
+- - -
+* * * * * * * * * * * * * * * * * * * * * * * * * * * THE END OF DATA * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+Opening Log Session
+
+Setup Program Started
+
+**** Opening DupRawData.csv
+
+**** Opening DupMainData.bin
+
+**** Closing DupRawData.csv
+
+**** Closing DupMainData.bin
+
+11 items written, 0 errors
+
+**** Closing Setup
+
+**** Closing Log Session
+
+
+Opening Log Session
+
+Opening  DupTransData.txt
+
+OK, starting UserApp
+
+QI: 9
+      FRA France            Europe      Western Eu 5515 84 59225700 78.8
+
+QI: 0
+      No Country with that ID
+
+QI: 999
+      No Country with that ID
+
+QI: 4
+      POL Poland            Europe      Eastern Eu 3232 19 38653600 73.2
+
+QI: 7
+      GBR United Kingdom    Europe      British Is 2429 10 59623400 77.7
+
+QI: 3
+      NIC Nicaragua         North Ameri Central Am 1300 18 5074000  68.7
+
+QI: 2
+      No Country with that ID
+
+QI: 8
+      No Country with that ID
+
+QI: 10
+      No Country with that ID
+
+QI: 6
+      USA United States     North Ameri North Amer 9363 17 27835700 77.1
+
+LI: 
+
+    Code   Name                 Continent      Region        Area       Indep   Population  L.exp
+
+    NIC    Nicaragua            North Ameri    Central Am    130000     1838    5074000     68.7
+
+    POL    Poland               Europe         Eastern Eu    323250     1918    38653600    73.2
+
+    USA    United States        North Ameri    North Amer    9363520    1776    27835700    77.1
+
+    GBR    United Kingdom       Europe         British Is    242900     1066    59623400    77.7
+
+**** Closing DupMainData.bin
+
+**** Closing UserApp - 17 items Processed
+
+**** Closing Log Session
+
+
+Opening ShowFiles.txt and LogSessionFile.txt
+
+DupMain Data Storage - N is 0, MaxID is 9
+[RRN]   ID      CODE    NAME                    CONTINENT       REGION          AREA            INDEP   POPULATION      L.EXP   
+------------------------------------------------------------------------------------------------------------------------------------------------
+EMPTY
+EMPTY
+[003]   3       NIC     Nicaragua               North Ameri     Central Am      130000          1838    5074000         68.7    
+[004]   4       POL     Poland                  Europe          Eastern Eu      323250          1918    38653600        73.2    
+EMPTY
+[006]   6       USA     United States           North Ameri     North Amer      9363520         1776    278357000       77.1    
+[007]   7       GBR     United Kingdom          Europe          British Is      242900          1066    59623400        77.7    
+EMPTY
+[009]   9       FRA     France                  Europe          Western Eu      551500          843     59225700        78.8    
+- - -
+* * * * * * * * * * * * * * * * * * * * * * * * * * * THE END OF DATA * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+Opening Log Session
+
+Setup Program Started
+
+**** Opening A2ZRawData.csv
+
+**** Opening A2ZMainData.bin
+
+**** Closing A2ZRawData.csv
+
+**** Closing A2ZMainData.bin
+
+26 items written, 0 errors
+
+**** Closing Setup
+
+**** Closing Log Session
+
+
+Opening Log Session
+
+Opening  A2ZTransData.txt
+
+OK, starting UserApp
+
+QI: 12
+      MEX Mexico            North Ameri Central Am 1958 18 98881000 71.5
+
+QI: 23
+      No Country with that ID
+
+QI: 1
+      XVI Hex Land          North Ameri CyberSpace 1    19 19665148 0.0 
+
+QI: 2
+      No Country with that ID
+
+QI: 39
+      ATA Antarctica        Antarctica  Antarctica 1312 0  0        0.0 
+
+QI: 40
+      No Country with that ID
+
+QI: 4
+      IND India             Asia        Southern a 3287 19 10136620 62.5
+
+QI: 11
+      No Country with that ID
+
+DeleteByID not yet implemented
+
+QI: 20
+      POL Poland            Europe      Eastern Eu 3232 19 38653600 73.2
+
+QI: 13
+      DEU Germany           Europe      Western Eu 3570 19 82164700 77.4
+
+LI: 
+
+    Code   Name                 Continent      Region        Area       Indep   Population  L.exp
+
+    XVI    Hex Land             North Ameri    CyberSpace    1          1969    19665148    0.0 
+
+    CHN    China                Asia           Eastern As    9572900    -152    12775580    71.4
+
+    IND    India                Asia           Southern a    3287263    1947    10136620    62.5
+
+    USA    United States        North Ameri    North Amer    9363520    1776    27835700    77.1
+
+    RUS    Russian Federatio    Europe         Eastern Eu    1707540    1991    14693400    67.2
+
+    JPN    Japan                Asia           Eastern As    377829     -660    12671400    80.7
+
+    MEX    Mexico               North Ameri    Central Am    1958201    1810    98881000    71.5
+
+    DEU    Germany              Europe         Western Eu    357022     1955    82164700    77.4
+
+    EGY    Egypt                Africa         Northern A    1001449    1922    68470000    63.3
+
+    GBR    United Kingdom       Europe         British Is    242900     1066    59623400    77.7
+
+    FRA    France               Europe         Western Eu    551500     843     59225700    78.8
+
+    POL    Poland               Europe         Eastern Eu    323250     1918    38653600    73.2
+
+    KEN    Kenya                Africa         Eastern Af    580367     1963    30080000    48.0
+
+    VEN    Venezuela            South Ameri    South Amer    912050     1811    24170000    73.1
+
+    YEM    Yemen                Asia           Middle Eas    527968     1918    18112000    59.8
+
+    ZWE    Zimbabwe             Africa         Eastern Af    390757     1980    11669000    37.8
+
+    BEL    Belgium              Europe         Western Eu    30518      1830    10239000    77.8
+
+    SOM    Somalia              Africa         Eastern Af    637657     1960    10097000    46.2
+
+    HTI    Haiti                North Ameri    Caribbean     27750      1804    8222000     49.2
+
+    NIC    Nicaragua            North Ameri    Central Am    130000     1838    5074000     68.7
+
+    LBN    Lebanon              Asia           Middle Eas    10400      1941    3282000     71.3
+
+    OMN    Oman                 Asia           Middle Eas    309500     1951    2542000     71.8
+
+    QAT    Qatar                Asia           Middle Eas    11000      1971    599000      72.4
+
+    WSM    Samoa                Oceania        Polynesia     2831       1962    180000      69.2
+
+    TCA    Turks and Caicos     North Ameri    Caribbean     430        0       17000       73.3
+
+**** Closing A2ZMainData.bin
+
+**** Closing UserApp - 49 items Processed
+
+**** Closing Log Session
+
+
+Opening ShowFiles.txt and LogSessionFile.txt
+
+A2ZMain Data Storage - N is 0, MaxID is 39
+[RRN]   ID      CODE    NAME                    CONTINENT       REGION          AREA            INDEP   POPULATION      L.EXP   
+------------------------------------------------------------------------------------------------------------------------------------------------
+[001]   1       XVI     Hex Land                North Ameri     CyberSpace      1               1969    1966514816      0.0     
+EMPTY
+[003]   3       CHN     China                   Asia            Eastern As      9572900         -1523   1277558000      71.4    
+[004]   4       IND     India                   Asia            Southern a      3287263         1947    1013662000      62.5    
+EMPTY
+[006]   6       USA     United States           North Ameri     North Amer      9363520         1776    278357000       77.1    
+EMPTY
+[008]   8       RUS     Russian Federatio       Europe          Eastern Eu      17075400        1991    146934000       67.2    
+[009]   9       JPN     Japan                   Asia            Eastern As      377829          -660    126714000       80.7    
+EMPTY
+EMPTY
+[012]   12      MEX     Mexico                  North Ameri     Central Am      1958201         1810    98881000        71.5    
+[013]   13      DEU     Germany                 Europe          Western Eu      357022          1955    82164700        77.4    
+EMPTY
+[015]   15      EGY     Egypt                   Africa          Northern A      1001449         1922    68470000        63.3    
+EMPTY
+[017]   17      GBR     United Kingdom          Europe          British Is      242900          1066    59623400        77.7    
+EMPTY
+[019]   19      FRA     France                  Europe          Western Eu      551500          843     59225700        78.8    
+[020]   20      POL     Poland                  Europe          Eastern Eu      323250          1918    38653600        73.2    
+[021]   21      KEN     Kenya                   Africa          Eastern Af      580367          1963    30080000        48.0    
+[022]   22      VEN     Venezuela               South Ameri     South Amer      912050          1811    24170000        73.1    
+EMPTY
+[024]   24      YEM     Yemen                   Asia            Middle Eas      527968          1918    18112000        59.8    
+[025]   25      ZWE     Zimbabwe                Africa          Eastern Af      390757          1980    11669000        37.8    
+EMPTY
+[027]   27      BEL     Belgium                 Europe          Western Eu      30518           1830    10239000        77.8    
+[028]   28      SOM     Somalia                 Africa          Eastern Af      637657          1960    10097000        46.2    
+EMPTY
+[030]   30      HTI     Haiti                   North Ameri     Caribbean       27750           1804    8222000         49.2    
+[031]   31      NIC     Nicaragua               North Ameri     Central Am      130000          1838    5074000         68.7    
+[032]   32      LBN     Lebanon                 Asia            Middle Eas      10400           1941    3282000         71.3    
+[033]   33      OMN     Oman                    Asia            Middle Eas      309500          1951    2542000         71.8    
+EMPTY
+[035]   35      QAT     Qatar                   Asia            Middle Eas      11000           1971    599000          72.4    
+[036]   36      WSM     Samoa                   Oceania         Polynesia       2831            1962    180000          69.2    
+[037]   37      TCA     Turks and Caicos        North Ameri     Caribbean       430             0       17000           73.3    
+EMPTY
+[039]   39      ATA     Antarctica              Antarctica      Antarctica      13120000        0       0               0.0     
+- - -
+* * * * * * * * * * * * * * * * * * * * * * * * * * * THE END OF DATA * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+

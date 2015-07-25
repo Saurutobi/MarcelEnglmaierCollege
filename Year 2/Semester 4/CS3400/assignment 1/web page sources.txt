@@ -1,0 +1,15 @@
+http://en.wikipedia.org/wiki/HTML
+it's wikipedia, but it's good because it contains examples of html and descriptions to reference
+http://www.htmldog.com/guides/htmlbeginner/
+for the two of us who had no idea what we were doing, this was a good reference for how to
+do many things
+http://www.w3schools.com/html/default.asp
+This was great because we could see how the changes directly affected the webpage
+http://www.quackit.com/html/
+this wasn't so much helpful as it was funny. It had much source code for copying, but no explanations
+https://developer.mozilla.org/en-US/
+this was probably the most helpful as it was very useful for explanations of stuff in general
+http://dev.mysql.com/doc/refman/5.0/en/apis-php.html
+this one had references of mysql extension stuff for php that we used
+http://www.w3schools.com/php/default.asp
+again w3schools, but this one is for php and is very helpful

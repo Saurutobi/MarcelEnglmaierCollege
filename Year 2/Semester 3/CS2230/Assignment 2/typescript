@@ -1,0 +1,60 @@
+Script started on Thu Oct 04 13:59:29 2012
+bronco:~/assignment2> cat main2.c
+#include<stdio.h>
+
+//author Marcel Englmaier
+
+unsigned char NthByteC(int, int);
+unsigned char NthByteS(int, int);
+
+int main(int argc, char * argv[])
+{
+        printf("Value = 5\nByteNdx = 2\n");
+
+                //takes a 32 bit input, gets 1 byte back, and displays it as hex
+        printf("Using C: %x is returned when passing 0xfacecafe and asking for byte #2\n", NthByteC(0xfacecafe,2));
+        printf("Using C: %x is returned when passing 0xfaed9327 and asking for byte #3\n", NthByteC(0xfaed9327,3));
+        printf("Using C: %x is returned when passing 0x2893fade and asking for byte #0\n", NthByteC(0x2893fade,0));
+
+                //takes a 32 bit input, gets 1 byte back, and displays it as hex
+        printf("Using Assemlby: %x is returned when passing 0xfacecafe and asking for byte #2\n", NthByteS(0xfacecafe,2));
+        printf("Using Assemlby: %x is returned when passing 0xfaed9327 and asking for byte #3\n", NthByteC(0xfaed9327,3));
+        printf("Using Assemlby: %x is returned when passing 0x2893fade and asking for byte #0\n", NthByteC(0x2893fade,0));
+}
+
+unsigned char NthByteC(int Val, int ByteNdx)
+{
+        ByteNdx = ByteNdx << (3);       //takes ByteNdx and converts it to bits so the next shift works
+        return ((Val >> ByteNdx) & 0xFF);       //returns the wanted byte by shifting the Val over, then mask it and return it
+}
+bronco:~/assignment2> cat NthByteS.s
+        .global NthByteS
+        !author: Marcel Englmaier
+
+NthByteS: save %sp, -1024, %sp
+                                !%10 = val
+                                !%i1 = ByteNdx
+
+        sll %i1, 3, %i1 !effectively converts %i1 to bits for next shift
+        srl %i0, %i1, %i0       !shifts %i0 to the right by %i1 bits
+        
+        and %i0, 0xFF, %i0      !masks %i0 with 0xFF
+
+        ret
+        restore
+bronco:~/assignment2> cat[K[K[Kgcc -c main2.c
+bronco:~/assignment2> gcc 0c [K[K-c NthBytes[KSl.s[K[K[K.s
+bronco:~/assignment2> c[Kg[Kgcc main2.o NthByteS.o -o assignment2
+bronco:~/assignment2> ./ assignment2
+Value = 5
+ByteNdx = 2
+Using C: ce is returned when passing 0xfacecafe and asking for byte #2
+Using C: fa is returned when passing 0xfaed9327 and asking for byte #3
+Using C: de is returned when passing 0x2893fade and asking for byte #0
+Using Assemlby: ce is returned when passing 0xfacecafe and asking for byte #2
+Using Assemlby: fa is returned when passing 0xfaed9327 and asking for byte #3
+Using Assemlby: de is returned when passing 0x2893fade and asking for byte #0
+bronco:~/assignment2> exit
+exit
+
+script done on Thu Oct 04 14:00:22 2012

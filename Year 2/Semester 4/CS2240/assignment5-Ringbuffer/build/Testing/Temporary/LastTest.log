@@ -1,0 +1,51 @@
+Start testing: Feb 21 13:56 EST
+----------------------------------------------------------
+Unable to find executable: /home/saurutobi/Dropbox/College/Undergraduate/Year2/Spring2013/CS2240/Ringbuffer/RingBufferTar/build/tests/create-test
+1/3 Testing: create-test
+1/3 Test: create-test
+Command: "" "RINGBUFFER"
+Directory: /home/saurutobi/Dropbox/College/Undergraduate/Year2/Spring2013/CS2240/Ringbuffer/RingBufferTar/build/tests
+"create-test" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"create-test" end time: Feb 21 13:56 EST
+"create-test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/saurutobi/Dropbox/College/Undergraduate/Year2/Spring2013/CS2240/Ringbuffer/RingBufferTar/build/tests/read-test
+2/3 Testing: read-test
+2/3 Test: read-test
+Command: "" "RINGBUFFER"
+Directory: /home/saurutobi/Dropbox/College/Undergraduate/Year2/Spring2013/CS2240/Ringbuffer/RingBufferTar/build/tests
+"read-test" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"read-test" end time: Feb 21 13:56 EST
+"read-test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/saurutobi/Dropbox/College/Undergraduate/Year2/Spring2013/CS2240/Ringbuffer/RingBufferTar/build/tests/write-test
+3/3 Testing: write-test
+3/3 Test: write-test
+Command: "" "RINGBUFFER"
+Directory: /home/saurutobi/Dropbox/College/Undergraduate/Year2/Spring2013/CS2240/Ringbuffer/RingBufferTar/build/tests
+"write-test" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"write-test" end time: Feb 21 13:56 EST
+"write-test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Feb 21 13:56 EST

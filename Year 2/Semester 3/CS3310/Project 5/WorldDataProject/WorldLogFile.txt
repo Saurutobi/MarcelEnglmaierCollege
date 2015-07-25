@@ -1,0 +1,6 @@
+Connecting to MySQL and loading up WorldTrans.txt
+OK, the DB Connection is OPENED
+
+ERROR, DB Connection didn't work - no trans done
+java.util.NoSuchElementException: No line found
+EXITING PROGRAM

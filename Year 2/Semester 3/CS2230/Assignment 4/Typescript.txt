@@ -1,0 +1,457 @@
+Script started on Tue Nov 20 15:32:34 2012
+bronco:~/assignment4> cat Main4.c
+
+#include<stdio.h>
+
+//author: Marcel Englmaier
+
+void DisplayHist(char*, ...);
+
+int main(int argc, char * argv[])
+{
+        DisplayHist("First 1 Unscaled",10,15,-1);
+        DisplayHist("Second 1 Scaled",10,154,-1);
+        DisplayHist("Third 2 Unscaled",10,15,25,10,-1);
+        DisplayHist("Fourth 2 Scaled",10,15,25,157,-1);
+        DisplayHist("Fifth 4 Scaled",10,15,20,567,30,4,45,100,-1);
+}
+bronco:~/assignment4> cat DisplayHist.s
+
+        .global DisplayHist
+        !Author: Marcel Englmaier
+
+DisplayHist:    save %sp,-800, %sp
+        set screen, %l0   !setting screen
+        
+        mov %i0, %l4    !saving %i0 for later use
+        mov %i1, %l5    !saving %i1 for later use
+        mov %i0, %o3    !saving %i0 for later use
+        mov %i1, %o4    !saving %i1 for later use
+        clr %l3 !clearing the counter
+        mov 32,%l7      !moving ' '(32) to %l7
+        
+        !creating an empty string
+Initialize:
+        stb %l7,[%l0+%l3]       !storing ' ' to screen + counter
+        cmp %l3,2000
+        bl,a Initialize !loop
+        add %l3,1,%l3           !advance counter
+        mov %l4,%l3
+        mov 85,%l6             !ascii for "U"
+        
+        !Check for scaling
+CheckForScaling:
+        ldub [%l3],%l7  !loading a character of the title
+        mov 1,%o5
+        cmp %l7,%g0             !compare to null 
+        be,a FetchArgs  
+        clr %o5         !clear %o5 if its unscaled
+        cmp %l7,%l6             !compare that character with 'U' for Unscaled
+        be  FetchArgs
+        mov %i2,%l1
+        ba CheckForScaling      !loop check for unscaled or scaled
+        add %l3,1,%l3        !increment to next char
+
+FetchArgs:
+        clr %l7        !clear values
+        clr %l6 !clear values
+        call PutArgs    !clear values
+        clr %l3 !clear values
+
+        !moving inputs to stackframe
+PutArgs:
+		mov %l4,%o3
+		mov %l5, %o4
+		add %i0,%l4,%i0            !putting value back to %i0
+		mov %l5, %i1               !replacing %i1 with correct
+		st %i5,[%fp + 88]
+		st %i4,[%fp + 84]
+		st %i3,[%fp + 80]
+		st %i2,[%fp + 76]
+		st %i1,[%fp + 72]
+		st %i0,[%fp + 68]
+		add %fp, 68, %l7   !base address of all arguments into %l7
+
+		cmp %o5,1          !check for scaling
+		be Lines           !if unscaled, go to Lines
+		mov %i2,%l1
+
+readInput:
+        ld [%l7+4],%o0
+        ld [%l7+8],%l1
+        ld [%l7+12],%l2
+        cmp %l1, %l3
+        bg,a loadInputs
+        mov %l1, %l3
+
+loadInputs:
+        add %l7,8,%l7
+        cmp %l2, -1              !check for terminating condition
+        bne readInput           !if not, read more inputs
+        mov %l3, %l5    
+
+        mov %l3, %o0
+        call .udiv              !divide to find frequency
+        mov 20, %o1
+        mov %o0, %l5
+        mov %l5,%o5             !frequency now in %o0,%l5
+
+        !writing "x="
+        clr %i1        
+        mov 11, %i0
+        mov %i0,%o0
+        call Offset   
+        mov %i1, %o1
+        mov 88, %l7     !move x ascii value to %l7
+        stb %l7,[%l0+%o0]
+        mov 61, %l7     !move "=" ascii value to %l7
+        inc %o0
+        stb %l7,[%l0+%o0]
+        mov %o0, %l3
+        add %l3,3,%l3    
+
+WriteScale:
+        clr %o0
+        add %l5,%o0,%o0
+        call .urem
+        mov 10, %o1
+        mov %o0, %l7
+        add 48,%l7,%l7
+        stb %l7,[%l0+%l3]
+        clr %o0
+        add %l5,%o0,%o0
+        call .udiv
+        mov 10, %o1
+        mov %o0, %l5
+        cmp %l5, 0
+        bne,a WriteScale
+        dec %l3
+
+        !prepares to write '/n'
+Lines:
+        mov 10, %l7
+        clr %i1
+        mov 79, %i1
+        clr %i0
+        clr %l3
+
+WriteNewLines:      
+        mov %i1, %o1
+        call Offset
+        mov %i0, %o0
+        stb %l7,[%l0+%o0]       
+        add %i0,1,%i0
+        cmp %l3,25
+        bl,a WriteNewLines
+        add %l3,1,%l3
+
+        !clearing stuff
+        mov 124, %l7            !put "|" into %l7
+        clr %i0
+        clr %i1
+        clr %l3
+        mov 5, %i1
+
+        !Write Y axis
+yAxis:      
+        mov %i1, %o1
+        call Offset
+        mov %i0, %o0     
+        stb %l7,[%l0+%o0]       
+        add %i0,1,%i0
+        cmp %l3,21
+        bl,a yAxis
+        add %l3,1,%l3
+                
+        !clearing stuff
+        mov 45, %l7             !put "-" into %l7
+        clr %i1
+        clr %l3
+        clr %i0
+        mov 21, %i0             !start on 2nd lowest row
+
+        !Write X axis
+xAxis:      
+        mov %i1, %o1
+        call Offset 
+        mov %i0, %o0
+        stb %l7,[%l0+%o0]       
+        add %i1,1,%i1
+        cmp %l3,79
+        bl,a xAxis
+        add %l3,1,%l3
+
+        !carriage return after xAxis
+        mov 10, %l7             !put "/n" into %l7
+        stb %l7,[%l0+%o0]
+        
+        clr %l7
+        clr %l5
+        clr %l6
+        
+        add %fp, 68, %l7        !setting base address on %l7
+        mov 20,%l5
+        mov 8,%l6
+        mov 8,%l3
+        mov 1, %o2
+        mov 120, %l2            !move "x" to %l2
+        mov 1,%l3
+        mov %o3, %i0
+        mov %o4, %i1
+
+PrepareToWrite:
+        mov 22,%l5
+        mov %l5,%o0
+        call Offset
+        mov %l6,%o1
+        mov %o0, %l3
+        mov %o3, %i0
+        mov %o4, %i1
+        ld [%l7+4],%l2
+        ld [%l7+8],%o0
+        ld [%l7+12],%i0
+
+        call .udiv
+        mov %o5,%o1     !move the scale factor
+        mov %o0,%l4     !save how many times to write x
+
+WriteStuff:
+        mov %l2,%o0
+        call .urem
+        mov 10, %o1
+        add %o0,48,%o0  !making remainder an integer
+        stb %o0,[%l0+%l3]
+        mov %l2,%o0
+        call .udiv           
+        mov 10, %o1
+        mov %o0, %l2
+        cmp %l2, 0
+        bne,a WriteStuff
+        dec %l3
+        
+        clr %o0
+        clr %l2
+        mov 1, %o2
+        mov 120, %l2            !put "x" in %l2
+        cmp %o5,1
+        be,a getFrequency
+        mov %l1,%i2
+        call writeHist
+        mov 20,%l5  
+
+writeHist:
+        mov %l5, %o0            !rows
+        call Offset
+        mov %l6, %o1            !columns
+        stb %l2,[%l0+%o0]       !put "x" in location
+        dec %l5         !decrease row number
+        cmp %o2, %l4            !compare for number of times written
+        bl,a writeHist
+        add %o2,1,%o2
+
+readyNextValue: 
+        add %l6,5,%l6
+        mov %l6,%l3
+        mov 20,%l5
+        mov 1, %o2
+        cmp %i0,-1              !checking third value if need to be continue
+        bne,a PrepareToWrite
+        add %l7,8,%l7
+                
+        call WriteTitle
+        nop
+
+        !only used if unscaled
+getFrequency:
+        ld [%l7+8],%l4
+        call writeHist
+        mov 20,%l5 
+
+WriteTitle:
+        clr %l3
+        clr %i1 
+        clr %l7       
+        clr %i0
+        clr %i0
+        mov 36, %i1     !title starts 36 chars in
+        mov %o3,%l4
+
+LoopTitle:
+        ldub [%l4],%l7  !loading the title
+        cmp %l7, %g0            !comparing to null
+        be away
+        mov %i1, %o1
+        call Offset
+        mov %i0, %o0 
+        stb %l7,[%l0+%o0]       !writing the title
+        add %i1,1,%i1
+        ba LoopTitle            !loop to write the next character
+        add %l4,1,%l4
+
+        clr %i0
+        clr %i1
+
+away:
+        !trap stament to write stuff
+        mov %l0, %o1
+        mov 4, %g1
+        mov 1, %o0
+        mov 2000 , %o2
+        ta 0
+        ret
+        restore
+
+
+Offset: save %sp, -800, %sp
+        mov %i0,%o0
+        call .umul
+        mov 80,%o1
+        add %i1,%o0,%i0
+
+        ret
+        restore
+        
+
+        !begin data section
+        .section ".data"
+screen: .skip 2000
+bronco:~/assignment4> make
+
+gcc -c Main4.c
+gcc -c DisplayHist.s
+gcc Main4.o DisplayHist.o -o ass4
+bronco:~/assignment4> ./ass4
+
+     |                              First 1 Unscaled                           
+     |                                                                         
+     |                                                                         
+     |                                                                         
+     |                                                                         
+     |                                                                         
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+-------------------------------------------------------------------------------
+       10                                                                      
+                                                                               
+                                                                               
+     |  x                           Second 1 Scaled                            
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+X=  7|  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+-------------------------------------------------------------------------------
+       10                                                                      
+                                                                               
+                                                                               
+     |                              Third 2 Unscaled                           
+     |                                                                         
+     |                                                                         
+     |                                                                         
+     |                                                                         
+     |                                                                         
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x                                                                      
+     |  x    x                                                                 
+     |  x    x                                                                 
+     |  x    x                                                                 
+     |  x    x                                                                 
+     |  x    x                                                                 
+     |  x    x                                                                 
+     |  x    x                                                                 
+     |  x    x                                                                 
+     |  x    x                                                                 
+     |  x    x                                                                 
+-------------------------------------------------------------------------------
+       10   25                                                                 
+                                                                               
+                                                                               
+     |       x                      Fourth 2 Scaled                            
+     |       x                                                                 
+     |       x                                                                 
+     |       x                                                                 
+     |       x                                                                 
+     |       x                                                                 
+     |       x                                                                 
+     |       x                                                                 
+     |       x                                                                 
+     |       x                                                                 
+     |       x                                                                 
+X=  7|       x                                                                 
+     |       x                                                                 
+     |       x                                                                 
+     |       x                                                                 
+     |       x                                                                 
+     |       x                                                                 
+     |       x                                                                 
+     |       x                                                                 
+     |  x    x                                                                 
+     |  x    x                                                                 
+-------------------------------------------------------------------------------
+       10   25                                                                 
+                                                                               
+                                                                               
+     |                              Fifth 4 Scaled                             
+     |       x                                                                 
+     |       x                                                                 
+     |       x                                                                 
+     |       x                                                                 
+     |       x                                                                 
+     |       x                                                                 
+     |       x                                                                 
+     |       x                                                                 
+     |       x                                                                 
+     |       x                                                                 
+X= 28|       x                                                                 
+     |       x                                                                 
+     |       x                                                                 
+     |       x                                                                 
+     |       x                                                                 
+     |       x                                                                 
+     |       x                                                                 
+     |       x         x                                                       
+     |       x         x                                                       
+     |  x    x    x    x                                                       
+-------------------------------------------------------------------------------
+       10   20   30   45                                                       
+                                                                               
+                                                                               
+bronco:~/assignment4> end
+
+end: Not in while/foreach.
+bronco:~/assignment4> exit
+
+exit
+
+script done on Tue Nov 20 15:33:25 2012

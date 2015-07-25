@@ -1,0 +1,7 @@
+create-test 0 0
+read-test 0 0
+write-test 0 0
+---
+create-test
+read-test
+write-test

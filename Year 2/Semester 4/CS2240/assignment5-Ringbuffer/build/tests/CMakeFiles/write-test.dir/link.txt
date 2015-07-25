@@ -1,0 +1,1 @@
+/usr/bin/gcc      CMakeFiles/write-test.dir/test-write.c.o  -o write-test -rdynamic -L/home/saurutobi/Dropbox/College/Undergraduate/Year2/Spring2013/CS2240/Ringbuffer/RingBufferTar/build/src ../src/libring-buffer.a -Wl,-rpath,/home/saurutobi/Dropbox/College/Undergraduate/Year2/Spring2013/CS2240/Ringbuffer/RingBufferTar/build/src 

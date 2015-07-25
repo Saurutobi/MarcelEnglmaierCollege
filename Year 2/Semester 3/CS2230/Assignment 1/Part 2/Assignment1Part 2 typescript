@@ -1,0 +1,70 @@
+Script started on Wed Sep 26 23:44:41 2012
+bronco:~> exit[Kexit./Assignment1Part2[18D[28@gcc assgn1.o ComputeExpr.o -o [16C[46Dcat ComputeExpr.s[K[17Dgcc -c assgn1.c[K[15Dcat ComputeExpr.s[13Dassgn1.c[K[12Dexit[Kcat assgn1.c
+
+#include<stdio.h>
+
+int ComputeExpr(int, int, int);
+
+int main(int argc, char * argv[])
+{
+        printf("2*4 + 2*1 + 2*7 = %d \n", ComputeExpr(4,1,7));
+        printf("2*2 + 2*3 + 2*4 = %d \n", ComputeExpr(2,3,4));
+        printf("2*10 + 2*12 + 2*71 = %d \n", ComputeExpr(10,12,71));
+        printf("2*28 + 2*123 + 2*40 = %d \n", ComputeExpr(28,123,40));
+}
+bronco:~> cat assgn1.c[12Dexit[K./Assignment1Part2[18D[28@gcc assgn1.o ComputeExpr.o -o [16C[46Dcat ComputeExpr.s[K
+
+        .global ComputeExpr
+
+ComputeExpr:    save %sp, -1024, %sp
+
+        call Double     !calls Double first time
+        mov %i0, %o0    !moves imput to output before save is made so output becomes input at save
+        mov %o0, %l0    !moves output(doubled) to a local to be added later
+
+        call Double     !calls Double second time
+        mov %i1, %o0    !moves imput to output before save is made so output becomes input at save
+        mov %o0, %l1    !moves output(doubled) to a local to be added later
+
+        call Double     !calls Double third time
+        mov %i2, %o0    !moves imput to output before save is made so output becomes input at save
+        mov %o0, %l2    !moves output(doubled) to a local to be added later
+
+        add %l0, %l1, %i0       !adds first two locals
+        add %i0, %l2, %i0       !adds third local to the first two to make the final result
+
+        ret
+        restore
+
+Double: 
+        .word 0x9DE3B400        !is equal to 'save %o6, -1024, %o6'. binary is:
+                                !1001 1101 1110 0011 1011 0100 0000 0000
+                
+        .word 0xB0060018        !adds the input '0' to itself to effectivly double, saves it to input.
+                                !so the restore moves it to output '0'. This is equal to add %10, %10, %10. binary is:
+                                !1011 0000 0000 0110 0000 0000 0001 1000
+
+        .word 0x81C7E008        !is equal to 'ret' or 'jmpl %i7 + 8, %g0'. binary is:
+                                !1000 0001 1100 0111 1110 0000 0000 1000 
+
+        .word 0x81E82008        !is equal to 'restore' or 'restore %g0, %g0, %g0. binary is:
+                                !1000 0001 1110 1000 0010 0000 0000 1000
+        
+         
+bronco:~> cat ComputeExpr.s[13Dassgn1.c[K[12Dexit[K./Assignment1Part2[18D[28@gcc assgn1.o ComputeExpr.o -o [16C[46Dcat ComputeExpr.s[K[17Dgcc -c assgn1.c[K
+
+bronco:~> gcc -c ComputeExpr.s
+
+bronco:~> gcc -c ComputeExpr.s[13Dassgn1.c[K[15Dcat ComputeExpr.s[13Dassgn1.c[K[12Dexit[K./Assignment1Part2[18D[28@gcc assgn1.o ComputeExpr.o -o [16C
+
+bronco:~> gcc assgn1.o ComputeExpr.o -o Assignment1Part2[42D-c ComputeExpr.s[K[13Dassgn1.c[K[15Dcat ComputeExpr.s[13Dassgn1.c[K[12Dexit[K./Assignment1Part2
+
+2*4 + 2*1 + 2*7 = 24 
+2*2 + 2*3 + 2*4 = 18 
+2*10 + 2*12 + 2*71 = 186 
+2*28 + 2*123 + 2*40 = 382 
+bronco:~> exit
+
+exit
+
+script done on Wed Sep 26 23:45:17 2012

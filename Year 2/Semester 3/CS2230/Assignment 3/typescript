@@ -1,0 +1,102 @@
+Script started on Sun Oct 07 19:39:57 2012
+bronco:~/assignment3> cat main3.c
+#include<stdio.h>
+
+//author Marcel Englmaier
+
+int CountBits(int);
+int FincWhenCSet();
+int FincWhenVSet();
+
+int main(int argc, char * argv[])
+{
+        //tests CountBits with multiple problems
+        printf("%d 'on' bits in 0x00100011\n", CountBits(0x00100011));
+        printf("%d 'on' bits in 0xfacecafe\n", CountBits(0xfacecafe));
+        printf("%d 'on' bits in 0xffffffff\n", CountBits(0xffffffff));
+
+        //finds the value for C flag and V flag
+        printf("%x is the value just before the 'C' flag is set\n", FincWhenCSet());
+        printf("%x is the value just before the 'V' flag is set\n", FincWhenVSet());
+}
+bronco:~/assignment3> cat Finc[K[K[K[KCountBits.s
+        .global CountBits
+        !author: Marcel Englmaier
+
+CountBits: save %sp, -1024, %sp
+
+        clr %l0 !clears %l0-used as a temporary variable
+        clr %l1 !clears %l1-used as loop counter
+        clr %l2 !clears %l2-used as 'number of on bits' counter
+
+loop:   cmp %l1,32      !begins loop, tests if the loop has run 32 times using %l1
+        be,a away       !if loop has ran 32 times, go to away
+        mov %l2, %i0    !in the delay slot, moves 'number of on bits' counter to be outputted
+        and %i0,1,%l0   !gets the right-most bit in %i0 and saves it to temporary %l0
+        srl %i0,1,%i0   !shifts %i0 1 bit
+        cmp %l0,1       !tests if %l0 is 1
+        be addition     !if %l0 is 1, go to the addition branch
+        clr %l0 !resets %l0 for next test in the delay slot
+endAdd:         !after addition is done, execution comes back here to continue inside the loop
+        ba loop !tells execution to go back to loop to continue on looping
+        add %l1,1,%l1   !in the delay slot, advance %l1 by 1
+
+addition:
+        ba endAdd       !tells the execution to return back to the loop
+        add 1,%l2,%l2   !in the delay slot, add 1 to the 'number of bits' counter
+
+away:
+        ret             !returns
+        restore !restores
+bronco:~/assignment3> cat Finc[Kc WhenCSet.s
+cat: Finc: No such file or directory
+cat: WhenCSet.s: No such file or directory
+bronco:~/assignment3> cat FincWhenCSet.s
+        .global FincWhenCSet
+        !author: Marcel Englmaier
+
+FincWhenCSet: save %sp, -1024, %sp
+
+        clr %l0         !clears %l0-used as the 'number before the flag-setting'
+        clr %l1         !clears %l1
+
+loop: 
+        addcc 1,%l0,%l1 !adds 1 to %l0 and saves it to %l1 while setting flags
+        bcs away                !if the 'c' flag has been set, got to away
+        mov %l0,%i0             !in the delay slot, moves last used number to %i0 for output
+        ba loop         !goes back to loop to continue cycle
+        add 0,%l1,%l0           !copies %l1 to %l0, no flag has been set
+
+away:
+        ret                     !returns
+        restore         !restores
+bronco:~/assignment3> cat Finw[KcWhenVSet.s
+        .global FincWhenVSet
+
+FincWhenVSet: save %sp, -1024, %sp
+
+        clr %l0         !clears %l0-used as the 'number before the flag-setting'
+        clr %l1         !clears %l1
+
+loop: 
+        addcc 1,%l0,%l1 !adds 1 to %l0 and saves it to %l1 while setting flags
+        bvs away                !if the 'c' flag has been set, got to away
+        mov %l0,%i0             !in the delay slot, moves last used number to %i0 for output
+        ba loop         !goes back to loop to continue cycle
+        add 0,%l1,%l0           !copies %l1 to %l0, no flag has been set
+
+away:
+        ret                     !returns
+        restore         !restoresbronco:~/assignment3> make
+gcc -c FincWhenVSet.s
+gcc main3.o CountBits.o FincWhenCSet.o FincWhenVSet.o -o assignment3
+bronco:~/assignment3> ./assignment3
+3 'on' bits in 0x00100011
+22 'on' bits in 0xfacecafe
+32 'on' bits in 0xffffffff
+ffffffff is the value just before the 'C' flag is set
+7fffffff is the value just before the 'V' flag is set
+bronco:~/assignment3> exit
+exit
+
+script done on Sun Oct 07 19:43:25 2012

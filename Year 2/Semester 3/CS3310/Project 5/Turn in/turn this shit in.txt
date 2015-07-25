@@ -1,0 +1,851 @@
+******************************************************************************
+LogSession.txt
+******************************************************************************
+
+=================================================
+Map Data: Europe  Number of cities: 19
+Amsterdam
+Belgrade
+Berlin
+Bern
+Brussels
+Budapest
+Copenhagen
+Genoa
+Hamburg
+Lisbon
+Madrid
+Munich
+Naples
+Paris
+Prague
+Rome
+Trieste
+Vienna
+Warsaw
+       1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16   17   18   19
+--------------------------------------------------------------------------------------------------
+ 1|    0    8    8  558  164    8    8    8  338    8    8  526    8    8    8    8    8    8    8
+ 2|    8    0    8    8    8  263    8    8    8    8    8    8    8    8    8    8  403  501    8
+ 3|    8    8    0  628    8    8    8    8  182    8    8    8    8    8  219    8    8    8  345
+ 4|  558    8  628    0  497    8    8  304    8    8 1104  311    8    8    8    8  489    8    8
+ 5|  164    8    8  497    0    8    8  740    8    8    8    8    8  225    8    8    8    8    8
+ 6|    8  263    8    8    8    0    8    8    8    8    8    8    8    8    8    8  384  155  394
+ 7|    8    8    8    8    8    8    0    8  180    8    8    8    8    8    8    8    8    8    8
+ 8|    8    8    8  304  740    8    8    0    8    8  951    8    8  629    8  328  361    8    8
+ 9|  338    8  182    8    8    8  180    8    0    8    8    8    8    8    8    8    8    8    8
+10|    8    8    8    8    8    8    8    8    8    0  339    8    8    8    8    8    8    8    8
+11|    8    8    8 1104    8    8    8  951    8  339    0    8    8  805    8    8    8    8    8
+12|  526    8    8  311    8    8    8    8    8    8    8    0    8    8  174  582    8  280    8
+13|    8    8    8    8    8    8    8    8    8    8    8    8    0    8    8  134    8    8    8
+14|    8    8    8    8  225    8    8  629    8    8  805    8    8    0    8    8    8    8    8
+15|    8    8  219    8    8    8    8    8    8    8    8  174    8    8    0    8    8  185  479
+16|    8    8    8    8    8    8    8  328    8    8    8  582  134    8    8    0  442    8    8
+17|    8  403    8  489    8  384    8  361    8    8    8    8    8    8    8  442    0  317    8
+18|    8  501    8    8    8  155    8    8    8    8    8  280    8    8  185    8  317    0  464
+19|    8    8  345    8    8  394    8    8    8    8    8    8    8    8  479    8    8  464    0
+
+
+******************************************************************************
+SetupUtility.java
+******************************************************************************
+
+/* PROJECT: WorldDataProject #5         PROGRAM: SetupUtility
+ * Written By: Marcel Englmaier
+ * FILES ACCESSED: LogSession.txt, all other files
+ * DESCRIPTION: SetupUtility creates the files for the driving app to use
+ ******************************************************************************/
+package SetupUtility;
+
+import java.io.*;
+import java.util.Scanner;
+
+public class SetupUtility
+{
+
+    //<editor-fold defaultstate="collapsed" desc="Public Declarations">
+    
+    
+    //**************************** PUBLIC DECLARATIONS ************************
+    //None
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Private Declarations">
+    
+    
+    //**************************** PRIVATE DECLARATIONS ************************
+    //None
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Public Main">
+    
+    
+    //****************************** PUBLIC Main *******************************
+    public static void main(String[] args) throws IOException
+    {
+        //declarations
+        String fileNamePrefix;
+        Scanner scanLeConsole = new Scanner(System.in);
+        System.out.println("Which Map Data should I use, Your Grace? *bows*\n");
+        fileNamePrefix = scanLeConsole.next();
+        System.out.println("\nAs you wish, Your Grace, I shall use -" + fileNamePrefix + "- as the map data\n");
+        
+        
+        PrintWriter logSession = new PrintWriter(new File("LogSession.txt"));
+        RandomAccessFile mapData = new RandomAccessFile(new File(fileNamePrefix + "MapData.bin"), "rw");
+        PrintWriter cityNames = new PrintWriter(new File(fileNamePrefix + "CityNames.txt"));
+        Scanner rawData = new Scanner(new File(fileNamePrefix + "RawData.txt"));
+        int [][] adjMatrix;
+        String [] cityNameArray;
+        String [] temp;
+        int n;
+        int i;
+        int j;
+        int maxNameLength;
+        
+        //read ?RawData header
+        n = Integer.parseInt(rawData.nextLine().split(" ")[0]);
+        cityNameArray = new String[n];
+        
+        //read city names and write to ?CityNames.txt
+        maxNameLength = 0;
+        for(i = 0; i < n; i++)
+        {
+            cityNameArray[i] = rawData.nextLine();
+            if(cityNameArray[i].length() > maxNameLength)
+            {
+                maxNameLength = cityNameArray[i].length();
+            }
+        }    
+        maxNameLength++;
+        for(i = 0; i < n; i++)
+        {
+            cityNames.printf("%-" + maxNameLength + "s", cityNameArray[i]);
+        }
+        
+        //create 2d array from RawData.txt
+        adjMatrix = new int[n][n];
+        
+        //initialize values
+        for(i = 0; i < n; i++)
+        {
+            for(j = 0; j < n; j++)
+            {
+                adjMatrix[i][j] = Integer.MAX_VALUE;
+            }
+            adjMatrix[i][i] = 0;
+        }
+        
+        //read and store actual edge weights
+        while(rawData.hasNextLine())
+        {
+            temp = rawData.nextLine().split(" ");
+            adjMatrix[Integer.parseInt(temp[0])][Integer.parseInt(temp[1])] = Integer.parseInt(temp[2]);
+            adjMatrix[Integer.parseInt(temp[1])][Integer.parseInt(temp[0])] = Integer.parseInt(temp[2]);
+        }
+        
+        //store to ?MapData.bin
+        mapData.writeInt(n);
+        //store graph
+        for(i = 0; i < n; i++)
+        {
+            for(j = 0; j < n; j++)
+            {
+                mapData.writeInt(adjMatrix[i][j]);
+            }
+        }
+        
+        //Begin printing of the File to logSession
+        logSession.println("=================================================");
+        logSession.println("Map Data: " + fileNamePrefix + "  Number of cities: " + n);       
+        
+        //print cities
+        for(i = 0; i < n; i++)
+        {
+            logSession.println(cityNameArray[i]);
+        }
+        
+        //print graph
+        logSession.print("   ");
+        for(j = 0; j < n; j++)
+        {
+            logSession.printf("%5d", (j+1));
+        }
+        logSession.println();
+        logSession.print("---");
+        for(j = 0; j < n; j++)
+        {
+            logSession.print("-----");
+        }
+        logSession.println();
+        for(i = 0; i < n; i++)
+        {
+            logSession.printf("%2d|", (i + 1));
+            for(j = 0; j < n; j++)
+            {
+                if(adjMatrix[i][j] != Integer.MAX_VALUE)
+                {
+                    logSession.printf(" %4d", adjMatrix[i][j]);
+                }
+                else
+                {
+                    logSession.printf("%5s", "8");
+                }
+            }
+            logSession.println();
+        }
+        
+        mapData.close();
+        cityNames.close();
+        rawData.close();
+        logSession.close();
+        System.out.println("All has been completed to your wishes, your grace");
+    }
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Public Get/Set Methods">
+    
+    
+    //**************************** PUBLIC GET/SET METHODS **********************
+    //None
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Public Service Methods">
+    
+    
+    //**************************** PUBLIC SERVICE METHODS **********************
+    //None
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Private Methods">
+    
+    
+    //**************************** PRIVATE METHODS *****************************
+    
+    
+    //</editor-fold>
+}
+
+
+******************************************************************************
+DrivingApp.java
+******************************************************************************
+
+
+/* PROJECT: WorldDataProject #5         PROGRAM: DrivingApp
+ * Written By: Marcel Englmaier
+ * PROJECT CLASSES USED: Map, UI, shortestPath
+ * FILES ACCESSED: none
+ * DESCRIPTION: this program asks for user input, then runs it through the other
+ * 				classes
+ *******************************************************************************/
+package DrivingApp;
+
+import OOPClasses.Map;
+import OOPClasses.UI;
+import OOPClasses.shortestPath;
+import java.io.*;
+import java.util.Scanner;
+
+public class DrivingApp 
+{
+
+    //<editor-fold defaultstate="collapsed" desc="Public Declarations">
+    
+    
+    //**************************** PUBLIC DECLARATIONS ************************
+    //None
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Private Declarations">
+    
+    
+    //**************************** PRIVATE DECLARATIONS ************************
+    private static Map thisIsTheMap;
+    private static UI thisIsTheUI;
+    private static shortestPath thisIsTheShortestPath;
+    private static String fileNamePrefix;
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Public Main">
+    
+    
+    //****************************** PUBLIC Main *******************************
+    public static void main(String[] args) throws IOException
+    {
+        int [] cityNumbers = new int[2];
+        Scanner scanLeConsole = new Scanner(System.in);
+        System.out.println("Which Map Data should I use, Your Grace? *bows*\n");
+        fileNamePrefix = scanLeConsole.next();
+        System.out.println("\nAs you wish, Your Grace, I shall use " + fileNamePrefix + " as the map data\n");
+        thisIsTheMap = new Map(fileNamePrefix);
+        thisIsTheUI = new UI(fileNamePrefix);
+        thisIsTheShortestPath = new shortestPath(thisIsTheMap);
+        
+        String startCity = "";
+        String destinationCity = "";
+        
+        //amIDone reads one command
+        while(thisIsTheUI.amIDone())
+        {
+            startCity = thisIsTheUI.getStartCity();
+            destinationCity = thisIsTheUI.getDestinationCity();
+            cityNumbers[0] = thisIsTheMap.getCityNumber(startCity);
+            cityNumbers[1] = thisIsTheMap.getCityNumber(destinationCity);
+            thisIsTheUI.log("#   #   #   #   #   #   #   #   #   #   #   #   #   #");
+            thisIsTheUI.log(startCity + " (" + cityNumbers[0] + ") TO " + destinationCity + " (" + cityNumbers[1] + ")");
+            
+            if(cityNumbers[0] == -1 || cityNumbers[1] == -1)
+            {
+                thisIsTheUI.log("Error - one of the cities is not on this map");
+            }
+            else
+            {
+                thisIsTheUI.log(thisIsTheShortestPath.findPath(cityNumbers));
+            }
+        }
+        
+        thisIsTheMap.finishUp();
+        thisIsTheUI.finishUp();
+    }
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Public Get/Set Methods">
+    
+    
+    //**************************** PUBLIC GET/SET METHODS **********************
+    //None
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Public Service Methods">
+    
+    
+    //**************************** PUBLIC SERVICE METHODS **********************
+    //None
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Private Methods">
+    
+    
+    //**************************** PRIVATE METHODS *****************************
+    
+    
+    //</editor-fold>
+}
+
+
+******************************************************************************
+Map.java
+******************************************************************************
+
+
+/* PROJECT: WorldDataProject #5         CLASS: Map
+* Written By: Marcel Englmaier
+* FILES ACCESSED: ?Mapdata.bin, ?Citynames.txt
+* FILE STRUCTURE: OOP
+* DESCRIPTION: is the map
+*******************************************************************************/
+
+package OOPClasses;
+
+import java.io.*;
+import java.util.Scanner;
+
+public class Map
+{
+    //<editor-fold defaultstate="collapsed" desc="Public Declarations">
+    
+    
+    //**************************** PUBLIC DECLARATIONS ************************
+    //None
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Private Declarations">
+    
+    
+    //**************************** PRIVATE DECLARATIONS ************************
+    private RandomAccessFile mapData;
+    private Scanner cityNames;
+    private String [] cityNameArray;
+    private String temp;
+    private int i;
+    private int j;
+    private int n;
+    private int cityNameLength;
+    private int offSet;
+    private final int HEADER_REC_SIZE = 4;
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Public Constructor(s)">
+    
+    
+    //**************************** PUBLIC CONSTRUCTOR(S) ***********************
+    public Map(String fileNamePrefix)
+    {
+        try
+        {
+            mapData = new RandomAccessFile(new File(fileNamePrefix + "MapData.bin"), "rw");
+            cityNames = new Scanner(new File(fileNamePrefix + "CityNames.txt"));
+        }
+        catch(IOException e)
+        {
+            System.out.println("Could not open ?MapData.bin and "
+                    + "?CityNames.txt");
+        }
+        
+        try
+        {
+            n = mapData.readInt();
+            cityNameArray = new String[n];
+            cityNameLength = Integer.parseInt(cityNames.nextLine());
+            temp = cityNames.nextLine();
+            for(i = 0; i < n; i++)
+            {
+                for(j = 0; j < cityNameLength; j++)
+                cityNameArray[i] = temp.substring((i * cityNameLength), (i + 1) * cityNameLength);
+                cityNameArray[i] = cityNameArray[i].trim();
+            }
+        }
+        catch(IOException e)
+        {
+            System.out.println("Could not read n from ?MapData");
+        }
+    }
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Public Get/Set Methods">
+    
+    
+    //**************************** PUBLIC GET/SET METHODS **********************
+    public int getN()
+    {
+        return n;
+    }
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Public Service Methods">
+    
+    
+    //**************************** PUBLIC SERVICE METHODS **********************
+    public String getCityName(int cityNumber)
+    {
+        return cityNameArray[cityNumber];
+    }
+    
+    public int getCityNumber(String cityName)
+    {
+        int retval = -1;
+        for(i = 0; i < n; i++)
+        {
+            if(cityNameArray[i].equalsIgnoreCase(cityName))
+                retval = i;
+        }
+        return retval;
+    }
+    
+    public int getRoadDistance(int cityNumber1, int cityNumber2)
+    {
+        int retval = -1;
+        offSet = CalculateOffSet(cityNumber1, cityNumber2);
+        try
+        {
+            mapData.seek(offSet);
+            retval = mapData.readInt();
+        }
+        catch(IOException e)
+        {
+            System.out.println("Could not read from ?MapData.bin");
+        }
+        return retval;
+    }
+    
+    public void finishUp()
+    {
+        try
+        {
+            mapData.close();
+            cityNames.close();
+        }
+        catch(IOException e)
+        {
+            System.out.println("Could not close ?MapData.bin and ?CityNames.txt");
+        }
+    }
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Private Methods">
+    
+    
+    //**************************** PRIVATE METHODS *****************************
+    private int CalculateOffSet(int cityNumber1, int cityNumber2)
+    {
+        return HEADER_REC_SIZE + (cityNumber1 * (19 * 4)) + (cityNumber2 * 4);
+    }
+    
+    
+    //</editor-fold>
+}
+
+
+******************************************************************************
+ShortestPath.java
+******************************************************************************
+
+/* PROJECT: WorldDataProject #5         CLASS: shortestPath
+* Written By: Marcel Englmaier
+* FILES ACCESSED: none
+* FILE STRUCTURE: OOP
+* DESCRIPTION: calculates the map path using dijkstra's algorithm
+*******************************************************************************/
+
+package OOPClasses;
+
+import java.util.ArrayList;
+
+
+public class shortestPath
+{
+    //<editor-fold defaultstate="collapsed" desc="Public Declarations">
+    
+    
+    //**************************** PUBLIC DECLARATIONS ************************
+    //None
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Private Declarations">
+    
+    
+    //**************************** PRIVATE DECLARATIONS ************************
+    private Map map;
+    private boolean [] included;
+    private int [] distance;
+    private int [] path;
+    private int i;
+    private int n;
+    private int minSubscript;
+    private int minDistance;
+    private int numberOfTargets;
+    ArrayList<String> tracePathArray = new ArrayList<String>();
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Public Constructor(s)">
+    
+    
+    //**************************** PUBLIC CONSTRUCTOR(S) ***********************
+    public shortestPath(Map map)
+    {
+        this.map = map;
+        n = map.getN();
+    }
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Public Get/Set Methods">
+    
+    
+    //**************************** PUBLIC GET/SET METHODS **********************
+    public int [] getDistanceArray()
+    {
+        return distance;
+    }
+    public int [] getPathArray()
+    {
+        return path;
+    }
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Public Service Methods">
+    
+    
+    //**************************** PUBLIC SERVICE METHODS **********************
+    public String findPath(int [] numbers)
+    {
+        Initialize(numbers[0]);
+        Search(numbers[0], numbers[1]);
+        return ReportAnswer(numbers[0], numbers[1]) + "\n" + traceOfTargets();
+    }
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Private Methods">
+    
+    
+    //**************************** PRIVATE METHODS *****************************
+    private void Initialize(int firstCityNumber)
+    {
+        //Initialize the 3 supplemental arrays
+        included = new boolean[n];
+        distance = new int[n];
+        path = new int[n];
+        
+        //fill with beginning values
+        for(i = 0; i < n; i++)
+        {
+            included[i] = false;
+            distance[i] = map.getRoadDistance(firstCityNumber, i);
+            if(distance[i] != Integer.MAX_VALUE && distance[i] != 0)
+                path[i] = firstCityNumber;
+            else
+                path[i] = -1;
+        }
+        included[firstCityNumber] = true;
+        
+    }
+    private void Search(int firstCityNumber, int secondCityNumber)
+    {
+        tracePathArray = new ArrayList<String>();
+        numberOfTargets = 0;
+        
+        //the main Search part
+        //special case
+        if(firstCityNumber == secondCityNumber)
+        {
+            distance[secondCityNumber] = map.getRoadDistance(firstCityNumber, 
+                    secondCityNumber);
+        }
+        //normal case
+        else
+        {
+            while(!included[secondCityNumber])
+            {
+                minDistance = Integer.MAX_VALUE;
+                for(i = 0; i < n; i++)
+                {
+                    if(distance[i] != 0 && distance[i] < minDistance 
+                            && !included[i])
+                    {
+                        minDistance = distance[i];
+                        minSubscript = i;
+                    }
+                }
+                included[minSubscript] = true;
+                tracePathArray.add(map.getCityName(minSubscript) + " ");
+                numberOfTargets++;
+                for(i = 0; i < n; i++)
+                {
+                    if(!included[i])
+                    {
+                        if(map.getRoadDistance(minSubscript, i) 
+                                != Integer.MAX_VALUE 
+                                && map.getRoadDistance(minSubscript, i) != 0)
+                        {
+                            if((distance[minSubscript] 
+                                    + map.getRoadDistance(minSubscript, i)) 
+                                    < distance[i])
+                            {
+                                distance[i] = distance[minSubscript] 
+                                        + map.getRoadDistance(minSubscript, i);
+                                path[i] = minSubscript;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    //--------------------------------------------------------------------------
+    private String ReportAnswer(int firstCityNumber, int secondCityNumber)
+    {     
+        String ret = "DISTANCE: " + distance[secondCityNumber] + "\nPATH: ";
+        ArrayList<String> pathArray = new ArrayList<String>();
+
+        //store backwards path in array
+        pathArray.add(map.getCityName(secondCityNumber));
+        int current = secondCityNumber;
+        while(path[current] != -1)
+        {
+            pathArray.add(map.getCityName(path[current]));
+            current = path[current];
+        }
+        
+        //store forwards path in string retval
+        for(i = pathArray.size() - 1; i >= 0; i--)
+        {
+            if(i != 0)
+                ret += pathArray.get(i) + " > ";
+            else
+                ret += pathArray.get(i);
+        }
+        ret += "\n";
+        
+        //return answer
+        return ret;
+    }
+    
+    private String traceOfTargets()
+    {
+        String ret = "TRACE OF TARGETS: ";
+        for(i = 0; i < tracePathArray.size(); i++)
+        {
+            ret += tracePathArray.get(i);
+        }
+        ret += "\n# TARGETS: " + numberOfTargets + "\n";
+        
+        //return trace of targets
+        return ret;
+    }
+    
+    
+    
+    //</editor-fold>
+}
+
+
+
+******************************************************************************
+UI.java
+******************************************************************************
+
+
+/* PROJECT: WorldDataProject #5         CLASS: UI
+* Written By: Marcel Englmaier
+* FILES ACCESSED: ?CityPairs.txt, LogSession.txt
+* FILE STRUCTURE: OOP
+* INDEX STRUCTURE:  
+* DESCRIPTION: reads citypairs and writes to logsession
+*******************************************************************************/
+
+package OOPClasses;
+
+import java.io.*;
+import java.util.Scanner;
+
+
+public class UI
+{
+    //<editor-fold defaultstate="collapsed" desc="Public Declarations">
+    
+    
+    //**************************** PUBLIC DECLARATIONS ************************
+    //None
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Private Declarations">
+    
+    
+    //**************************** PRIVATE DECLARATIONS ************************
+    private PrintWriter logSession;
+    private Scanner cityPairs;
+    private String [] cityPairArray;
+    private String startCity;
+    private String destinationCity;
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Public Constructor(s)">
+    
+    
+    //**************************** PUBLIC CONSTRUCTOR(S) ***********************
+    public UI(String fileNamePrefix)
+    {
+        try
+        {
+            logSession = new PrintWriter(new File("LogSession.txt"));
+            cityPairs = new Scanner(new File(fileNamePrefix + "CityPairs.txt"));
+        }
+        catch(IOException e)
+        {
+            System.out.println("Could not open LogSession.txt and " + fileNamePrefix + "CityPairs.txt");
+        }
+    }
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Public Get/Set Methods">
+    
+    
+    //**************************** PUBLIC GET/SET METHODS **********************
+    public String getStartCity()
+    {
+        return startCity;
+    }
+    
+    public String getDestinationCity()
+    {
+        return destinationCity;
+    }
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Public Service Methods">
+    
+    
+    //**************************** PUBLIC SERVICE METHODS **********************
+     public void finishUp()
+    {
+        logSession.close();
+        cityPairs.close();
+    }
+     
+    public boolean amIDone()
+    {
+        boolean ret = false;
+        if(cityPairs.hasNextLine())
+        {
+            cityPairArray = cityPairs.nextLine().split(" ");
+            startCity = cityPairArray[0];
+            destinationCity = cityPairArray[1];
+            ret = true;
+        }
+        return ret;
+    }
+    
+    public void log(String message)
+    {
+        logSession.println(message);
+    }
+    
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Private Methods">
+    
+    
+    //**************************** PRIVATE METHODS *****************************
+    
+    
+    //</editor-fold>
+}

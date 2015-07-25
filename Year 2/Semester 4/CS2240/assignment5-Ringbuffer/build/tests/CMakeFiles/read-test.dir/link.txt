@@ -1,0 +1,1 @@
+/usr/bin/gcc      CMakeFiles/read-test.dir/test-read.c.o  -o read-test -rdynamic -L/home/saurutobi/Dropbox/College/Undergraduate/Year2/Spring2013/CS2240/Ringbuffer/RingBufferTar/build/src ../src/libring-buffer.a -Wl,-rpath,/home/saurutobi/Dropbox/College/Undergraduate/Year2/Spring2013/CS2240/Ringbuffer/RingBufferTar/build/src 

@@ -1,0 +1,27 @@
+CS 340 Intra_team evaluation 1B
+Name: Marcel Englmaier
+Team NUmber: 9
+
+
+1) For each team member please evaluate them with respect to this
+assignment.
+
+Team Members:                Daniel       Thomas        Marcel
+
+Skills at start (0-5)        ___3____     ___0____      ___0____
+Skills at end (0-5)          ___4____     ___2____      ___2____
+Ammount of effort (0-5)      ___4____     ___4____      ___4____
+Put in sufficent time (0-5)  ___5____     ___5____      ___5____
+Understood all parts of      ___5____     ___4____      ___4____
+ the final project (0-5)
+Worked well with others (0-5)___5____     ___5____      ___5____
+Ammount contributed to       ___34___     ___33___      ___33___
+  project (must sum to 100)  
+
+
+
+2) Comments on your team's functions and suggestions.
+We worked very well as a team. Thomas and I were both underqualified, but we learned quickly
+and worked hard on this project. Thomas and I were mainly responsible for design and simple
+HTML and PHP coding, while Daniel did the more complicated things like the back end stuff,
+login, and MySQL.

@@ -1,0 +1,11 @@
+print cover sheet. sign it
+print logsession in landscape mode so no text wrap
+print dupMain.bin from a hexesit with hex&char versions
+print all of the code files
+print demospecs
+
+delete all the above, print this:
+Note:3c and 3d cannot be completed due to some sort of error, so 3c is not complete,
+but 3d is accomplished by using the second record found in DupMainData.bin.
+Appologies for the errors, this is just to prove I know the concepts of 3d.
+-Marcel Englmaier

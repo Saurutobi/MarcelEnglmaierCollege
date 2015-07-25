@@ -1,0 +1,61 @@
+CS3310 - Kaminski - Asgn 5 demo specs
+
+
+The DEMO:
+[should not have to delete LogSession.txt file since
+    SetupUtility opens it in TRUNCATE mode]
+1) run SetupUtility which 
+    - creates EuopeMapData.bin file
+    - creates EuropeCityNames.txt file
+    - pretty-prints both files to LogSession.txt file
+2) use HexEdit to print out the MapData and CityNames files
+3) run DrivingApp which processes CityPairs file
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+PACKET TO HAND IN - IN THIS ORDER
+   - cover page
+   - LogSession.txt
+   - HexEdit printout of EuropeMapData.bin
+   - HexEdit printout of EuropeCityNames.txt
+   - SetUpUtility code file
+   - DrivingApp code file
+   - Map class code file
+   - ShortestPath class code file
+   - UI class code file
+   - any other code files
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+NOTES ON READABILITY:  
+
+When printing LogSession.txt (in Word or WordPad...)
+- use Courier New (or other fixed-width font) so that
+  the pretty-printed Matrix comes out "nice" and aligned
+- use landscape & a smallish font to avoid wrap-around for
+  the Matrix (though wrap-around for the Path and TraceOfTargets
+  is OK)
+- useline wrap-around (vs. line-truncation) so the whole
+  Path and TraceOfTargets is visible
+- use small margins (like 0.5) to save paper.
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Make sure that:
+
+- the graph is implemented as an EXTERNAL Adjacency Matrix
+  (NOT INTERNAL, for DrivingApp)
+- the implementation of Dijkstra's Algorithm is the one that I
+    discussed in class (and that's on the course webpage)
+- you have the right answers (as far as you can tell):
+	- check if they seem REASONABLE,
+	- make sure there aren't duplicates in path or trace,
+	- make sure trace's order of cities follows "what you
+		know Dijkstra's Algorithm should do"
+- the answer path:
+    - prints from START to DESTINATION (not DESTINATION to START)
+    - uses city NAMES. not city NUMBERS
+- the trace of targets shows the cities in the order that they
+    were selected as targets (Do NOT use Included array to print
+    target nodes in alphabetical order).
+- you follow the specs for the LogSession file format

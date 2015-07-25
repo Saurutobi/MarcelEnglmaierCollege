@@ -1,0 +1,65 @@
+Dan told me about a class called ClassificationDataSet in Pybrain which does pretty much everything needed for this. It prepares the data. Once that's ready, trainEpoch() trains and calculates error. I messed around with some hidden parameters to see if I could get the error down, and improve stuff. Didn't work so well, the final result was similar to the Multitron, with much less code. If I let it run longer, I think the error could go down. Just took way too long. 20 Epochs like i'm running here takes about 10 minutes. Pybrain is very, very nice.
+The print code is courtesy of Dan, it looks very, very nice.
+
+OUTPUT:
+
+epoch:   1  |  train error: 13.55%  |  test error: 13.00%
+epoch:   2  |  train error: 11.79%  |  test error: 11.70%
+epoch:   3  |  train error: 12.66%  |  test error: 12.30%
+epoch:   4  |  train error: 10.75%  |  test error: 11.10%
+epoch:   5  |  train error: 11.55%  |  test error: 11.90%
+epoch:   6  |  train error: 11.60%  |  test error: 12.30%
+epoch:   7  |  train error: 12.73%  |  test error: 14.00%
+epoch:   8  |  train error: 12.75%  |  test error: 12.20%
+epoch:   9  |  train error: 11.18%  |  test error: 11.90%
+epoch:  10  |  train error: 11.43%  |  test error: 11.00%
+epoch:  11  |  train error: 11.44%  |  test error: 11.30%
+epoch:  12  |  train error: 12.14%  |  test error: 13.30%
+epoch:  13  |  train error: 11.01%  |  test error: 11.50%
+epoch:  14  |  train error: 12.65%  |  test error: 12.00%
+epoch:  15  |  train error: 11.77%  |  test error: 11.10%
+epoch:  16  |  train error: 12.86%  |  test error: 12.70%
+epoch:  17  |  train error: 11.75%  |  test error: 12.00%
+epoch:  18  |  train error: 11.90%  |  test error: 10.30%
+epoch:  19  |  train error: 11.42%  |  test error: 11.80%
+epoch:  20  |  train error: 12.62%  |  test error: 12.10%
+
+CODE:
+#Author: Marcel Englmaier
+import cPickle
+
+from pybrain.datasets import ClassificationDataSet
+from pybrain.tools.shortcuts import buildNetwork
+
+from pybrain.supervised.trainers import BackpropTrainer
+from pybrain.structure.modules import SoftmaxLayer
+from pybrain.utilities import percentError
+from pybrain.tools.neuralnets import NNregression, Trainer, NNclassifier
+
+#import sys
+if __name__ == '__main__': 
+    with open('./littlemnist.pkl', 'rb') as f:
+        (trainX, trainY), (validX, validY), (testX, testY) = cPickle.load(f)    
+    
+    trainingSet = ClassificationDataSet(28 * 28, nb_classes=10)
+    for image, label in zip(trainX, trainY):
+        trainingSet.addSample(image, label)
+
+    testingSet = ClassificationDataSet(28 * 28, nb_classes=10)
+    for image, label in zip(validX, validY):
+        testingSet.addSample(image, label)
+
+    trainingSet._convertToOneOfMany()
+    testingSet._convertToOneOfMany()
+    
+    fnn = buildNetwork(trainingSet.indim, 100, trainingSet.outdim, outclass=SoftmaxLayer, bias=True)
+    trainer = BackpropTrainer(fnn, dataset=trainingSet, momentum=0.05, weightdecay=0.01)
+    
+    for i in range(20):
+        trainer.trainEpochs(1)
+        trn_result = percentError(trainer.testOnClassData(), trainingSet['class'])
+        tst_result = percentError(trainer.testOnClassData(dataset=testingSet), testingSet['class'])
+
+        print "epoch: %3d  | " % trainer.totalepochs, \
+              "train error: %5.2f%%  | " % trn_result, \
+              "test error: %5.2f%%" % tst_result 

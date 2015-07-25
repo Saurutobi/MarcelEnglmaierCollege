@@ -1,0 +1,1181 @@
+Script started on Tue Jan 22 22:08:38 2013
+bronco:~/2240/assignment1> cat main.c
+
+//author: Marcel Englmaier
+
+#include "meh.h"
+
+typedef struct
+{
+        char Code[4]; // a null will be in the fourth position
+        char Name[40]; // these string lengths are arbitrarary
+        char Population[20]; // but they all be null terminated
+        char Lifeexp[10]; // character strings
+}aStruct;
+
+int main(int argc, char *argv[])
+{
+        //a static struct for use later
+        aStruct tempStruct;
+        //an array of pointers to aStruct
+        aStruct *structPointers;
+        int arraySize = 239;
+        //allocates space for 300 of these things
+        structPointers = (aStruct *)calloc(arraySize, sizeof(aStruct));
+        
+        int err = 0;
+        int i;
+        int n;
+        int x;
+        char buffer[200],ch;
+        char *Tok;
+        int file = open("AllCountries.dat", O_RDONLY);
+        if(file == -1)
+        {
+                err_sys("error on open");
+        } else
+        {
+                //this loop reads in all items
+                for(x = 0; x < arraySize; x++)
+                {
+                        buffer[0] = ch;
+                        i = 0;
+                        do
+                        {
+                                n = read(file, &ch, 1);
+                                if(n == -1)
+                                {
+                                        err_sys("reading a line didn't work");
+                                }
+                                buffer[i++] = ch;
+                        }while (ch != '\n');
+                        
+                        //1 Code
+                        Tok = strtok(buffer, ",\n");
+                        n = strlen(Tok);
+                        for(i = 0; i < n; i++)
+                        {
+                                (structPointers[x].Code[i]) = Tok[i];
+                        }
+                        if((structPointers[x].Code[1]) == NULL)
+                        {
+                                (structPointers[x].Code[3]) = NULL;
+                                (structPointers[x].Code[2]) = (structPointers[x].Code[2]);
+                                (structPointers[x].Code[1]) = '0';
+                                (structPointers[x].Code[0]) = '0';
+                        }
+                        if((structPointers[x].Code[2]) == NULL)
+                        {
+                                (structPointers[x].Code[3]) = NULL;
+                                (structPointers[x].Code[2]) = (structPointers[x].Code[1]);
+                                (structPointers[x].Code[1]) = (structPointers[x].Code[0]);
+                                (structPointers[x].Code[0]) = '0';
+                        }
+                        
+                        //2 Skip
+                        Tok = strtok(NULL,",\n");
+                        //3 Name
+                        Tok = strtok(NULL,",\n");
+                        n = strlen(Tok);
+                        for(i = 0; i < n; i++)
+                        {
+                                (structPointers[x].Name[i]) = Tok[i];
+                        }
+                        //4-7 Skip
+                        Tok = strtok(NULL,",\n");
+                        Tok = strtok(NULL,",\n");
+                        Tok = strtok(NULL,",\n");
+                        Tok = strtok(NULL,",\n");
+                        //8 Population
+                        Tok = strtok(NULL,",\n");
+                        n = strlen(Tok);
+                        for(i = 0; i < n; i++)
+                        {
+                                (structPointers[x].Population[i]) = Tok[i];
+                        }
+                        //9 Age
+                        Tok = strtok(NULL,",\n");
+                        n = strlen(Tok);
+                        for(i = 0; i < n; i++)
+                        {
+                                (structPointers[x].Lifeexp[i]) = Tok[i];
+                        }
+                }
+                
+                //Prints Raw Data First for Comparison
+                if(write(STDOUT_FILENO, "\nRaw Sort-------------------------------------------------------------------------------\n", 89) == -1)
+                {
+                        err_sys("error outputting Raw Data");
+                }
+                for(i = 0; i < arraySize; i++)
+                {
+                        if(structPointers[i].Code[0] != NULL)
+                        {
+                                //print Code
+                                if(write(STDOUT_FILENO, "Code: ", 6) == -1)
+                                {
+                                        err_sys("error outputting Raw Data");
+                                }
+                                if(write(STDOUT_FILENO, (structPointers[i].Code), strlen((structPointers[i].Code))) == -1)
+                                {
+                                        err_sys("error outputting Raw Data");
+                                }
+                                if(write(STDOUT_FILENO, " | ", 3) == -1)
+                                {
+                                        err_sys("error outputting Raw Data");
+                                }
+                                //print Name
+                                if(write(STDOUT_FILENO, "Name: ", 6) == -1)
+                                {
+                                        err_sys("error outputting Raw Data");
+                                }
+                                if(write(STDOUT_FILENO, (structPointers[i].Name), strlen((structPointers[i].Name))) == -1)
+                                {
+                                        err_sys("error outputting Raw Data");
+                                }
+                                if(write(STDOUT_FILENO, " | ", 3) == -1)
+                                {
+                                        err_sys("error outputting Raw Data");
+                                }
+                                //print Population
+                                if(write(STDOUT_FILENO, "Pop: ", 5) == -1)
+                                {
+                                        err_sys("error outputting Raw Data");
+                                }
+                                if(write(STDOUT_FILENO, (structPointers[i].Population), strlen((structPointers[i].Population))) == -1)
+                                {
+                                        err_sys("error outputting Raw Data");
+                                }
+                                if(write(STDOUT_FILENO, " | ", 3) == -1)
+                                {
+                                        err_sys("error outputting Raw Data");
+                                }
+                                //print Lifeexp
+                                if(write(STDOUT_FILENO, "Lifeexp: ", 9) == -1)
+                                {
+                                        err_sys("error outputting Raw Data");
+                                }
+                                if(write(STDOUT_FILENO, (structPointers[i].Lifeexp), strlen((structPointers[i].Lifeexp))) == -1)
+                                {
+                                        err_sys("error outputting Raw Data");
+                                }
+                                if(write(STDOUT_FILENO, " | \n", 4) == -1)
+                                {
+                                        err_sys("error outputting Raw Data");
+                                }
+                        }
+                }
+                //the following code sorts twice and then prints sorted arrays twice
+                int f, g;
+                //Code Sort
+                for (f = (arraySize - 1); f > 0; f--)
+                {
+                        for (g = 1; g <= i; g++)
+                        {
+                                if (compareCode(structPointers[g-1].Code, structPointers[g].Code) == 1)
+                                {
+                                        tempStruct = (structPointers[g-1]);
+                                        (structPointers[g-1]) = (structPointers[g]);
+                                        (structPointers[g]) = tempStruct;
+                                }
+                        }
+                }
+                //Prints Code Sort
+                if(write(STDOUT_FILENO, "\nCode Sort------------------------------------------------------------------------------\n", 89) == -1)
+                {
+                        err_sys("error outputting Code Sort");
+                }
+                for(i = 0; i < arraySize; i++)
+                {
+                        if(structPointers[i].Code[0] != NULL)
+                        {
+                                //print Code
+                                if(write(STDOUT_FILENO, "Code: ", 6) == -1)
+                                {
+                                        err_sys("error outputting Code Sort");
+                                }
+                                if(write(STDOUT_FILENO, (structPointers[i].Code), strlen((structPointers[i].Code))) == -1)
+                                {
+                                        err_sys("error outputting Code Sort");
+                                }
+                                if(write(STDOUT_FILENO, " | ", 3) == -1)
+                                {
+                                        err_sys("error outputting Code Sort");
+                                }
+                                //print Name
+                                if(write(STDOUT_FILENO, "Name: ", 6) == -1)
+                                {
+                                        err_sys("error outputting Code Sort");
+                                }
+                                if(write(STDOUT_FILENO, (structPointers[i].Name), strlen((structPointers[i].Name))) == -1)
+                                {
+                                        err_sys("error outputting Code Sort");
+                                }
+                                if(write(STDOUT_FILENO, " | ", 3) == -1)
+                                {
+                                        err_sys("error outputting Code Sort");
+                                }
+                                //print Population
+                                if(write(STDOUT_FILENO, "Pop: ", 5) == -1)
+                                {
+                                        err_sys("error outputting Code Sort");
+                                }
+                                if(write(STDOUT_FILENO, (structPointers[i].Population), strlen((structPointers[i].Population))) == -1)
+                                {
+                                        err_sys("error outputting Code Sort");
+                                }
+                                if(write(STDOUT_FILENO, " | ", 3) == -1)
+                                {
+                                        err_sys("error outputting Code Sort");
+                                }
+                                //print Lifeexp
+                                if(write(STDOUT_FILENO, "Lifeexp: ", 9) == -1)
+                                {
+                                        err_sys("error outputting Code Sort");
+                                }
+                                if(write(STDOUT_FILENO, (structPointers[i].Lifeexp), strlen((structPointers[i].Lifeexp))) == -1)
+                                {
+                                        err_sys("error outputting Code Sort");
+                                }
+                                if(write(STDOUT_FILENO, " | \n", 4) == -1)
+                                {
+                                        err_sys("error outputting Code Sort");
+                                }
+                        }
+                }
+                
+                //Population Sort
+                for (f = (arraySize - 1); f > 0; f--)
+                {
+                        for (g = 1; g <= i; g++)
+                        {
+                                if (atoi(structPointers[g-1].Population) > atoi(structPointers[g].Population))
+                                {
+                                        tempStruct = (structPointers[g-1]);
+                                        (structPointers[g-1]) = (structPointers[g]);
+                                        (structPointers[g]) = tempStruct;
+                                }
+                        }
+                }
+                //Prints Pop Sort
+                if(write(STDOUT_FILENO, "\nPop Sort-------------------------------------------------------------------------------\n", 89) == -1)
+                {
+                        err_sys("error outputting Pop Sort");
+                }
+                for(i = 0; i < arraySize; i++)
+                {
+                        if(structPointers[i].Code[0] != NULL)
+                        {
+                                //print Code
+                                if(write(STDOUT_FILENO, "Code: ", 6) == -1)
+                                {
+                                        err_sys("error outputting Pop Sort");
+                                }
+                                if(write(STDOUT_FILENO, (structPointers[i].Code), strlen((structPointers[i].Code))) == -1)
+                                {
+                                        err_sys("error outputting Pop Sort");
+                                }
+                                if(write(STDOUT_FILENO, " | ", 3) == -1)
+                                {
+                                        err_sys("error outputting Pop Sort");
+                                }
+                                //print Name
+                                if(write(STDOUT_FILENO, "Name: ", 6) == -1)
+                                {
+                                        err_sys("error outputting Pop Sort");
+                                }
+                                if(write(STDOUT_FILENO, (structPointers[i].Name), strlen((structPointers[i].Name))) == -1)
+                                {
+                                        err_sys("error outputting Pop Sort");
+                                }
+                                if(write(STDOUT_FILENO, " | ", 3) == -1)
+                                {
+                                        err_sys("error outputting Pop Sort");
+                                }
+                                //print Population
+                                if(write(STDOUT_FILENO, "Pop: ", 5) == -1)
+                                {
+                                        err_sys("error outputting Pop Sort");
+                                }
+                                if(write(STDOUT_FILENO, (structPointers[i].Population), strlen((structPointers[i].Population))) == -1)
+                                {
+                                        err_sys("error outputting Pop Sort");
+                                }
+                                if(write(STDOUT_FILENO, " | ", 3) == -1)
+                                {
+                                        err_sys("error outputting Pop Sort");
+                                }
+                                //print Lifeexp
+                                if(write(STDOUT_FILENO, "Lifeexp: ", 9) == -1)
+                                {
+                                        err_sys("error outputting Pop Sort");
+                                }
+                                if(write(STDOUT_FILENO, (structPointers[i].Lifeexp), strlen((structPointers[i].Lifeexp))) == -1)
+                                {
+                                        err_sys("error outputting Pop Sort");
+                                }
+                                if(write(STDOUT_FILENO, " | \n", 4) == -1)
+                                {
+                                        err_sys("error outputting Pop Sort");
+                                }
+                        }
+                }
+                
+        }
+        if(close(file) == -1)
+        {
+                err_sys("error on close");
+        }
+        return 0;
+}
+
+int compareCode(char one[], char two[])
+{
+        if ((int)one[0] > (int)two[0])
+        {
+                return 1;
+        }
+        if ((int)one[0] == (int)two[0])
+        {
+                if ((int)one[1] > (int)two[1])
+                {
+                        return 1;
+                }
+                if ((int)one[1] == (int)two[1])
+                {
+                        if ((int)one[2] > (int)two[2])
+                        {
+                                return 1;
+                        }
+                }
+        }
+        return 0;
+}
+bronco:~/2240/assignment1> cat meh.h
+
+//author: Marcel Englmaier
+
+
+#include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "apue.h"
+bronco:~/2240/assignment1> make
+make: `ass1' is up to date.
+bronco:~/2240/assignment1> ./ass1
+
+Raw Sort-------------------------------------------------------------------------------
+Code: 115 | Name: Algeria | Pop: 31471000 | Lifeexp: 69.7 | 
+Code: 146 | Name: Angola | Pop: 12878000 | Lifeexp: 38.3 | 
+Code: 094 | Name: Benin | Pop: 6097000 | Lifeexp: 50.2 | 
+Code: 129 | Name: Botswana | Pop: 1622000 | Lifeexp: 39.3 | 
+Code: 193 | Name: British Indian Ocean Territory | Pop: 0 | Lifeexp: NULL | 
+Code: 095 | Name: Burkina Faso | Pop: 11937000 | Lifeexp: 46.7 | 
+Code: 116 | Name: Burundi | Pop: 6695000 | Lifeexp: 46.2 | 
+Code: 096 | Name: Cameroon | Pop: 15085000 | Lifeexp: 54.8 | 
+Code: 147 | Name: Cape Verde | Pop: 428000 | Lifeexp: 68.9 | 
+Code: 097 | Name: Central African Republic | Pop: 3615000 | Lifeexp: 44 | 
+Code: 098 | Name: Chad | Pop: 7651000 | Lifeexp: 50.5 | 
+Code: 148 | Name: Comoros | Pop: 578000 | Lifeexp: 60 | 
+Code: 099 | Name: Congo | Pop: 2943000 | Lifeexp: 47.4 | 
+Code: 100 | Name: Congo; The Democratic Republic of the | Pop: 51654000 | Lifeexp: 48.8 | 
+Code: 101 | Name: Cote d’Ivoire | Pop: 14786000 | Lifeexp: 45.2 | 
+Code: 154 | Name: Djibouti | Pop: 638000 | Lifeexp: 50.8 | 
+Code: 063 | Name: Egypt | Pop: 68470000 | Lifeexp: 63.3 | 
+Code: 133 | Name: Equatorial Guinea | Pop: 453000 | Lifeexp: 53.6 | 
+Code: 189 | Name: Eritrea | Pop: 3850000 | Lifeexp: 55.8 | 
+Code: 000 | Name: Ethiopia | Pop: 62565000 | Lifeexp: 45.2 | 
+Code: 102 | Name: Gabon | Pop: 1226000 | Lifeexp: 50.1 | 
+Code: 126 | Name: Gambia | Pop: 1305000 | Lifeexp: 53.2 | 
+Code: 091 | Name: Ghana | Pop: 20212000 | Lifeexp: 57.4 | 
+Code: 093 | Name: Guinea | Pop: 7430000 | Lifeexp: 45.6 | 
+Code: 144 | Name: Guinea-Bissau | Pop: 1213000 | Lifeexp: 49 | 
+
+Code Sort------------------------------------------------------------------------------
+Code: 000 | Name: Ethiopia | Pop: 62565000 | Lifeexp: 45.2 | 
+Code: 063 | Name: Egypt | Pop: 68470000 | Lifeexp: 63.3 | 
+Code: 091 | Name: Ghana | Pop: 20212000 | Lifeexp: 57.4 | 
+Code: 093 | Name: Guinea | Pop: 7430000 | Lifeexp: 45.6 | 
+Code: 094 | Name: Benin | Pop: 6097000 | Lifeexp: 50.2 | 
+Code: 095 | Name: Burkina Faso | Pop: 11937000 | Lifeexp: 46.7 | 
+Code: 096 | Name: Cameroon | Pop: 15085000 | Lifeexp: 54.8 | 
+Code: 097 | Name: Central African Republic | Pop: 3615000 | Lifeexp: 44 | 
+Code: 098 | Name: Chad | Pop: 7651000 | Lifeexp: 50.5 | 
+Code: 099 | Name: Congo | Pop: 2943000 | Lifeexp: 47.4 | 
+Code: 100 | Name: Congo; The Democratic Republic of the | Pop: 51654000 | Lifeexp: 48.8 | 
+Code: 101 | Name: Cote d’Ivoire | Pop: 14786000 | Lifeexp: 45.2 | 
+Code: 102 | Name: Gabon | Pop: 1226000 | Lifeexp: 50.1 | 
+Code: 115 | Name: Algeria | Pop: 31471000 | Lifeexp: 69.7 | 
+Code: 116 | Name: Burundi | Pop: 6695000 | Lifeexp: 46.2 | 
+Code: 126 | Name: Gambia | Pop: 1305000 | Lifeexp: 53.2 | 
+Code: 129 | Name: Botswana | Pop: 1622000 | Lifeexp: 39.3 | 
+Code: 133 | Name: Equatorial Guinea | Pop: 453000 | Lifeexp: 53.6 | 
+Code: 144 | Name: Guinea-Bissau | Pop: 1213000 | Lifeexp: 49 | 
+Code: 146 | Name: Angola | Pop: 12878000 | Lifeexp: 38.3 | 
+Code: 147 | Name: Cape Verde | Pop: 428000 | Lifeexp: 68.9 | 
+Code: 148 | Name: Comoros | Pop: 578000 | Lifeexp: 60 | 
+Code: 154 | Name: Djibouti | Pop: 638000 | Lifeexp: 50.8 | 
+Code: 189 | Name: Eritrea | Pop: 3850000 | Lifeexp: 55.8 | 
+
+Pop Sort-------------------------------------------------------------------------------
+Code: 193 | Name: British Indian Ocean Territory | Pop: 0 | Lifeexp: NULL | 
+Code: 147 | Name: Cape Verde | Pop: 428000 | Lifeexp: 68.9 | 
+Code: 133 | Name: Equatorial Guinea | Pop: 453000 | Lifeexp: 53.6 | 
+Code: 148 | Name: Comoros | Pop: 578000 | Lifeexp: 60 | 
+Code: 154 | Name: Djibouti | Pop: 638000 | Lifeexp: 50.8 | 
+Code: 144 | Name: Guinea-Bissau | Pop: 1213000 | Lifeexp: 49 | 
+Code: 102 | Name: Gabon | Pop: 1226000 | Lifeexp: 50.1 | 
+Code: 126 | Name: Gambia | Pop: 1305000 | Lifeexp: 53.2 | 
+Code: 129 | Name: Botswana | Pop: 1622000 | Lifeexp: 39.3 | 
+Code: 099 | Name: Congo | Pop: 2943000 | Lifeexp: 47.4 | 
+Code: 097 | Name: Central African Republic | Pop: 3615000 | Lifeexp: 44 | 
+Code: 189 | Name: Eritrea | Pop: 3850000 | Lifeexp: 55.8 | 
+Code: 094 | Name: Benin | Pop: 6097000 | Lifeexp: 50.2 | 
+Code: 116 | Name: Burundi | Pop: 6695000 | Lifeexp: 46.2 | 
+Code: 093 | Name: Guinea | Pop: 7430000 | Lifeexp: 45.6 | 
+Code: 098 | Name: Chad | Pop: 7651000 | Lifeexp: 50.5 | 
+Code: 095 | Name: Burkina Faso | Pop: 11937000 | Lifeexp: 46.7 | 
+Code: 146 | Name: Angola | Pop: 12878000 | Lifeexp: 38.3 | 
+Code: 101 | Name: Cote d’Ivoire | Pop: 14786000 | Lifeexp: 45.2 | 
+Code: 096 | Name: Cameroon | Pop: 15085000 | Lifeexp: 54.8 | 
+Code: 091 | Name: Ghana | Pop: 20212000 | Lifeexp: 57.4 | 
+Code: 115 | Name: Algeria | Pop: 31471000 | Lifeexp: 69.7 | 
+Code: 100 | Name: Congo; The Democratic Republic of the | Pop: 51654000 | Lifeexp: 48.8 | 
+Code: 000 | Name: Ethiopia | Pop: 62565000 | Lifeexp: 45.2 | 
+bronco:~/2240/assignment1> make
+gcc -c main.c
+main.c: In function 'main':
+main.c:60: warning: comparison between pointer and integer
+main.c:62: warning: assignment makes integer from pointer without a cast
+main.c:67: warning: comparison between pointer and integer
+main.c:69: warning: assignment makes integer from pointer without a cast
+main.c:112: warning: comparison between pointer and integer
+main.c:192: warning: comparison between pointer and integer
+main.c:269: warning: comparison between pointer and integer
+gcc -g error.o main.o -o ass1
+bronco:~/2240/assignment1> ./ass1
+
+Raw Sort-------------------------------------------------------------------------------
+Code: 115 | Name: Algeria | Pop: 31471000 | Lifeexp: 69.7 | 
+Code: 146 | Name: Angola | Pop: 12878000 | Lifeexp: 38.3 | 
+Code: 094 | Name: Benin | Pop: 6097000 | Lifeexp: 50.2 | 
+Code: 129 | Name: Botswana | Pop: 1622000 | Lifeexp: 39.3 | 
+Code: 193 | Name: British Indian Ocean Territory | Pop: 0 | Lifeexp: NULL | 
+Code: 095 | Name: Burkina Faso | Pop: 11937000 | Lifeexp: 46.7 | 
+Code: 116 | Name: Burundi | Pop: 6695000 | Lifeexp: 46.2 | 
+Code: 096 | Name: Cameroon | Pop: 15085000 | Lifeexp: 54.8 | 
+Code: 147 | Name: Cape Verde | Pop: 428000 | Lifeexp: 68.9 | 
+Code: 097 | Name: Central African Republic | Pop: 3615000 | Lifeexp: 44 | 
+Code: 098 | Name: Chad | Pop: 7651000 | Lifeexp: 50.5 | 
+Code: 148 | Name: Comoros | Pop: 578000 | Lifeexp: 60 | 
+Code: 099 | Name: Congo | Pop: 2943000 | Lifeexp: 47.4 | 
+Code: 100 | Name: Congo; The Democratic Republic of the | Pop: 51654000 | Lifeexp: 48.8 | 
+Code: 101 | Name: Cote d’Ivoire | Pop: 14786000 | Lifeexp: 45.2 | 
+Code: 154 | Name: Djibouti | Pop: 638000 | Lifeexp: 50.8 | 
+Code: 063 | Name: Egypt | Pop: 68470000 | Lifeexp: 63.3 | 
+Code: 133 | Name: Equatorial Guinea | Pop: 453000 | Lifeexp: 53.6 | 
+Code: 189 | Name: Eritrea | Pop: 3850000 | Lifeexp: 55.8 | 
+Code: 000 | Name: Ethiopia | Pop: 62565000 | Lifeexp: 45.2 | 
+Code: 102 | Name: Gabon | Pop: 1226000 | Lifeexp: 50.1 | 
+Code: 126 | Name: Gambia | Pop: 1305000 | Lifeexp: 53.2 | 
+Code: 091 | Name: Ghana | Pop: 20212000 | Lifeexp: 57.4 | 
+Code: 093 | Name: Guinea | Pop: 7430000 | Lifeexp: 45.6 | 
+Code: 144 | Name: Guinea-Bissau | Pop: 1213000 | Lifeexp: 49 | 
+Code: 122 | Name: Kenya | Pop: 30080000 | Lifeexp: 48 | 
+Code: 130 | Name: Lesotho | Pop: 2153000 | Lifeexp: 50.8 | 
+Code: 038 | Name: Liberia | Pop: 3154000 | Lifeexp: 51 | 
+Code: 083 | Name: Libyan Arab Jamahiriya | Pop: 5605000 | Lifeexp: 75.5 | 
+Code: 103 | Name: Madagascar | Pop: 15942000 | Lifeexp: 55 | 
+Code: 123 | Name: Malawi | Pop: 10925000 | Lifeexp: 37.6 | 
+Code: 104 | Name: Mali | Pop: 11234000 | Lifeexp: 46.7 | 
+Code: 105 | Name: Mauritania | Pop: 2670000 | Lifeexp: 50.8 | 
+Code: 134 | Name: Mauritius | Pop: 1158000 | Lifeexp: 71 | 
+Code: 194 | Name: Mayotte | Pop: 149000 | Lifeexp: 59.5 | 
+Code: 088 | Name: Morocco | Pop: 28351000 | Lifeexp: 69.1 | 
+Code: 149 | Name: Mozambique | Pop: 19680000 | Lifeexp: 37.5 | 
+Code: 167 | Name: Namibia | Pop: 1726000 | Lifeexp: 42.5 | 
+Code: 106 | Name: Niger | Pop: 10730000 | Lifeexp: 41.3 | 
+Code: 107 | Name: Nigeria | Pop: 111506000 | Lifeexp: 51.6 | 
+Code: 195 | Name: Réunion | Pop: 699000 | Lifeexp: 72.7 | 
+Code: 117 | Name: Rwanda | Pop: 7733000 | Lifeexp: 39.3 | 
+Code: 196 | Name: Saint Helena | Pop: 6000 | Lifeexp: 76.8 | 
+Code: 150 | Name: Sao Tome and Principe | Pop: 147000 | Lifeexp: 65.3 | 
+Code: 108 | Name: Senegal | Pop: 9481000 | Lifeexp: 62.2 | 
+Code: 153 | Name: Seychelles | Pop: 77000 | Lifeexp: 70.4 | 
+Code: 112 | Name: Sierra Leone | Pop: 4854000 | Lifeexp: 45.3 | 
+Code: 109 | Name: Somalia | Pop: 10097000 | Lifeexp: 46.2 | 
+Code: 051 | Name: South Africa | Pop: 40377000 | Lifeexp: 51.1 | 
+Code: 089 | Name: Sudan | Pop: 29490000 | Lifeexp: 56.6 | 
+Code: 135 | Name: Swaziland | Pop: 1008000 | Lifeexp: 40.4 | 
+Code: 113 | Name: Tanzania | Pop: 33517000 | Lifeexp: 52.3 | 
+Code: 110 | Name: Togo | Pop: 4629000 | Lifeexp: 54.7 | 
+Code: 090 | Name: Tunisia | Pop: 9586000 | Lifeexp: 73.7 | 
+Code: 118 | Name: Uganda | Pop: 21778000 | Lifeexp: 42.9 | 
+Code: 197 | Name: Western Sahara | Pop: 293000 | Lifeexp: 49.8 | 
+Code: 124 | Name: Zambia | Pop: 9169000 | Lifeexp: 37.2 | 
+Code: 161 | Name: Zimbabwe | Pop: 11669000 | Lifeexp: 37.8 | 
+Code: 198 | Name: Antarctica | Pop: 0 | Lifeexp: NULL | 
+Code: 199 | Name: Bouvet Island | Pop: 0 | Lifeexp: NULL | 
+Code: 200 | Name: French Southern territories | Pop: 0 | Lifeexp: NULL | 
+Code: 201 | Name: Heard Island and McDonald Islands | Pop: 0 | Lifeexp: NULL | 
+Code: 202 | Name: South Georgia and the South Sandwich Isl0nds | Pop: 0nds | Lifeexp: NULL | 
+Code: 060 | Name: Afghanistan | Pop: 22720000 | Lifeexp: 45.9 | 
+Code: 170 | Name: Armenia | Pop: 3520000 | Lifeexp: 66.4 | 
+Code: 171 | Name: Azerbaijan | Pop: 7734000 | Lifeexp: 62.9 | 
+Code: 139 | Name: Bahrain | Pop: 617000 | Lifeexp: 73 | 
+Code: 140 | Name: Bangladesh | Pop: 129155000 | Lifeexp: 60.2 | 
+Code: 052 | Name: Bhutan | Pop: 2124000 | Lifeexp: 52.4 | 
+Code: 166 | Name: Brunei | Pop: 328000 | Lifeexp: 73.6 | 
+Code: 085 | Name: Cambodia | Pop: 11168000 | Lifeexp: 56.5 | 
+Code: 000 | Name: China | Pop: 1277558000 | Lifeexp: 71.4 | 
+Code: 111 | Name: Cyprus | Pop: 754700 | Lifeexp: 76.7 | 
+Code: 203 | Name: East Timor | Pop: 885000 | Lifeexp: 46 | 
+Code: 172 | Name: Georgia | Pop: 4968000 | Lifeexp: 64.5 | 
+Code: 204 | Name: Hong Kong | Pop: 6782000 | Lifeexp: 79.5 | 
+Code: 076 | Name: India | Pop: 1013662000 | Lifeexp: 62.5 | 
+Code: 071 | Name: Indonesia | Pop: 212107000 | Lifeexp: 68 | 
+Code: 048 | Name: Iran | Pop: 67702000 | Lifeexp: 69.7 | 
+Code: 066 | Name: Iraq | Pop: 23115000 | Lifeexp: 66.5 | 
+Code: 078 | Name: Israel | Pop: 6217000 | Lifeexp: 78.6 | 
+Code: 000 | Name: Japan | Pop: 126714000 | Lifeexp: 80.7 | 
+Code: 074 | Name: Jordan | Pop: 5083000 | Lifeexp: 77.4 | 
+Code: 173 | Name: Kazakstan | Pop: 16223000 | Lifeexp: 63.2 | 
+Code: 114 | Name: Kuwait | Pop: 1972000 | Lifeexp: 76.1 | 
+Code: 174 | Name: Kyrgyzstan | Pop: 4699000 | Lifeexp: 63.4 | 
+Code: 086 | Name: Laos | Pop: 5433000 | Lifeexp: 53.1 | 
+Code: 068 | Name: Lebanon | Pop: 3282000 | Lifeexp: 71.3 | 
+Code: 205 | Name: Macao | Pop: 473000 | Lifeexp: 81.6 | 
+Code: 092 | Name: Malaysia | Pop: 22244000 | Lifeexp: 70.8 | 
+Code: 127 | Name: Maldives | Pop: 286000 | Lifeexp: 62.2 | 
+Code: 061 | Name: Mongolia | Pop: 2662000 | Lifeexp: 67.3 | 
+Code: 079 | Name: Myanmar | Pop: 45611000 | Lifeexp: 54.9 | 
+Code: 015 | Name: Nepal | Pop: 23930000 | Lifeexp: 57.8 | 
+Code: 080 | Name: North Korea | Pop: 24039000 | Lifeexp: 70.7 | 
+Code: 084 | Name: Oman | Pop: 2542000 | Lifeexp: 71.8 | 
+Code: 077 | Name: Pakistan | Pop: 156483000 | Lifeexp: 61.1 | 
+Code: 206 | Name: Palestine | Pop: 3101000 | Lifeexp: 71.4 | 
+Code: 075 | Name: Philippines | Pop: 75967000 | Lifeexp: 67.5 | 
+Code: 141 | Name: Qatar | Pop: 599000 | Lifeexp: 72.4 | 
+Code: 067 | Name: Saudi Arabia | Pop: 21607000 | Lifeexp: 67.8 | 
+Code: 128 | Name: Singapore | Pop: 3567000 | Lifeexp: 80.1 | 
+Code: 081 | Name: South Korea | Pop: 46844000 | Lifeexp: 74.4 | 
+Code: 082 | Name: Sri Lanka | Pop: 18827000 | Lifeexp: 71.8 | 
+Code: 069 | Name: Syria | Pop: 16125000 | Lifeexp: 68.5 | 
+Code: 072 | Name: Taiwan | Pop: 22256000 | Lifeexp: 76.4 | 
+Code: 175 | Name: Tajikistan | Pop: 6188000 | Lifeexp: 64.1 | 
+Code: 011 | Name: Thailand | Pop: 61399000 | Lifeexp: 68.6 | 
+Code: 064 | Name: Turkey | Pop: 66591000 | Lifeexp: 71 | 
+Code: 176 | Name: Turkmenistan | Pop: 4459000 | Lifeexp: 60.9 | 
+Code: 142 | Name: United Arab Emirates | Pop: 2441000 | Lifeexp: 74.1 | 
+Code: 177 | Name: Uzbekistan | Pop: 24318000 | Lifeexp: 63.7 | 
+Code: 073 | Name: Vietnam | Pop: 79832000 | Lifeexp: 69.3 | 
+Code: 055 | Name: Yemen | Pop: 18112000 | Lifeexp: 59.8 | 
+Code: 053 | Name: Albania | Pop: 3401200 | Lifeexp: 71.6 | 
+Code: 010 | Name: Andorra | Pop: 78000 | Lifeexp: 83.5 | 
+Code: 056 | Name: Austria | Pop: 8091800 | Lifeexp: 77.7 | 
+Code: 178 | Name: Belarus | Pop: 10236000 | Lifeexp: 68 | 
+Code: 032 | Name: Belgium | Pop: 10239000 | Lifeexp: 77.8 | 
+Code: 188 | Name: Bosnia and Herzegovina | Pop: 3972000 | Lifeexp: 71.5 | 
+Code: 050 | Name: Bulgaria | Pop: 8190900 | Lifeexp: 70.9 | 
+Code: 179 | Name: Croatia | Pop: 4473000 | Lifeexp: 73.7 | 
+Code: 190 | Name: Czech Republic | Pop: 10278100 | Lifeexp: 74.5 | 
+Code: 000 | Name: Denmark | Pop: 5330000 | Lifeexp: 76.5 | 
+Code: 180 | Name: Estonia | Pop: 1439200 | Lifeexp: 69.5 | 
+Code: 207 | Name: Faroe Islands | Pop: 43000 | Lifeexp: 78.4 | 
+Code: 054 | Name: Finland | Pop: 5171300 | Lifeexp: 77.4 | 
+Code: 000 | Name: France | Pop: 59225700 | Lifeexp: 78.8 | 
+Code: 087 | Name: Germany | Pop: 82164700 | Lifeexp: 77.4 | 
+Code: 208 | Name: Gibraltar | Pop: 25000 | Lifeexp: 79 | 
+Code: 033 | Name: Greece | Pop: 10545700 | Lifeexp: 78.4 | 
+Code: 065 | Name: Holy See (Vatican City State) | Pop: 1000 | Lifeexp: NULL | 
+Code: 057 | Name: Hungary | Pop: 10043200 | Lifeexp: 71.4 | 
+Code: 070 | Name: Iceland | Pop: 279000 | Lifeexp: 79.4 | 
+Code: 062 | Name: Ireland | Pop: 3775100 | Lifeexp: 76.8 | 
+Code: 039 | Name: Italy | Pop: 57680000 | Lifeexp: 79 | 
+Code: 181 | Name: Latvia | Pop: 2424200 | Lifeexp: 68.4 | 
+Code: 018 | Name: Liechtenstein | Pop: 32300 | Lifeexp: 78.8 | 
+Code: 182 | Name: Lithuania | Pop: 3698500 | Lifeexp: 69.1 | 
+Code: 041 | Name: Luxembourg | Pop: 435700 | Lifeexp: 77.1 | 
+Code: 183 | Name: Macedonia | Pop: 2024000 | Lifeexp: 73.8 | 
+Code: 125 | Name: Malta | Pop: 380200 | Lifeexp: 77.9 | 
+Code: 184 | Name: Moldova | Pop: 4380000 | Lifeexp: 64.5 | 
+Code: 040 | Name: Monaco | Pop: 34000 | Lifeexp: 78.8 | 
+Code: 014 | Name: Netherlands | Pop: 15864000 | Lifeexp: 78.3 | 
+Code: 047 | Name: Norway | Pop: 4478500 | Lifeexp: 78.7 | 
+Code: 058 | Name: Poland | Pop: 38653600 | Lifeexp: 73.2 | 
+Code: 000 | Name: Portugal | Pop: 9997600 | Lifeexp: 75.8 | 
+Code: 043 | Name: Romania | Pop: 22455500 | Lifeexp: 69.9 | 
+Code: 185 | Name: Russian Federation | Pop: 146934000 | Lifeexp: 67.2 | 
+Code: 000 | Name: San Marino | Pop: 27000 | Lifeexp: 81.1 | 
+Code: 191 | Name: Slovakia | Pop: 5398700 | Lifeexp: 73.7 | 
+Code: 186 | Name: Slovenia | Pop: 1987800 | Lifeexp: 74.9 | 
+Code: 012 | Name: Spain | Pop: 39441700 | Lifeexp: 78.8 | 
+Code: 209 | Name: Svalbard and Jan Mayen | Pop: 3200 | Lifeexp: NULL | 
+Code: 000 | Name: Sweden | Pop: 8861400 | Lifeexp: 79.6 | 
+Code: 013 | Name: Switzerland | Pop: 7160400 | Lifeexp: 79.6 | 
+Code: 187 | Name: Ukraine | Pop: 50456000 | Lifeexp: 66 | 
+Code: 000 | Name: United Kingdom | Pop: 59623400 | Lifeexp: 77.7 | 
+Code: 059 | Name: Yugoslavia | Pop: 10640000 | Lifeexp: 72.4 | 
+Code: 210 | Name: Anguilla | Pop: 8000 | Lifeexp: 76.1 | 
+Code: 163 | Name: Antigua and Barbuda | Pop: 68000 | Lifeexp: 70.5 | 
+Code: 211 | Name: Aruba | Pop: 103000 | Lifeexp: 78.4 | 
+Code: 143 | Name: Bahamas | Pop: 307000 | Lifeexp: 71.1 | 
+Code: 131 | Name: Barbados | Pop: 270000 | Lifeexp: 73 | 
+Code: 164 | Name: Belize | Pop: 241000 | Lifeexp: 70.9 | 
+Code: 212 | Name: Bermuda | Pop: 65000 | Lifeexp: 76.9 | 
+Code: 042 | Name: Canada | Pop: 31147000 | Lifeexp: 79.4 | 
+Code: 213 | Name: Cayman Islands | Pop: 38000 | Lifeexp: 78.9 | 
+Code: 025 | Name: Costa Rica | Pop: 4023000 | Lifeexp: 75.8 | 
+Code: 045 | Name: Cuba | Pop: 11201000 | Lifeexp: 76.2 | 
+Code: 155 | Name: Dominica | Pop: 71000 | Lifeexp: 73.4 | 
+Code: 037 | Name: Dominican Republic | Pop: 8495000 | Lifeexp: 73.2 | 
+Code: 036 | Name: El Salvador | Pop: 6276000 | Lifeexp: 69.7 | 
+Code: 214 | Name: Greenland | Pop: 56000 | Lifeexp: 68.1 | 
+Code: 145 | Name: Grenada | Pop: 94000 | Lifeexp: 64.5 | 
+Code: 215 | Name: Guadeloupe | Pop: 456000 | Lifeexp: 77 | 
+Code: 026 | Name: Guatemala | Pop: 11385000 | Lifeexp: 66.2 | 
+Code: 017 | Name: Haiti | Pop: 8222000 | Lifeexp: 49.2 | 
+Code: 034 | Name: Honduras | Pop: 6485000 | Lifeexp: 69.9 | 
+Code: 119 | Name: Jamaica | Pop: 2583000 | Lifeexp: 75.2 | 
+Code: 216 | Name: Martinique | Pop: 395000 | Lifeexp: 78.3 | 
+Code: 019 | Name: Mexico | Pop: 98881000 | Lifeexp: 71.5 | 
+Code: 217 | Name: Montserrat | Pop: 11000 | Lifeexp: 78 | 
+Code: 218 | Name: Netherlands Antilles | Pop: 217000 | Lifeexp: 74.7 | 
+Code: 035 | Name: Nicaragua | Pop: 5074000 | Lifeexp: 68.7 | 
+Code: 046 | Name: Panama | Pop: 2856000 | Lifeexp: 75.5 | 
+Code: 219 | Name: Puerto Rico | Pop: 3869000 | Lifeexp: 75.6 | 
+Code: 165 | Name: Saint Kitts and Nevis | Pop: 38000 | Lifeexp: 70.7 | 
+Code: 158 | Name: Saint Lucia | Pop: 154000 | Lifeexp: 72.3 | 
+Code: 220 | Name: Saint Pierre and Miquelon | Pop: 7000 | Lifeexp: 77.6 | 
+Code: 159 | Name: Saint Vincent and the Grenadines | Pop: 114000 | Lifeexp: 72.3 | 
+Code: 120 | Name: Trinidad and Tobago | Pop: 1295000 | Lifeexp: 68 | 
+Code: 221 | Name: Turks and Caicos Islands | Pop: 17000 | Lifeexp: 73.3 | 
+Code: 016 | Name: United States | Pop: 278357000 | Lifeexp: 77.1 | 
+Code: 222 | Name: Virgin Islands; British | Pop: 21000 | Lifeexp: 75.4 | 
+Code: 223 | Name: Virgin Islands; U.S. | Pop: 93000 | Lifeexp: 78.1 | 
+Code: 224 | Name: American Samoa | Pop: 68000 | Lifeexp: 75.1 | 
+Code: 044 | Name: Australia | Pop: 18886000 | Lifeexp: 79.8 | 
+Code: 225 | Name: Christmas Island | Pop: 2500 | Lifeexp: NULL | 
+Code: 226 | Name: Cocos (Keeling) Islands | Pop: 600 | Lifeexp: NULL | 
+Code: 227 | Name: Cook Islands | Pop: 20000 | Lifeexp: 71.1 | 
+Code: 137 | Name: Fiji Islands | Pop: 817000 | Lifeexp: 67.9 | 
+Code: 228 | Name: French Polynesia | Pop: 235000 | Lifeexp: 74.8 | 
+Code: 229 | Name: Guam | Pop: 168000 | Lifeexp: 77.8 | 
+Code: 160 | Name: Kiribati | Pop: 83000 | Lifeexp: 59.8 | 
+Code: 168 | Name: Marshall Islands | Pop: 64000 | Lifeexp: 65.5 | 
+Code: 169 | Name: Micronesia; Federated States of | Pop: 119000 | Lifeexp: 68.6 | 
+Code: 136 | Name: Nauru | Pop: 12000 | Lifeexp: 60.8 | 
+Code: 230 | Name: New Caledonia | Pop: 214000 | Lifeexp: 72.8 | 
+Code: 049 | Name: New Zealand | Pop: 3862000 | Lifeexp: 77.8 | 
+Code: 231 | Name: Niue | Pop: 2000 | Lifeexp: NULL | 
+Code: 232 | Name: Norfolk Island | Pop: 2000 | Lifeexp: NULL | 
+Code: 233 | Name: Northern Mariana Islands | Pop: 78000 | Lifeexp: 75.5 | 
+Code: 192 | Name: Palau | Pop: 19000 | Lifeexp: 68.6 | 
+Code: 151 | Name: Papua New Guinea | Pop: 4807000 | Lifeexp: 63.1 | 
+Code: 234 | Name: Pitcairn | Pop: 50 | Lifeexp: NULL | 
+Code: 121 | Name: Samoa | Pop: 180000 | Lifeexp: 69.2 | 
+Code: 156 | Name: Solomon Islands | Pop: 444000 | Lifeexp: 71.3 | 
+Code: 235 | Name: Tokelau | Pop: 2000 | Lifeexp: NULL | 
+Code: 138 | Name: Tonga | Pop: 99000 | Lifeexp: 67.9 | 
+Code: 157 | Name: Tuvalu | Pop: 12000 | Lifeexp: 66.3 | 
+Code: 236 | Name: United States Minor Outlying Islands | Pop: 0 | Lifeexp: NULL | 
+Code: 162 | Name: Vanuatu | Pop: 190000 | Lifeexp: 60.6 | 
+Code: 237 | Name: Wallis and Futuna | Pop: 15000 | Lifeexp: NULL | 
+Code: 024 | Name: Argentina | Pop: 37032000 | Lifeexp: 75.1 | 
+Code: 030 | Name: Bolivia | Pop: 8329000 | Lifeexp: 63.7 | 
+Code: 028 | Name: Brazil | Pop: 170115000 | Lifeexp: 62.9 | 
+Code: 020 | Name: Chile | Pop: 15211000 | Lifeexp: 75.7 | 
+Code: 021 | Name: Colombia | Pop: 42321000 | Lifeexp: 70.3 | 
+Code: 029 | Name: Ecuador | Pop: 12646000 | Lifeexp: 71.1 | 
+Code: 238 | Name: Falkland Islands | Pop: 2000 | Lifeexp: NULL | 
+Code: 239 | Name: French Guiana | Pop: 181000 | Lifeexp: 76.1 | 
+Code: 132 | Name: Guyana | Pop: 861000 | Lifeexp: 64 | 
+Code: 022 | Name: Paraguay | Pop: 5496000 | Lifeexp: 73.7 | 
+Code: 027 | Name: Peru | Pop: 25662000 | Lifeexp: 70 | 
+Code: 152 | Name: Suriname | Pop: 417000 | Lifeexp: 71.4 | 
+Code: 031 | Name: Uruguay | Pop: 3337000 | Lifeexp: 75.2 | 
+Code: 023 | Name: Venezuela | Pop: 24170000 | Lifeexp: 73.1 | 
+
+Code Sort------------------------------------------------------------------------------
+Code: 000 | Name: Ethiopia | Pop: 62565000 | Lifeexp: 45.2 | 
+Code: 000 | Name: China | Pop: 1277558000 | Lifeexp: 71.4 | 
+Code: 000 | Name: Japan | Pop: 126714000 | Lifeexp: 80.7 | 
+Code: 000 | Name: Denmark | Pop: 5330000 | Lifeexp: 76.5 | 
+Code: 000 | Name: France | Pop: 59225700 | Lifeexp: 78.8 | 
+Code: 000 | Name: Portugal | Pop: 9997600 | Lifeexp: 75.8 | 
+Code: 000 | Name: San Marino | Pop: 27000 | Lifeexp: 81.1 | 
+Code: 000 | Name: Sweden | Pop: 8861400 | Lifeexp: 79.6 | 
+Code: 000 | Name: United Kingdom | Pop: 59623400 | Lifeexp: 77.7 | 
+Code: 010 | Name: Andorra | Pop: 78000 | Lifeexp: 83.5 | 
+Code: 011 | Name: Thailand | Pop: 61399000 | Lifeexp: 68.6 | 
+Code: 012 | Name: Spain | Pop: 39441700 | Lifeexp: 78.8 | 
+Code: 013 | Name: Switzerland | Pop: 7160400 | Lifeexp: 79.6 | 
+Code: 014 | Name: Netherlands | Pop: 15864000 | Lifeexp: 78.3 | 
+Code: 015 | Name: Nepal | Pop: 23930000 | Lifeexp: 57.8 | 
+Code: 016 | Name: United States | Pop: 278357000 | Lifeexp: 77.1 | 
+Code: 017 | Name: Haiti | Pop: 8222000 | Lifeexp: 49.2 | 
+Code: 018 | Name: Liechtenstein | Pop: 32300 | Lifeexp: 78.8 | 
+Code: 019 | Name: Mexico | Pop: 98881000 | Lifeexp: 71.5 | 
+Code: 020 | Name: Chile | Pop: 15211000 | Lifeexp: 75.7 | 
+Code: 021 | Name: Colombia | Pop: 42321000 | Lifeexp: 70.3 | 
+Code: 022 | Name: Paraguay | Pop: 5496000 | Lifeexp: 73.7 | 
+Code: 023 | Name: Venezuela | Pop: 24170000 | Lifeexp: 73.1 | 
+Code: 024 | Name: Argentina | Pop: 37032000 | Lifeexp: 75.1 | 
+Code: 025 | Name: Costa Rica | Pop: 4023000 | Lifeexp: 75.8 | 
+Code: 026 | Name: Guatemala | Pop: 11385000 | Lifeexp: 66.2 | 
+Code: 027 | Name: Peru | Pop: 25662000 | Lifeexp: 70 | 
+Code: 028 | Name: Brazil | Pop: 170115000 | Lifeexp: 62.9 | 
+Code: 029 | Name: Ecuador | Pop: 12646000 | Lifeexp: 71.1 | 
+Code: 030 | Name: Bolivia | Pop: 8329000 | Lifeexp: 63.7 | 
+Code: 031 | Name: Uruguay | Pop: 3337000 | Lifeexp: 75.2 | 
+Code: 032 | Name: Belgium | Pop: 10239000 | Lifeexp: 77.8 | 
+Code: 033 | Name: Greece | Pop: 10545700 | Lifeexp: 78.4 | 
+Code: 034 | Name: Honduras | Pop: 6485000 | Lifeexp: 69.9 | 
+Code: 035 | Name: Nicaragua | Pop: 5074000 | Lifeexp: 68.7 | 
+Code: 036 | Name: El Salvador | Pop: 6276000 | Lifeexp: 69.7 | 
+Code: 037 | Name: Dominican Republic | Pop: 8495000 | Lifeexp: 73.2 | 
+Code: 038 | Name: Liberia | Pop: 3154000 | Lifeexp: 51 | 
+Code: 039 | Name: Italy | Pop: 57680000 | Lifeexp: 79 | 
+Code: 040 | Name: Monaco | Pop: 34000 | Lifeexp: 78.8 | 
+Code: 041 | Name: Luxembourg | Pop: 435700 | Lifeexp: 77.1 | 
+Code: 042 | Name: Canada | Pop: 31147000 | Lifeexp: 79.4 | 
+Code: 043 | Name: Romania | Pop: 22455500 | Lifeexp: 69.9 | 
+Code: 044 | Name: Australia | Pop: 18886000 | Lifeexp: 79.8 | 
+Code: 045 | Name: Cuba | Pop: 11201000 | Lifeexp: 76.2 | 
+Code: 046 | Name: Panama | Pop: 2856000 | Lifeexp: 75.5 | 
+Code: 047 | Name: Norway | Pop: 4478500 | Lifeexp: 78.7 | 
+Code: 048 | Name: Iran | Pop: 67702000 | Lifeexp: 69.7 | 
+Code: 049 | Name: New Zealand | Pop: 3862000 | Lifeexp: 77.8 | 
+Code: 050 | Name: Bulgaria | Pop: 8190900 | Lifeexp: 70.9 | 
+Code: 051 | Name: South Africa | Pop: 40377000 | Lifeexp: 51.1 | 
+Code: 052 | Name: Bhutan | Pop: 2124000 | Lifeexp: 52.4 | 
+Code: 053 | Name: Albania | Pop: 3401200 | Lifeexp: 71.6 | 
+Code: 054 | Name: Finland | Pop: 5171300 | Lifeexp: 77.4 | 
+Code: 055 | Name: Yemen | Pop: 18112000 | Lifeexp: 59.8 | 
+Code: 056 | Name: Austria | Pop: 8091800 | Lifeexp: 77.7 | 
+Code: 057 | Name: Hungary | Pop: 10043200 | Lifeexp: 71.4 | 
+Code: 058 | Name: Poland | Pop: 38653600 | Lifeexp: 73.2 | 
+Code: 059 | Name: Yugoslavia | Pop: 10640000 | Lifeexp: 72.4 | 
+Code: 060 | Name: Afghanistan | Pop: 22720000 | Lifeexp: 45.9 | 
+Code: 061 | Name: Mongolia | Pop: 2662000 | Lifeexp: 67.3 | 
+Code: 062 | Name: Ireland | Pop: 3775100 | Lifeexp: 76.8 | 
+Code: 063 | Name: Egypt | Pop: 68470000 | Lifeexp: 63.3 | 
+Code: 064 | Name: Turkey | Pop: 66591000 | Lifeexp: 71 | 
+Code: 065 | Name: Holy See (Vatican City State) | Pop: 1000 | Lifeexp: NULL | 
+Code: 066 | Name: Iraq | Pop: 23115000 | Lifeexp: 66.5 | 
+Code: 067 | Name: Saudi Arabia | Pop: 21607000 | Lifeexp: 67.8 | 
+Code: 068 | Name: Lebanon | Pop: 3282000 | Lifeexp: 71.3 | 
+Code: 069 | Name: Syria | Pop: 16125000 | Lifeexp: 68.5 | 
+Code: 070 | Name: Iceland | Pop: 279000 | Lifeexp: 79.4 | 
+Code: 071 | Name: Indonesia | Pop: 212107000 | Lifeexp: 68 | 
+Code: 072 | Name: Taiwan | Pop: 22256000 | Lifeexp: 76.4 | 
+Code: 073 | Name: Vietnam | Pop: 79832000 | Lifeexp: 69.3 | 
+Code: 074 | Name: Jordan | Pop: 5083000 | Lifeexp: 77.4 | 
+Code: 075 | Name: Philippines | Pop: 75967000 | Lifeexp: 67.5 | 
+Code: 076 | Name: India | Pop: 1013662000 | Lifeexp: 62.5 | 
+Code: 077 | Name: Pakistan | Pop: 156483000 | Lifeexp: 61.1 | 
+Code: 078 | Name: Israel | Pop: 6217000 | Lifeexp: 78.6 | 
+Code: 079 | Name: Myanmar | Pop: 45611000 | Lifeexp: 54.9 | 
+Code: 080 | Name: North Korea | Pop: 24039000 | Lifeexp: 70.7 | 
+Code: 081 | Name: South Korea | Pop: 46844000 | Lifeexp: 74.4 | 
+Code: 082 | Name: Sri Lanka | Pop: 18827000 | Lifeexp: 71.8 | 
+Code: 083 | Name: Libyan Arab Jamahiriya | Pop: 5605000 | Lifeexp: 75.5 | 
+Code: 084 | Name: Oman | Pop: 2542000 | Lifeexp: 71.8 | 
+Code: 085 | Name: Cambodia | Pop: 11168000 | Lifeexp: 56.5 | 
+Code: 086 | Name: Laos | Pop: 5433000 | Lifeexp: 53.1 | 
+Code: 087 | Name: Germany | Pop: 82164700 | Lifeexp: 77.4 | 
+Code: 088 | Name: Morocco | Pop: 28351000 | Lifeexp: 69.1 | 
+Code: 089 | Name: Sudan | Pop: 29490000 | Lifeexp: 56.6 | 
+Code: 090 | Name: Tunisia | Pop: 9586000 | Lifeexp: 73.7 | 
+Code: 091 | Name: Ghana | Pop: 20212000 | Lifeexp: 57.4 | 
+Code: 092 | Name: Malaysia | Pop: 22244000 | Lifeexp: 70.8 | 
+Code: 093 | Name: Guinea | Pop: 7430000 | Lifeexp: 45.6 | 
+Code: 094 | Name: Benin | Pop: 6097000 | Lifeexp: 50.2 | 
+Code: 095 | Name: Burkina Faso | Pop: 11937000 | Lifeexp: 46.7 | 
+Code: 096 | Name: Cameroon | Pop: 15085000 | Lifeexp: 54.8 | 
+Code: 097 | Name: Central African Republic | Pop: 3615000 | Lifeexp: 44 | 
+Code: 098 | Name: Chad | Pop: 7651000 | Lifeexp: 50.5 | 
+Code: 099 | Name: Congo | Pop: 2943000 | Lifeexp: 47.4 | 
+Code: 100 | Name: Congo; The Democratic Republic of the | Pop: 51654000 | Lifeexp: 48.8 | 
+Code: 101 | Name: Cote d’Ivoire | Pop: 14786000 | Lifeexp: 45.2 | 
+Code: 102 | Name: Gabon | Pop: 1226000 | Lifeexp: 50.1 | 
+Code: 103 | Name: Madagascar | Pop: 15942000 | Lifeexp: 55 | 
+Code: 104 | Name: Mali | Pop: 11234000 | Lifeexp: 46.7 | 
+Code: 105 | Name: Mauritania | Pop: 2670000 | Lifeexp: 50.8 | 
+Code: 106 | Name: Niger | Pop: 10730000 | Lifeexp: 41.3 | 
+Code: 107 | Name: Nigeria | Pop: 111506000 | Lifeexp: 51.6 | 
+Code: 108 | Name: Senegal | Pop: 9481000 | Lifeexp: 62.2 | 
+Code: 109 | Name: Somalia | Pop: 10097000 | Lifeexp: 46.2 | 
+Code: 110 | Name: Togo | Pop: 4629000 | Lifeexp: 54.7 | 
+Code: 111 | Name: Cyprus | Pop: 754700 | Lifeexp: 76.7 | 
+Code: 112 | Name: Sierra Leone | Pop: 4854000 | Lifeexp: 45.3 | 
+Code: 113 | Name: Tanzania | Pop: 33517000 | Lifeexp: 52.3 | 
+Code: 114 | Name: Kuwait | Pop: 1972000 | Lifeexp: 76.1 | 
+Code: 115 | Name: Algeria | Pop: 31471000 | Lifeexp: 69.7 | 
+Code: 116 | Name: Burundi | Pop: 6695000 | Lifeexp: 46.2 | 
+Code: 117 | Name: Rwanda | Pop: 7733000 | Lifeexp: 39.3 | 
+Code: 118 | Name: Uganda | Pop: 21778000 | Lifeexp: 42.9 | 
+Code: 119 | Name: Jamaica | Pop: 2583000 | Lifeexp: 75.2 | 
+Code: 120 | Name: Trinidad and Tobago | Pop: 1295000 | Lifeexp: 68 | 
+Code: 121 | Name: Samoa | Pop: 180000 | Lifeexp: 69.2 | 
+Code: 122 | Name: Kenya | Pop: 30080000 | Lifeexp: 48 | 
+Code: 123 | Name: Malawi | Pop: 10925000 | Lifeexp: 37.6 | 
+Code: 124 | Name: Zambia | Pop: 9169000 | Lifeexp: 37.2 | 
+Code: 125 | Name: Malta | Pop: 380200 | Lifeexp: 77.9 | 
+Code: 126 | Name: Gambia | Pop: 1305000 | Lifeexp: 53.2 | 
+Code: 127 | Name: Maldives | Pop: 286000 | Lifeexp: 62.2 | 
+Code: 128 | Name: Singapore | Pop: 3567000 | Lifeexp: 80.1 | 
+Code: 129 | Name: Botswana | Pop: 1622000 | Lifeexp: 39.3 | 
+Code: 130 | Name: Lesotho | Pop: 2153000 | Lifeexp: 50.8 | 
+Code: 131 | Name: Barbados | Pop: 270000 | Lifeexp: 73 | 
+Code: 132 | Name: Guyana | Pop: 861000 | Lifeexp: 64 | 
+Code: 133 | Name: Equatorial Guinea | Pop: 453000 | Lifeexp: 53.6 | 
+Code: 134 | Name: Mauritius | Pop: 1158000 | Lifeexp: 71 | 
+Code: 135 | Name: Swaziland | Pop: 1008000 | Lifeexp: 40.4 | 
+Code: 136 | Name: Nauru | Pop: 12000 | Lifeexp: 60.8 | 
+Code: 137 | Name: Fiji Islands | Pop: 817000 | Lifeexp: 67.9 | 
+Code: 138 | Name: Tonga | Pop: 99000 | Lifeexp: 67.9 | 
+Code: 139 | Name: Bahrain | Pop: 617000 | Lifeexp: 73 | 
+Code: 140 | Name: Bangladesh | Pop: 129155000 | Lifeexp: 60.2 | 
+Code: 141 | Name: Qatar | Pop: 599000 | Lifeexp: 72.4 | 
+Code: 142 | Name: United Arab Emirates | Pop: 2441000 | Lifeexp: 74.1 | 
+Code: 143 | Name: Bahamas | Pop: 307000 | Lifeexp: 71.1 | 
+Code: 144 | Name: Guinea-Bissau | Pop: 1213000 | Lifeexp: 49 | 
+Code: 145 | Name: Grenada | Pop: 94000 | Lifeexp: 64.5 | 
+Code: 146 | Name: Angola | Pop: 12878000 | Lifeexp: 38.3 | 
+Code: 147 | Name: Cape Verde | Pop: 428000 | Lifeexp: 68.9 | 
+Code: 148 | Name: Comoros | Pop: 578000 | Lifeexp: 60 | 
+Code: 149 | Name: Mozambique | Pop: 19680000 | Lifeexp: 37.5 | 
+Code: 150 | Name: Sao Tome and Principe | Pop: 147000 | Lifeexp: 65.3 | 
+Code: 151 | Name: Papua New Guinea | Pop: 4807000 | Lifeexp: 63.1 | 
+Code: 152 | Name: Suriname | Pop: 417000 | Lifeexp: 71.4 | 
+Code: 153 | Name: Seychelles | Pop: 77000 | Lifeexp: 70.4 | 
+Code: 154 | Name: Djibouti | Pop: 638000 | Lifeexp: 50.8 | 
+Code: 155 | Name: Dominica | Pop: 71000 | Lifeexp: 73.4 | 
+Code: 156 | Name: Solomon Islands | Pop: 444000 | Lifeexp: 71.3 | 
+Code: 157 | Name: Tuvalu | Pop: 12000 | Lifeexp: 66.3 | 
+Code: 158 | Name: Saint Lucia | Pop: 154000 | Lifeexp: 72.3 | 
+Code: 159 | Name: Saint Vincent and the Grenadines | Pop: 114000 | Lifeexp: 72.3 | 
+Code: 160 | Name: Kiribati | Pop: 83000 | Lifeexp: 59.8 | 
+Code: 161 | Name: Zimbabwe | Pop: 11669000 | Lifeexp: 37.8 | 
+Code: 162 | Name: Vanuatu | Pop: 190000 | Lifeexp: 60.6 | 
+Code: 163 | Name: Antigua and Barbuda | Pop: 68000 | Lifeexp: 70.5 | 
+Code: 164 | Name: Belize | Pop: 241000 | Lifeexp: 70.9 | 
+Code: 165 | Name: Saint Kitts and Nevis | Pop: 38000 | Lifeexp: 70.7 | 
+Code: 166 | Name: Brunei | Pop: 328000 | Lifeexp: 73.6 | 
+Code: 167 | Name: Namibia | Pop: 1726000 | Lifeexp: 42.5 | 
+Code: 168 | Name: Marshall Islands | Pop: 64000 | Lifeexp: 65.5 | 
+Code: 169 | Name: Micronesia; Federated States of | Pop: 119000 | Lifeexp: 68.6 | 
+Code: 170 | Name: Armenia | Pop: 3520000 | Lifeexp: 66.4 | 
+Code: 171 | Name: Azerbaijan | Pop: 7734000 | Lifeexp: 62.9 | 
+Code: 172 | Name: Georgia | Pop: 4968000 | Lifeexp: 64.5 | 
+Code: 173 | Name: Kazakstan | Pop: 16223000 | Lifeexp: 63.2 | 
+Code: 174 | Name: Kyrgyzstan | Pop: 4699000 | Lifeexp: 63.4 | 
+Code: 175 | Name: Tajikistan | Pop: 6188000 | Lifeexp: 64.1 | 
+Code: 176 | Name: Turkmenistan | Pop: 4459000 | Lifeexp: 60.9 | 
+Code: 177 | Name: Uzbekistan | Pop: 24318000 | Lifeexp: 63.7 | 
+Code: 178 | Name: Belarus | Pop: 10236000 | Lifeexp: 68 | 
+Code: 179 | Name: Croatia | Pop: 4473000 | Lifeexp: 73.7 | 
+Code: 180 | Name: Estonia | Pop: 1439200 | Lifeexp: 69.5 | 
+Code: 181 | Name: Latvia | Pop: 2424200 | Lifeexp: 68.4 | 
+Code: 182 | Name: Lithuania | Pop: 3698500 | Lifeexp: 69.1 | 
+Code: 183 | Name: Macedonia | Pop: 2024000 | Lifeexp: 73.8 | 
+Code: 184 | Name: Moldova | Pop: 4380000 | Lifeexp: 64.5 | 
+Code: 185 | Name: Russian Federation | Pop: 146934000 | Lifeexp: 67.2 | 
+Code: 186 | Name: Slovenia | Pop: 1987800 | Lifeexp: 74.9 | 
+Code: 187 | Name: Ukraine | Pop: 50456000 | Lifeexp: 66 | 
+Code: 188 | Name: Bosnia and Herzegovina | Pop: 3972000 | Lifeexp: 71.5 | 
+Code: 189 | Name: Eritrea | Pop: 3850000 | Lifeexp: 55.8 | 
+Code: 190 | Name: Czech Republic | Pop: 10278100 | Lifeexp: 74.5 | 
+Code: 191 | Name: Slovakia | Pop: 5398700 | Lifeexp: 73.7 | 
+Code: 192 | Name: Palau | Pop: 19000 | Lifeexp: 68.6 | 
+Code: 193 | Name: British Indian Ocean Territory | Pop: 0 | Lifeexp: NULL | 
+Code: 194 | Name: Mayotte | Pop: 149000 | Lifeexp: 59.5 | 
+Code: 195 | Name: Réunion | Pop: 699000 | Lifeexp: 72.7 | 
+Code: 196 | Name: Saint Helena | Pop: 6000 | Lifeexp: 76.8 | 
+Code: 197 | Name: Western Sahara | Pop: 293000 | Lifeexp: 49.8 | 
+Code: 198 | Name: Antarctica | Pop: 0 | Lifeexp: NULL | 
+Code: 199 | Name: Bouvet Island | Pop: 0 | Lifeexp: NULL | 
+Code: 200 | Name: French Southern territories | Pop: 0 | Lifeexp: NULL | 
+Code: 201 | Name: Heard Island and McDonald Islands | Pop: 0 | Lifeexp: NULL | 
+Code: 202 | Name: South Georgia and the South Sandwich Isl0nds | Pop: 0nds | Lifeexp: NULL | 
+Code: 203 | Name: East Timor | Pop: 885000 | Lifeexp: 46 | 
+Code: 204 | Name: Hong Kong | Pop: 6782000 | Lifeexp: 79.5 | 
+Code: 205 | Name: Macao | Pop: 473000 | Lifeexp: 81.6 | 
+Code: 206 | Name: Palestine | Pop: 3101000 | Lifeexp: 71.4 | 
+Code: 207 | Name: Faroe Islands | Pop: 43000 | Lifeexp: 78.4 | 
+Code: 208 | Name: Gibraltar | Pop: 25000 | Lifeexp: 79 | 
+Code: 209 | Name: Svalbard and Jan Mayen | Pop: 3200 | Lifeexp: NULL | 
+Code: 210 | Name: Anguilla | Pop: 8000 | Lifeexp: 76.1 | 
+Code: 211 | Name: Aruba | Pop: 103000 | Lifeexp: 78.4 | 
+Code: 212 | Name: Bermuda | Pop: 65000 | Lifeexp: 76.9 | 
+Code: 213 | Name: Cayman Islands | Pop: 38000 | Lifeexp: 78.9 | 
+Code: 214 | Name: Greenland | Pop: 56000 | Lifeexp: 68.1 | 
+Code: 215 | Name: Guadeloupe | Pop: 456000 | Lifeexp: 77 | 
+Code: 216 | Name: Martinique | Pop: 395000 | Lifeexp: 78.3 | 
+Code: 217 | Name: Montserrat | Pop: 11000 | Lifeexp: 78 | 
+Code: 218 | Name: Netherlands Antilles | Pop: 217000 | Lifeexp: 74.7 | 
+Code: 219 | Name: Puerto Rico | Pop: 3869000 | Lifeexp: 75.6 | 
+Code: 220 | Name: Saint Pierre and Miquelon | Pop: 7000 | Lifeexp: 77.6 | 
+Code: 221 | Name: Turks and Caicos Islands | Pop: 17000 | Lifeexp: 73.3 | 
+Code: 222 | Name: Virgin Islands; British | Pop: 21000 | Lifeexp: 75.4 | 
+Code: 223 | Name: Virgin Islands; U.S. | Pop: 93000 | Lifeexp: 78.1 | 
+Code: 224 | Name: American Samoa | Pop: 68000 | Lifeexp: 75.1 | 
+Code: 225 | Name: Christmas Island | Pop: 2500 | Lifeexp: NULL | 
+Code: 226 | Name: Cocos (Keeling) Islands | Pop: 600 | Lifeexp: NULL | 
+Code: 227 | Name: Cook Islands | Pop: 20000 | Lifeexp: 71.1 | 
+Code: 228 | Name: French Polynesia | Pop: 235000 | Lifeexp: 74.8 | 
+Code: 229 | Name: Guam | Pop: 168000 | Lifeexp: 77.8 | 
+Code: 230 | Name: New Caledonia | Pop: 214000 | Lifeexp: 72.8 | 
+Code: 231 | Name: Niue | Pop: 2000 | Lifeexp: NULL | 
+Code: 232 | Name: Norfolk Island | Pop: 2000 | Lifeexp: NULL | 
+Code: 233 | Name: Northern Mariana Islands | Pop: 78000 | Lifeexp: 75.5 | 
+Code: 234 | Name: Pitcairn | Pop: 50 | Lifeexp: NULL | 
+Code: 235 | Name: Tokelau | Pop: 2000 | Lifeexp: NULL | 
+Code: 236 | Name: United States Minor Outlying Islands | Pop: 0 | Lifeexp: NULL | 
+Code: 237 | Name: Wallis and Futuna | Pop: 15000 | Lifeexp: NULL | 
+Code: 238 | Name: Falkland Islands | Pop: 2000 | Lifeexp: NULL | 
+
+Pop Sort-------------------------------------------------------------------------------
+Code: 193 | Name: British Indian Ocean Territory | Pop: 0 | Lifeexp: NULL | 
+Code: 198 | Name: Antarctica | Pop: 0 | Lifeexp: NULL | 
+Code: 199 | Name: Bouvet Island | Pop: 0 | Lifeexp: NULL | 
+Code: 200 | Name: French Southern territories | Pop: 0 | Lifeexp: NULL | 
+Code: 201 | Name: Heard Island and McDonald Islands | Pop: 0 | Lifeexp: NULL | 
+Code: 202 | Name: South Georgia and the South Sandwich Isl0nds | Pop: 0nds | Lifeexp: NULL | 
+Code: 236 | Name: United States Minor Outlying Islands | Pop: 0 | Lifeexp: NULL | 
+Code: 234 | Name: Pitcairn | Pop: 50 | Lifeexp: NULL | 
+Code: 226 | Name: Cocos (Keeling) Islands | Pop: 600 | Lifeexp: NULL | 
+Code: 065 | Name: Holy See (Vatican City State) | Pop: 1000 | Lifeexp: NULL | 
+Code: 231 | Name: Niue | Pop: 2000 | Lifeexp: NULL | 
+Code: 232 | Name: Norfolk Island | Pop: 2000 | Lifeexp: NULL | 
+Code: 235 | Name: Tokelau | Pop: 2000 | Lifeexp: NULL | 
+Code: 238 | Name: Falkland Islands | Pop: 2000 | Lifeexp: NULL | 
+Code: 225 | Name: Christmas Island | Pop: 2500 | Lifeexp: NULL | 
+Code: 209 | Name: Svalbard and Jan Mayen | Pop: 3200 | Lifeexp: NULL | 
+Code: 196 | Name: Saint Helena | Pop: 6000 | Lifeexp: 76.8 | 
+Code: 220 | Name: Saint Pierre and Miquelon | Pop: 7000 | Lifeexp: 77.6 | 
+Code: 210 | Name: Anguilla | Pop: 8000 | Lifeexp: 76.1 | 
+Code: 217 | Name: Montserrat | Pop: 11000 | Lifeexp: 78 | 
+Code: 136 | Name: Nauru | Pop: 12000 | Lifeexp: 60.8 | 
+Code: 157 | Name: Tuvalu | Pop: 12000 | Lifeexp: 66.3 | 
+Code: 237 | Name: Wallis and Futuna | Pop: 15000 | Lifeexp: NULL | 
+Code: 221 | Name: Turks and Caicos Islands | Pop: 17000 | Lifeexp: 73.3 | 
+Code: 192 | Name: Palau | Pop: 19000 | Lifeexp: 68.6 | 
+Code: 227 | Name: Cook Islands | Pop: 20000 | Lifeexp: 71.1 | 
+Code: 222 | Name: Virgin Islands; British | Pop: 21000 | Lifeexp: 75.4 | 
+Code: 208 | Name: Gibraltar | Pop: 25000 | Lifeexp: 79 | 
+Code: 000 | Name: San Marino | Pop: 27000 | Lifeexp: 81.1 | 
+Code: 018 | Name: Liechtenstein | Pop: 32300 | Lifeexp: 78.8 | 
+Code: 040 | Name: Monaco | Pop: 34000 | Lifeexp: 78.8 | 
+Code: 165 | Name: Saint Kitts and Nevis | Pop: 38000 | Lifeexp: 70.7 | 
+Code: 213 | Name: Cayman Islands | Pop: 38000 | Lifeexp: 78.9 | 
+Code: 207 | Name: Faroe Islands | Pop: 43000 | Lifeexp: 78.4 | 
+Code: 214 | Name: Greenland | Pop: 56000 | Lifeexp: 68.1 | 
+Code: 168 | Name: Marshall Islands | Pop: 64000 | Lifeexp: 65.5 | 
+Code: 212 | Name: Bermuda | Pop: 65000 | Lifeexp: 76.9 | 
+Code: 163 | Name: Antigua and Barbuda | Pop: 68000 | Lifeexp: 70.5 | 
+Code: 224 | Name: American Samoa | Pop: 68000 | Lifeexp: 75.1 | 
+Code: 155 | Name: Dominica | Pop: 71000 | Lifeexp: 73.4 | 
+Code: 153 | Name: Seychelles | Pop: 77000 | Lifeexp: 70.4 | 
+Code: 010 | Name: Andorra | Pop: 78000 | Lifeexp: 83.5 | 
+Code: 233 | Name: Northern Mariana Islands | Pop: 78000 | Lifeexp: 75.5 | 
+Code: 160 | Name: Kiribati | Pop: 83000 | Lifeexp: 59.8 | 
+Code: 223 | Name: Virgin Islands; U.S. | Pop: 93000 | Lifeexp: 78.1 | 
+Code: 145 | Name: Grenada | Pop: 94000 | Lifeexp: 64.5 | 
+Code: 138 | Name: Tonga | Pop: 99000 | Lifeexp: 67.9 | 
+Code: 211 | Name: Aruba | Pop: 103000 | Lifeexp: 78.4 | 
+Code: 159 | Name: Saint Vincent and the Grenadines | Pop: 114000 | Lifeexp: 72.3 | 
+Code: 169 | Name: Micronesia; Federated States of | Pop: 119000 | Lifeexp: 68.6 | 
+Code: 150 | Name: Sao Tome and Principe | Pop: 147000 | Lifeexp: 65.3 | 
+Code: 194 | Name: Mayotte | Pop: 149000 | Lifeexp: 59.5 | 
+Code: 158 | Name: Saint Lucia | Pop: 154000 | Lifeexp: 72.3 | 
+Code: 229 | Name: Guam | Pop: 168000 | Lifeexp: 77.8 | 
+Code: 121 | Name: Samoa | Pop: 180000 | Lifeexp: 69.2 | 
+Code: 239 | Name: French Guiana | Pop: 181000 | Lifeexp: 76.1 | 
+Code: 162 | Name: Vanuatu | Pop: 190000 | Lifeexp: 60.6 | 
+Code: 230 | Name: New Caledonia | Pop: 214000 | Lifeexp: 72.8 | 
+Code: 218 | Name: Netherlands Antilles | Pop: 217000 | Lifeexp: 74.7 | 
+Code: 228 | Name: French Polynesia | Pop: 235000 | Lifeexp: 74.8 | 
+Code: 164 | Name: Belize | Pop: 241000 | Lifeexp: 70.9 | 
+Code: 131 | Name: Barbados | Pop: 270000 | Lifeexp: 73 | 
+Code: 070 | Name: Iceland | Pop: 279000 | Lifeexp: 79.4 | 
+Code: 127 | Name: Maldives | Pop: 286000 | Lifeexp: 62.2 | 
+Code: 197 | Name: Western Sahara | Pop: 293000 | Lifeexp: 49.8 | 
+Code: 143 | Name: Bahamas | Pop: 307000 | Lifeexp: 71.1 | 
+Code: 166 | Name: Brunei | Pop: 328000 | Lifeexp: 73.6 | 
+Code: 125 | Name: Malta | Pop: 380200 | Lifeexp: 77.9 | 
+Code: 216 | Name: Martinique | Pop: 395000 | Lifeexp: 78.3 | 
+Code: 152 | Name: Suriname | Pop: 417000 | Lifeexp: 71.4 | 
+Code: 147 | Name: Cape Verde | Pop: 428000 | Lifeexp: 68.9 | 
+Code: 041 | Name: Luxembourg | Pop: 435700 | Lifeexp: 77.1 | 
+Code: 156 | Name: Solomon Islands | Pop: 444000 | Lifeexp: 71.3 | 
+Code: 133 | Name: Equatorial Guinea | Pop: 453000 | Lifeexp: 53.6 | 
+Code: 215 | Name: Guadeloupe | Pop: 456000 | Lifeexp: 77 | 
+Code: 205 | Name: Macao | Pop: 473000 | Lifeexp: 81.6 | 
+Code: 148 | Name: Comoros | Pop: 578000 | Lifeexp: 60 | 
+Code: 141 | Name: Qatar | Pop: 599000 | Lifeexp: 72.4 | 
+Code: 139 | Name: Bahrain | Pop: 617000 | Lifeexp: 73 | 
+Code: 154 | Name: Djibouti | Pop: 638000 | Lifeexp: 50.8 | 
+Code: 195 | Name: Réunion | Pop: 699000 | Lifeexp: 72.7 | 
+Code: 111 | Name: Cyprus | Pop: 754700 | Lifeexp: 76.7 | 
+Code: 137 | Name: Fiji Islands | Pop: 817000 | Lifeexp: 67.9 | 
+Code: 132 | Name: Guyana | Pop: 861000 | Lifeexp: 64 | 
+Code: 203 | Name: East Timor | Pop: 885000 | Lifeexp: 46 | 
+Code: 135 | Name: Swaziland | Pop: 1008000 | Lifeexp: 40.4 | 
+Code: 134 | Name: Mauritius | Pop: 1158000 | Lifeexp: 71 | 
+Code: 144 | Name: Guinea-Bissau | Pop: 1213000 | Lifeexp: 49 | 
+Code: 102 | Name: Gabon | Pop: 1226000 | Lifeexp: 50.1 | 
+Code: 120 | Name: Trinidad and Tobago | Pop: 1295000 | Lifeexp: 68 | 
+Code: 126 | Name: Gambia | Pop: 1305000 | Lifeexp: 53.2 | 
+Code: 180 | Name: Estonia | Pop: 1439200 | Lifeexp: 69.5 | 
+Code: 129 | Name: Botswana | Pop: 1622000 | Lifeexp: 39.3 | 
+Code: 167 | Name: Namibia | Pop: 1726000 | Lifeexp: 42.5 | 
+Code: 114 | Name: Kuwait | Pop: 1972000 | Lifeexp: 76.1 | 
+Code: 186 | Name: Slovenia | Pop: 1987800 | Lifeexp: 74.9 | 
+Code: 183 | Name: Macedonia | Pop: 2024000 | Lifeexp: 73.8 | 
+Code: 052 | Name: Bhutan | Pop: 2124000 | Lifeexp: 52.4 | 
+Code: 130 | Name: Lesotho | Pop: 2153000 | Lifeexp: 50.8 | 
+Code: 181 | Name: Latvia | Pop: 2424200 | Lifeexp: 68.4 | 
+Code: 142 | Name: United Arab Emirates | Pop: 2441000 | Lifeexp: 74.1 | 
+Code: 084 | Name: Oman | Pop: 2542000 | Lifeexp: 71.8 | 
+Code: 119 | Name: Jamaica | Pop: 2583000 | Lifeexp: 75.2 | 
+Code: 061 | Name: Mongolia | Pop: 2662000 | Lifeexp: 67.3 | 
+Code: 105 | Name: Mauritania | Pop: 2670000 | Lifeexp: 50.8 | 
+Code: 046 | Name: Panama | Pop: 2856000 | Lifeexp: 75.5 | 
+Code: 099 | Name: Congo | Pop: 2943000 | Lifeexp: 47.4 | 
+Code: 206 | Name: Palestine | Pop: 3101000 | Lifeexp: 71.4 | 
+Code: 038 | Name: Liberia | Pop: 3154000 | Lifeexp: 51 | 
+Code: 068 | Name: Lebanon | Pop: 3282000 | Lifeexp: 71.3 | 
+Code: 031 | Name: Uruguay | Pop: 3337000 | Lifeexp: 75.2 | 
+Code: 053 | Name: Albania | Pop: 3401200 | Lifeexp: 71.6 | 
+Code: 170 | Name: Armenia | Pop: 3520000 | Lifeexp: 66.4 | 
+Code: 128 | Name: Singapore | Pop: 3567000 | Lifeexp: 80.1 | 
+Code: 097 | Name: Central African Republic | Pop: 3615000 | Lifeexp: 44 | 
+Code: 182 | Name: Lithuania | Pop: 3698500 | Lifeexp: 69.1 | 
+Code: 062 | Name: Ireland | Pop: 3775100 | Lifeexp: 76.8 | 
+Code: 189 | Name: Eritrea | Pop: 3850000 | Lifeexp: 55.8 | 
+Code: 049 | Name: New Zealand | Pop: 3862000 | Lifeexp: 77.8 | 
+Code: 219 | Name: Puerto Rico | Pop: 3869000 | Lifeexp: 75.6 | 
+Code: 188 | Name: Bosnia and Herzegovina | Pop: 3972000 | Lifeexp: 71.5 | 
+Code: 025 | Name: Costa Rica | Pop: 4023000 | Lifeexp: 75.8 | 
+Code: 184 | Name: Moldova | Pop: 4380000 | Lifeexp: 64.5 | 
+Code: 176 | Name: Turkmenistan | Pop: 4459000 | Lifeexp: 60.9 | 
+Code: 179 | Name: Croatia | Pop: 4473000 | Lifeexp: 73.7 | 
+Code: 047 | Name: Norway | Pop: 4478500 | Lifeexp: 78.7 | 
+Code: 110 | Name: Togo | Pop: 4629000 | Lifeexp: 54.7 | 
+Code: 174 | Name: Kyrgyzstan | Pop: 4699000 | Lifeexp: 63.4 | 
+Code: 151 | Name: Papua New Guinea | Pop: 4807000 | Lifeexp: 63.1 | 
+Code: 112 | Name: Sierra Leone | Pop: 4854000 | Lifeexp: 45.3 | 
+Code: 172 | Name: Georgia | Pop: 4968000 | Lifeexp: 64.5 | 
+Code: 035 | Name: Nicaragua | Pop: 5074000 | Lifeexp: 68.7 | 
+Code: 074 | Name: Jordan | Pop: 5083000 | Lifeexp: 77.4 | 
+Code: 054 | Name: Finland | Pop: 5171300 | Lifeexp: 77.4 | 
+Code: 000 | Name: Denmark | Pop: 5330000 | Lifeexp: 76.5 | 
+Code: 191 | Name: Slovakia | Pop: 5398700 | Lifeexp: 73.7 | 
+Code: 086 | Name: Laos | Pop: 5433000 | Lifeexp: 53.1 | 
+Code: 022 | Name: Paraguay | Pop: 5496000 | Lifeexp: 73.7 | 
+Code: 083 | Name: Libyan Arab Jamahiriya | Pop: 5605000 | Lifeexp: 75.5 | 
+Code: 094 | Name: Benin | Pop: 6097000 | Lifeexp: 50.2 | 
+Code: 175 | Name: Tajikistan | Pop: 6188000 | Lifeexp: 64.1 | 
+Code: 078 | Name: Israel | Pop: 6217000 | Lifeexp: 78.6 | 
+Code: 036 | Name: El Salvador | Pop: 6276000 | Lifeexp: 69.7 | 
+Code: 034 | Name: Honduras | Pop: 6485000 | Lifeexp: 69.9 | 
+Code: 116 | Name: Burundi | Pop: 6695000 | Lifeexp: 46.2 | 
+Code: 204 | Name: Hong Kong | Pop: 6782000 | Lifeexp: 79.5 | 
+Code: 013 | Name: Switzerland | Pop: 7160400 | Lifeexp: 79.6 | 
+Code: 093 | Name: Guinea | Pop: 7430000 | Lifeexp: 45.6 | 
+Code: 098 | Name: Chad | Pop: 7651000 | Lifeexp: 50.5 | 
+Code: 117 | Name: Rwanda | Pop: 7733000 | Lifeexp: 39.3 | 
+Code: 171 | Name: Azerbaijan | Pop: 7734000 | Lifeexp: 62.9 | 
+Code: 056 | Name: Austria | Pop: 8091800 | Lifeexp: 77.7 | 
+Code: 050 | Name: Bulgaria | Pop: 8190900 | Lifeexp: 70.9 | 
+Code: 017 | Name: Haiti | Pop: 8222000 | Lifeexp: 49.2 | 
+Code: 030 | Name: Bolivia | Pop: 8329000 | Lifeexp: 63.7 | 
+Code: 037 | Name: Dominican Republic | Pop: 8495000 | Lifeexp: 73.2 | 
+Code: 000 | Name: Sweden | Pop: 8861400 | Lifeexp: 79.6 | 
+Code: 124 | Name: Zambia | Pop: 9169000 | Lifeexp: 37.2 | 
+Code: 108 | Name: Senegal | Pop: 9481000 | Lifeexp: 62.2 | 
+Code: 090 | Name: Tunisia | Pop: 9586000 | Lifeexp: 73.7 | 
+Code: 000 | Name: Portugal | Pop: 9997600 | Lifeexp: 75.8 | 
+Code: 057 | Name: Hungary | Pop: 10043200 | Lifeexp: 71.4 | 
+Code: 109 | Name: Somalia | Pop: 10097000 | Lifeexp: 46.2 | 
+Code: 178 | Name: Belarus | Pop: 10236000 | Lifeexp: 68 | 
+Code: 032 | Name: Belgium | Pop: 10239000 | Lifeexp: 77.8 | 
+Code: 190 | Name: Czech Republic | Pop: 10278100 | Lifeexp: 74.5 | 
+Code: 033 | Name: Greece | Pop: 10545700 | Lifeexp: 78.4 | 
+Code: 059 | Name: Yugoslavia | Pop: 10640000 | Lifeexp: 72.4 | 
+Code: 106 | Name: Niger | Pop: 10730000 | Lifeexp: 41.3 | 
+Code: 123 | Name: Malawi | Pop: 10925000 | Lifeexp: 37.6 | 
+Code: 085 | Name: Cambodia | Pop: 11168000 | Lifeexp: 56.5 | 
+Code: 045 | Name: Cuba | Pop: 11201000 | Lifeexp: 76.2 | 
+Code: 104 | Name: Mali | Pop: 11234000 | Lifeexp: 46.7 | 
+Code: 026 | Name: Guatemala | Pop: 11385000 | Lifeexp: 66.2 | 
+Code: 161 | Name: Zimbabwe | Pop: 11669000 | Lifeexp: 37.8 | 
+Code: 095 | Name: Burkina Faso | Pop: 11937000 | Lifeexp: 46.7 | 
+Code: 029 | Name: Ecuador | Pop: 12646000 | Lifeexp: 71.1 | 
+Code: 146 | Name: Angola | Pop: 12878000 | Lifeexp: 38.3 | 
+Code: 101 | Name: Cote d’Ivoire | Pop: 14786000 | Lifeexp: 45.2 | 
+Code: 096 | Name: Cameroon | Pop: 15085000 | Lifeexp: 54.8 | 
+Code: 020 | Name: Chile | Pop: 15211000 | Lifeexp: 75.7 | 
+Code: 014 | Name: Netherlands | Pop: 15864000 | Lifeexp: 78.3 | 
+Code: 103 | Name: Madagascar | Pop: 15942000 | Lifeexp: 55 | 
+Code: 069 | Name: Syria | Pop: 16125000 | Lifeexp: 68.5 | 
+Code: 173 | Name: Kazakstan | Pop: 16223000 | Lifeexp: 63.2 | 
+Code: 055 | Name: Yemen | Pop: 18112000 | Lifeexp: 59.8 | 
+Code: 082 | Name: Sri Lanka | Pop: 18827000 | Lifeexp: 71.8 | 
+Code: 044 | Name: Australia | Pop: 18886000 | Lifeexp: 79.8 | 
+Code: 149 | Name: Mozambique | Pop: 19680000 | Lifeexp: 37.5 | 
+Code: 091 | Name: Ghana | Pop: 20212000 | Lifeexp: 57.4 | 
+Code: 067 | Name: Saudi Arabia | Pop: 21607000 | Lifeexp: 67.8 | 
+Code: 118 | Name: Uganda | Pop: 21778000 | Lifeexp: 42.9 | 
+Code: 092 | Name: Malaysia | Pop: 22244000 | Lifeexp: 70.8 | 
+Code: 072 | Name: Taiwan | Pop: 22256000 | Lifeexp: 76.4 | 
+Code: 043 | Name: Romania | Pop: 22455500 | Lifeexp: 69.9 | 
+Code: 060 | Name: Afghanistan | Pop: 22720000 | Lifeexp: 45.9 | 
+Code: 066 | Name: Iraq | Pop: 23115000 | Lifeexp: 66.5 | 
+Code: 015 | Name: Nepal | Pop: 23930000 | Lifeexp: 57.8 | 
+Code: 080 | Name: North Korea | Pop: 24039000 | Lifeexp: 70.7 | 
+Code: 023 | Name: Venezuela | Pop: 24170000 | Lifeexp: 73.1 | 
+Code: 177 | Name: Uzbekistan | Pop: 24318000 | Lifeexp: 63.7 | 
+Code: 027 | Name: Peru | Pop: 25662000 | Lifeexp: 70 | 
+Code: 088 | Name: Morocco | Pop: 28351000 | Lifeexp: 69.1 | 
+Code: 089 | Name: Sudan | Pop: 29490000 | Lifeexp: 56.6 | 
+Code: 122 | Name: Kenya | Pop: 30080000 | Lifeexp: 48 | 
+Code: 042 | Name: Canada | Pop: 31147000 | Lifeexp: 79.4 | 
+Code: 115 | Name: Algeria | Pop: 31471000 | Lifeexp: 69.7 | 
+Code: 113 | Name: Tanzania | Pop: 33517000 | Lifeexp: 52.3 | 
+Code: 024 | Name: Argentina | Pop: 37032000 | Lifeexp: 75.1 | 
+Code: 058 | Name: Poland | Pop: 38653600 | Lifeexp: 73.2 | 
+Code: 012 | Name: Spain | Pop: 39441700 | Lifeexp: 78.8 | 
+Code: 051 | Name: South Africa | Pop: 40377000 | Lifeexp: 51.1 | 
+Code: 021 | Name: Colombia | Pop: 42321000 | Lifeexp: 70.3 | 
+Code: 079 | Name: Myanmar | Pop: 45611000 | Lifeexp: 54.9 | 
+Code: 081 | Name: South Korea | Pop: 46844000 | Lifeexp: 74.4 | 
+Code: 187 | Name: Ukraine | Pop: 50456000 | Lifeexp: 66 | 
+Code: 100 | Name: Congo; The Democratic Republic of the | Pop: 51654000 | Lifeexp: 48.8 | 
+Code: 039 | Name: Italy | Pop: 57680000 | Lifeexp: 79 | 
+Code: 000 | Name: France | Pop: 59225700 | Lifeexp: 78.8 | 
+Code: 000 | Name: United Kingdom | Pop: 59623400 | Lifeexp: 77.7 | 
+Code: 011 | Name: Thailand | Pop: 61399000 | Lifeexp: 68.6 | 
+Code: 000 | Name: Ethiopia | Pop: 62565000 | Lifeexp: 45.2 | 
+Code: 064 | Name: Turkey | Pop: 66591000 | Lifeexp: 71 | 
+Code: 048 | Name: Iran | Pop: 67702000 | Lifeexp: 69.7 | 
+Code: 063 | Name: Egypt | Pop: 68470000 | Lifeexp: 63.3 | 
+Code: 075 | Name: Philippines | Pop: 75967000 | Lifeexp: 67.5 | 
+Code: 073 | Name: Vietnam | Pop: 79832000 | Lifeexp: 69.3 | 
+Code: 087 | Name: Germany | Pop: 82164700 | Lifeexp: 77.4 | 
+Code: 019 | Name: Mexico | Pop: 98881000 | Lifeexp: 71.5 | 
+Code: 107 | Name: Nigeria | Pop: 111506000 | Lifeexp: 51.6 | 
+Code: 000 | Name: Japan | Pop: 126714000 | Lifeexp: 80.7 | 
+Code: 140 | Name: Bangladesh | Pop: 129155000 | Lifeexp: 60.2 | 
+Code: 185 | Name: Russian Federation | Pop: 146934000 | Lifeexp: 67.2 | 
+Code: 077 | Name: Pakistan | Pop: 156483000 | Lifeexp: 61.1 | 
+Code: 028 | Name: Brazil | Pop: 170115000 | Lifeexp: 62.9 | 
+Code: 071 | Name: Indonesia | Pop: 212107000 | Lifeexp: 68 | 
+Code: 016 | Name: United States | Pop: 278357000 | Lifeexp: 77.1 | 
+Code: 076 | Name: India | Pop: 1013662000 | Lifeexp: 62.5 | 
+bronco:~/2240/assignment1> exit
+exit
+
+script done on Tue Jan 22 22:09:24 2013

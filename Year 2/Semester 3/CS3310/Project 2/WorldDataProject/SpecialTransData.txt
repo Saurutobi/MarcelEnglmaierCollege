@@ -1,0 +1,23 @@
+QC MYS
+QC {{{
+QC aaa
+QC 444
+QC (((
+QC [[[
+QC :::
+QC DEU
+QC ~~~
+QC ^^^
+QC ===
+QC )))
+QC &&&
+QC ]]]
+QC 999
+QC WMU
+QC zzz
+IN 11,UGA,Uganda,Africa,Eastern Africa,241038,1962,21778000,42.9,6313,Uganda,Republic,Yoweri Museveni,3425,UG
+IN 20,PSE,Palestine,Asia,Middle East,6257,NULL,3101000,71.4,4173,Filastin,Autonomous Area,Yasser (Yasir) Arafat,4074,PS
+IN 18,NOR,Norway,Europe,Nordic Countries,323877,1905,4478500,78.7,145895,Norge,Constitutional Monarchy,Harald V,2807,NO
+IN 20,AUS,Australia,Oceania,Australia and New Zealand,7741220,1901,18886000,79.8,351182,Australia,Constitutional Monarchy - Federation,Elisabeth II,135,AU
+IN 3,CXR,Christmas Island,Oceania,Australia and New Zealand,135,NULL,2500,NULL,0,Christmas Island,Territory of Australia,Elisabeth II,1791,CX
+LC

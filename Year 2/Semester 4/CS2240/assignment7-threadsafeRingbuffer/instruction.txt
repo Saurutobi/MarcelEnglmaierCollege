@@ -1,0 +1,24 @@
+
+make it. it will run itself and give you some output.
+
+Here's proof its unsafe: I ran it twice in a row, and the 'roles' swapped
+	If it weren't threadsafe, it'd crash and burn.
+
+
+
+saurutobi@Kyoshi:~/Dropbox/College/Undergraduate/Year2/Spring2013/CS2240/assignment7-threadsafeRingbuffer$ make
+gcc  threadedRingBuffer.c error.c ring-buffer.c  -lpthread 
+./a.out
+Everything wrote well 
+Everything read well
+All said and done 
+
+saurutobi@Kyoshi:~/Dropbox/College/Undergraduate/Year2/Spring2013/CS2240/assignment7-threadsafeRingbuffer$ make
+gcc  threadedRingBuffer.c error.c ring-buffer.c  -lpthread 
+./a.out
+Everything read well
+Everything wrote well 
+All said and done 
+
+
+also, not the quote I used is by T.S. Eliot. Trenary's favorite

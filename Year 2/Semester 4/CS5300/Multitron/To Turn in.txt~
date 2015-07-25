@@ -1,0 +1,119 @@
+The Science:
+I looked at Thom's multitron algorithms and saw that the weights and biases were
+now arrays. I created them as arrays and for every instance of a single weight or
+bias a had a for loop for all 10 instances. then, the calculation had to be
+modified slightly, and the update changed slightly as well. The finished product is
+noticably slower than the original perceptron, but works quite well.
+
+Output from Valid Data(I uncommented the valid output section to get this):
+
+0.151 1000
+0.142 1000
+0.133 1000
+0.132 1000
+0.123 1000
+0.116 1000
+0.131 1000
+0.137 1000
+0.133 1000
+0.141 1000
+0.106 1000
+0.14 1000
+0.144 1000
+0.122 1000
+0.118 1000
+0.141 1000
+0.129 1000
+0.133 1000
+0.131 1000
+
+Output from Test Data:
+0.114 1000
+0.114 1000
+0.116 1000
+0.125 1000
+0.117 1000
+0.127 1000
+0.121 1000
+0.114 1000
+0.105 1000
+0.121 1000
+0.133 1000
+0.118 1000
+0.124 1000
+0.106 1000
+0.124 1000
+0.123 1000
+0.128 1000
+0.122 1000
+0.118 1000
+0.125 1000
+0.116 1000
+0.161 1000
+
+Code:
+
+import numpy as np
+import cPickle, random
+
+class Perceptron(object):
+	def __init__(self, idim):
+		self.idim = idim
+		# set of 10 weights
+		self.weights = [np.zeros(idim) for x in range(10)]
+		# set of 10 biases
+		self.bias = [0 for x in range(10)]
+
+	def predict(self, x):
+		highestFuncVal = None
+		yHat = None
+		for i in range(10):
+			funcVal = np.dot(self.weights[i], x) + self.bias[i]
+			if funcVal > highestFuncVal or funcVal == None:
+				highestFuncVal = funcVal
+				yHat = i
+		return yHat
+
+	def update(self, x, y):
+		p = self.predict(x)
+		if p != y:
+			# adjust weights and bias if the prediction was not correct
+			for w in range(self.idim):
+				self.weights[p][w] = self.weights[p][w] - x[w]
+				self.weights[y][w] = self.weights[y][w] + x[w]
+			self.bias[p] = self.bias[p] - 1.1
+			self.bias[y] = self.bias[y] + 1.1
+
+if __name__ == '__main__':
+	# read in the data and 'unpickle' it.  lol.
+	with open('./littlemnist.pkl', 'rb') as f:
+		(trainX, trainY), (validX, validY), (testX, testY) = cPickle.load(f)
+	# training data
+	D = [(x, y) for x, y in zip(trainX, trainY)]
+	# Valid data
+	V = [(x, y) for x, y in zip(validX, validY)]
+	# test data
+	T = [(x, y) for x, y in zip(testX, testY)]
+
+	# make a perceptron, but its a multitron.
+	clf = Perceptron(len(trainX[0]))
+
+	while True:
+		random.shuffle(D)
+		# train
+		for x, y in D: 
+			clf.update(x, y)
+
+		# Validate
+		#error = 0
+		#for x, y in V:
+		#	error += int(y != clf.predict(x))
+		#print error / float(len(V)), len(V)
+
+		# test
+		error = 0
+		for x, y in T:
+			error += int(y != clf.predict(x))
+		print error / float(len(V)), len(V)
+
+

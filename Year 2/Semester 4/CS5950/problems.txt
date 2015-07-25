@@ -1,0 +1,17 @@
+Draw a square in the terminal. the side length depends on the input.
+Also, the outermost layer will function as a border. The border character and the
+inner character will be parameters of input.
+Input will be prompted, and size will be no less than 3
+example: 
+--Please specify size:
+5
+--Please specify interior:
+*
+--Please specify Border
+#
+Your Square(5x5):
+#####
+#***#
+#***#
+#***#
+#####

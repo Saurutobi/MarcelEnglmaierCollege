@@ -1,0 +1,13 @@
+Good References/Tools:
+
+http://en.wikipedia.org/wiki/Websafe_colors#Web-safe_colors   -   Wikipedia (of course). Goes into detail about the background of color schemes on the web, as well as what the standards are today. 
+
+http://colorschemedesigner.com/  -   This site is very good for choosing various types of color schemes such as monochromatic scheme, complementary colors, triadic color schemes, etc. Additionally, it gives RGB values for colors, shows sample html pages with your choice of colors, and has many other useful tools.
+
+Bad Examples:
+
+http://www.horserentals.com/
+
+http://msy.com.au/
+
+and the winner - http://www.dokimos.org/ajff/

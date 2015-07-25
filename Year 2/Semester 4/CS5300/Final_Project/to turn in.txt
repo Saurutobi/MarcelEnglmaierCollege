@@ -1,0 +1,5 @@
+After breaking up with Quincy, I didn't have the time to start
+ a new project from scratch, like the finger game we thought we
+ would make. I decided to let him continue on that path, whilst
+ I would revert to the default project. This program utilizes
+ and RBM, and an RBM trainer
