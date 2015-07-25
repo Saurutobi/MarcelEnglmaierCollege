@@ -1,0 +1,42 @@
+ctmcp <- function(ctmat,colk,alpha =.05)
+{
+
+	#the CT is in the array (matrix) ctmat.   It is
+	#c-table for testing of homogenity.   The range
+	#of the distributions is across the columns
+	#the rows correspond to the distributions (populations).
+
+	#This function only gets the difference in estimates
+	#the colk range value.   It can be extended to CI's
+
+	tab <- c()
+	a <- length(ctmat[,1])
+	b <- length(ctmat[1,])
+	numc <- a*(a-1)/2
+	zc <- abs(qnorm(alpha/(2*numc)))
+
+	for(i in 1:(a-1))
+	{
+		ni <- sum(ctmat[i,])
+		pi <- ctmat[i,colk]/ni
+		for(j in (i+1):a)
+		{
+			nj <- sum(ctmat[j,])
+			pj <- ctmat[j,colk]/nj
+			conf<-
+			#get the lower bound and the upper bound
+			if(lowerBound*UpperBound > 0)
+			{
+			sig<-1
+			}
+			else
+			{
+				sig<-0
+			}
+			vec <- c(i,j,pi,pj,pi-pj,conf,sig)
+			tab <- rbind(tab,vec)
+		}
+	}
+	colnames(tab) <- c("Rowi","Rowj","pi","pj","pi-pj",”CI”,”SIG”)
+	return(tab)
+}

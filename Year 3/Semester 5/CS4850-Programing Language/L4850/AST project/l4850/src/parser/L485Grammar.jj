@@ -1,0 +1,327 @@
+/**
+ * JavaCC template file created by SF JavaCC plugin 1.5.17+ wizard for JavaCC 1.5.0+
+ */
+options
+{
+  JDK_VERSION = "1.6";
+  static = true;
+}
+
+PARSER_BEGIN(L485Parser)
+package parser;
+
+public class L485Parser
+{
+
+}
+
+PARSER_END(L485Parser)
+
+SKIP :
+{
+  " "
+| "\r"
+| "\t"
+| "\n"
+| < "//" (~["\n","\r"])* ("\r")? "\n" >
+}
+
+TOKEN : /* Keywords */
+{
+  < DEFUNC : "defunc" >
+| < DEFCLASS : "defclass" >
+| < METHOD : "method" >
+| < FUNC : "func" >
+| < COND : "cond" >
+| < IF : "if" >
+| < THEN : "then" >
+| < ELSE: "else" >
+| < FI: "fi" >
+| < LOAD : "load" >
+| < NEW : "new" >
+| < VARS: "vars" >
+| < ASSIGN: "assign" >
+| < TO: "to" >
+| < WITH: "with" >
+| < TRUE: "true" >
+| < FALSE: "false" >
+
+}
+
+TOKEN : /* OPERATORS */
+{
+  < PLUS : "+" >
+| < MINUS : "-" >
+| < MULTIPLY : "*" >
+| < DIVIDE : "/" >
+| < OR : "||" >
+| < AND : "&&" >
+| < NOT : "!" >
+| < EQUAL : "==" >
+| < NOTEQUAL : "!=" >
+| < LESS : "< " >
+| < LESSEQUAL : "<=" >
+| < GREATER: ">" >
+| < GREATEREQUAL: ">=" >
+| < INVOKE: "->" >
+}
+
+TOKEN :
+{
+  <STRING: "'"(~["'"])*"'">
+| <#DIGIT: ["0" - "9"] >
+| <#ALPHA: ["a" - "z"] | ["A" - "Z"] >
+| <ID: <ALPHA> (<ALPHA> | <DIGIT>)*>
+| <#EXPONENT: ("e" | "E") ("+" | "-")? (<DIGIT>)+ >
+| <FLOATNUM: <INTNUM> (< DOT > (<DIGIT>)+ (<EXPONENT>)? | <EXPONENT>) >
+| < #POSITIVE : ["1" - "9"] >
+| <INTNUM: "0" | < POSITIVE > (<DIGIT>)* >
+| < DOT : "." >
+| < LP : "(" >
+| < RP : ")" >
+| < LB : "{" >
+| < RB : "}" >
+| < LBK: "[" >
+| < RBK: "]" >
+| < COMMA: "," >
+}
+
+ASTNode program():
+{
+    ASTNode node;
+}
+{
+    node = (functionDef() | classDef() | expression() | loadFile())+
+    {
+        return node;
+    }
+}
+ASTNode functionDef():
+{
+    ASTNode node;
+}
+{
+    <DEFUNC> iMaedAnID() <LP> (idList())? <RP> expressionList()
+}
+ASTNode idList():
+{
+    ASTNode node;
+}
+{
+    iMaedAnID() (<COMMA> iMaedAnID())*
+}
+ASTNode classDef():
+{
+    ASTNode node;
+}
+{
+    <DEFCLASS> iMaedAnID() <LB> (classVar())? (methods())? <RB>
+}
+ASTNode classVar():
+{
+    ASTNode node;
+}
+{
+    <VARS> idList()
+}
+ASTNode methods():
+{
+    ASTNode node;
+}
+{
+    (<METHOD> iMaedAnID() <LP> (idList())? <RP> expressionList())+
+}
+ASTNode loadFile():
+{
+    ASTNode node;
+}
+{
+    <LOAD> <STRING>
+}
+ASTNode expressionList():
+{
+    ASTNode node;
+}
+{
+    <LB> (expression())+ <RB>
+}
+ASTNode expression():
+{
+    ASTNode node;
+}
+{
+    compExpr() (logOp() compExpr())* | <NOT> compExpr()
+}
+ASTNode logOp():
+{
+    ASTNode node;
+}
+{
+    <OR> | <AND>
+}
+ASTNode compExpr():
+{
+    ASTNode node;
+}
+{
+    addExpr() (compOp() addExpr())*
+}
+ASTNode compOp():
+{
+    ASTNode node;
+}
+{
+    <EQUAL> | <NOTEQUAL> | <LESS> | <LESSEQUAL> | <GREATER> | <GREATEREQUAL>
+}
+ASTNode addExpr():
+{
+    ASTNode node;
+}
+{
+    mulExpr() (addOp() mulExpr())*
+}
+ASTNode addOp():
+{
+    ASTNode node;
+}
+{
+    <PLUS> | <MINUS>
+}
+ASTNode mulExpr():
+{
+    ASTNode node;
+}
+{
+    factor() (mulOp() factor())*
+}
+ASTNode mulOp():
+{
+    ASTNode node;
+}
+{
+    <MULTIPLY> | <DIVIDE>
+}
+ASTNode factor():
+{
+    ASTNode node;
+}
+{
+    operand() (call())?
+}
+ASTNode operand():
+{
+    ASTNode node;
+}
+{
+    varRef() | constant() | newExpr() | ifExpr() | funcExpr() | assignExpr() | condExpr() | withExpr() | <LP> expression() <RP>
+}
+ASTNode call():
+{
+    ASTNode node;
+}
+{
+    <INVOKE> <LP> (paramList())? <RP>
+}
+ASTNode paramList():
+{
+    ASTNode node;
+}
+{
+    expression() (<COMMA> expression())*
+}
+ASTNode varRef():
+{
+    ASTNode node;
+}
+{
+    iMaedAnID() (<DOT> iMaedAnID())?
+}
+ASTNode constant():
+{
+    ASTNode node;
+}
+{
+    <INTNUM> | <FLOATNUM> | list() | <STRING> | <TRUE> | <FALSE>
+}
+ASTNode list():
+{
+    ASTNode node;
+}
+{
+    <LBK> constantList() <RBK>
+}
+ASTNode constantList():
+{
+    ASTNode node;
+}
+{
+    constant() (<COMMA> constant())*
+}
+ASTNode newExpr():
+{
+    ASTNode node;
+}
+{
+    <NEW> iMaedAnID()
+}
+ASTNode ifExpr():
+{
+    ASTNode node;
+}
+{
+    <IF> expression() <THEN> expression() <ELSE> expression() <FI>
+}
+ASTNode funcExpr():
+{
+    ASTNode node;
+}
+{
+    <FUNC> <LP> (idList())? <RP> expressionList()
+}
+ASTNode assignExpr():
+{
+    ASTNode node;
+}
+{
+    <ASSIGN> expression() <TO> iMaedAnID()
+}
+ASTNode condExpr():
+{
+    ASTNode node;
+}
+{
+    <COND> condClauses()
+}
+ASTNode condClauses():
+{
+    ASTNode node;
+}
+{
+    (<LB> expression() expression() <RB>)+
+}
+ASTNode withExpr():
+{
+    ASTNode node;
+}
+{
+    <WITH> <LP> variableDefs() <RP> expressionList()
+}
+ASTNode variableDefs():
+{
+    ASTNode node;
+}
+{
+    (<LBK> iMaedAnID() expression() <RBK>)*
+}
+ASTNode iMaedAnID():
+{
+    ASTNode node;
+    Token id;
+}
+{
+    id = <ID>
+    {
+        node = new IdNode(id.image);
+        return node;
+    }
+}

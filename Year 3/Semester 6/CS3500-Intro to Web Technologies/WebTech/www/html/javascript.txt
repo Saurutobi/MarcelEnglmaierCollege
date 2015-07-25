@@ -1,0 +1,56 @@
+CS 3500  Javascript
+Spring 2014  
+
+Things you should be able to do
+
+1) layouts / Frames
+    top menu (standard names when apropos, File, Edit ,,...)
+         Pull sown lists with one slide right level
+         gray out / interactive for illegal choices
+    right menu
+         Expand / contract choices one level
+         gray out / interactive for illegal choices
+    browser back works
+    highlight current "location"
+    Rectangular grid layout
+2) Controls (positions then as desired)
+    Single buttons
+    Radio buttons
+    check boxes 
+    entry boxes / single line
+    entry boxes / full text
+    sliders
+    Menus single choice
+    Menus multiple choice 
+
+    Be able to set/read  any of these from Javascript
+    Be able to use a call back when any of these has an "event"
+3) Be able to read and write local files
+   Know the  security problems with allowing local file access
+   use the file chooser or hard code the file path
+4) Simple graphs:
+   Pie chart
+   Bar graph
+   Scatter plot
+   line graph
+
+    Colors, axes, labels, legend ...
+    size , position
+5) Validating input in Javascript
+         email address
+         phone number
+         number
+         name 
+         url
+         date
+         ...
+    Checking when entered vs checking at a later point 
+    Providing help
+6) Pages that behave well when the browser is resized
+   or zoomed. 
+7) Accessibility and Javascript/html
+8) Javascript that is browser dependent
+9) Testing and debugging Javascipt
+10) Javascript standards and programing standards
+11) The evil of pop-ups
+12) SIR model and the c program for its solution

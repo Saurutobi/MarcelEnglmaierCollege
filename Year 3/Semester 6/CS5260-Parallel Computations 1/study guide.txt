@@ -1,0 +1,28 @@
+define parallel speedup  -- Sp=T1/Tp<=p  ----------T is time for these, Tp or T1 is Tsub1, Tsubp. Time of 1 process, Time of all processes
+what is normally the mas speedup?
+what is parallel efficiency?  -- Ep=Sp/p<=1
+what is superlinear speedup?
+Need to know how to use mpi calls and such---READ THE FUCKING BOOK
+Give a formula for T. parallele time, Taking Overhead into account -- Tp=T1/p + To
+What is a SPMD program?
+Flynn's Taxonomy SISD, SIMD, MIMD? give examples of each
+Fixed Topology Architectures
+	Arrays where end points connect to endpoints on same area
+	hypercube -- dimensions: d, # of nodes in d=2^d. d=0, n=1. d=1, n=2. d=2, n=4.
+		each node is directly connected to d nodes
+		longest distance between any node is d
+Name the collective(General) communications(MPI)
+	broadcast
+	gather
+	scatter
+	reduce
+
+exam 2:
+	define diameter, bisection width, bisection bandwidth
+	completely connected
+	1d array
+	2d
+	3d arry
+	2d,3d torus
+	hypercube
+	dimension d

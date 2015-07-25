@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		<link rel="stylesheet" type="text/css" href="mainWebsiteCSS.css">
+		<title>Rate Your Group</title>
+		<script type="text/javascript" src="base64.js"></script>
+		<script src="jquery.js"></script> 
+		<script> 
+			$(function()
+			{
+				$("#navbarInclude").load("navbar.html");
+				$("#sidebarInclude").load("sidebar.html");
+			});
+		</script>
+	</head>
+
+	<body>
+	<div id="wrap">
+		<div id="header">
+			<h1>Rate Your Group</h1>
+	
+			<p>Group Members: Marcel Englmaier, Thinh Nguyen, David Rice</p>
+		</div>
+		<div id="navbarInclude"></div>
+		
+		<div id="main">
+			<div id="login">
+				<center>
+				<table bgcolor="white" cellpadding="12" border="1">
+					<tr>
+						<td colspan="2">
+							<center><h1><i><b>Login Area</b></i></h1></center>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h1><i><b>UserID:</b></i></h1>
+						</td>
+						<td>
+							<form name="login">
+					
+								<input name="userid" type="text">
+						</td>
+					</tr> 
+					<tr>
+						<td><h1><i><b>Password:</b></i></h1></td>
+						<td><input name="pswrd" type="password"></td>
+					</tr>
+					<tr>
+						<td>
+							<center>
+								<input type="button" value="Login" onClick="check(this.form)">
+							</center>
+						</td>
+						<td>
+							<center>
+							<br>
+							<input type="Reset">
+							</form>
+						</td>
+					</tr>
+				</table>
+			</center> 
+			</div>
+			<div id="table">
+			</div>
+		</div>
+		</br>
+		<div id="usr"></div>
+		</br>
+		<div id="sidebarInclude">
+		</div>
+		<div id="footer">
+		</div>
+	</div>
+	
+<script> 
+function showKeyword()
+{
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			document.getElementById("table").innerHTML=xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("GET","examMarcelShowKeyword.php?keyword=empty&string=null", true);
+	xmlhttp.send();
+}
+
+function showKeywordAndString()
+{
+	window.alert("looking");
+	var keyword = document.getElementById("keyword").value;
+	
+
+	window.alert("keyword="+keyword);
+	var string = document.getElementById("stringOutput").value;
+	window.alert("string="+string);
+
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			document.getElementById("table").innerHTML=xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("GET","examMarcelShowKeyword.php?keyword="+keyword+"&string="+string, true);
+	xmlhttp.send();
+}
+
+function save()
+{
+	window.alert("saving");
+	var keyword = document.getElementById("keyword").value;
+	window.alert("keyword="+keyword);
+	var string = document.getElementById("stringOutput").value;
+	window.alert("string="+string);
+
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			document.getElementById("table").innerHTML=xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("GET","examMarcelSave.php?keyword="+keyword+"&string="+string, true);
+	xmlhttp.send();
+}
+
+function changePassword()
+{
+	document.getElementById("table").innerHTML="New Password: <input type=\"text\" id=\"password\" value=\"Password Here\"><br><input type=\"button\" value=\"Change Password\" onClick=\"updatePassword()\">";
+}
+
+function updatePassword()
+{
+	window.alert("Updating Passwords");
+	var password = document.getElementById("password").value;
+	window.alert("new pass="+password);
+	
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			document.getElementById("table").innerHTML=xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("GET","examMarcelChangePass.php?pass="+password, true);
+	xmlhttp.send();
+}
+
+function check(form)
+{
+	var user = form.userid.value;
+	var password = form.pswrd.value;
+	/*the following code checkes whether the entered userid and password are matching*/
+	if(form.id.value == "myuserid" && form.pswrd.value == "mypswrd")
+	{
+		alert("Error UserName or Password");
+	}
+	validatePassword(user,password);	//This will need to be changed to password
+	
+}
+
+function validatePassword(user, pswrd)
+{
+	var userFromdb = "";
+	var username = user;
+	var password = "";
+	password = pswrd;
+	var reply = "";
+
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{			
+			
+			reply = xmlhttp.responseText;
+			console.log(reply);
+			reply = reply.trim();
+			if(reply == "yes")
+			{
+				clearLogin(username);
+				showKeyword();
+			}
+			else
+			{
+				alert('UserName Password Error');
+			}
+		}
+	}
+	
+	xmlhttp.open("GET","examMarcelLogin.php?username="+username+'&password='+password, true);
+	xmlhttp.send();
+}
+
+function clearLogin(user)
+{
+	var elem = document.getElementById('login');
+	elem.parentNode.removeChild(elem);	
+	document.getElementById("usr").innerHTML= user;
+}
+
+
+function submitTable()
+{
+	var i, j;
+	var usr=document.getElementById("usr").innerHTML;
+	var subject=document.getElementsByClassName("name");
+	var grade1=document.getElementsByClassName("g1");
+	var grade2=document.getElementsByClassName("g2");
+	var grade3=document.getElementsByClassName("g3");
+	var grade1total = 0;
+	var grade2total = 0;
+	var grade3total = 0;
+
+	
+	for (i = 0; i < grade1.length; i++)
+	{
+		grade1total = parseInt(grade1[i].value) + grade1total;
+		grade2total = parseInt(grade2[i].value) + grade2total;
+		grade3total = parseInt(grade3[i].value) + grade3total;
+	}
+
+	
+	if ((grade1total == 100) && (grade2total == 100) && (grade3total == 100))
+	{
+		
+		for (i = 0; i < subject.length; i++)
+		{	
+			window.alert("Submitting for "+subject[i].innerHTML);
+			if (usr=="")
+			{
+				window.alert("Authentication failed to return group name");
+				return;
+			}
+			if (window.XMLHttpRequest)
+			{// code for IE7+, Firefox, Chrome, Opera, Safari
+				xmlhttp=new XMLHttpRequest();
+			}
+			else
+			{// code for IE6, IE5
+				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange=function()
+			{
+				if (xmlhttp.readyState==4 && xmlhttp.status==200)
+				{
+					//window.alert("Submitted one row");
+					window.alert("Submitting for "+subject[i].innerHTML);
+					//document.getElementById("table").innerHTML=xmlhttp.responseText;
+				}
+			}
+
+xmlhttp.open("GET","gradesSubmit.php?userid="+usr+"&subject="+subject[i].innerHTML+"&grade1="+grade1[i].value+"&grade2="+grade2[i].value+"&grade3="+grade3[i].value, true);
+	xmlhttp.send();
+	
+		}
+	}
+	else window.alert("Grades for each assignment must add up to 100%");
+
+	if (i == subject.length) window.alert("Successfully Submitted Grade");
+}
+	
+
+
+
+		
+	 
+
+</script>
+
+</body>
+</html>

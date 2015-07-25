@@ -1,0 +1,11 @@
+1. Some examples of homeostatic mechanisms in the human body are body temperature, glucose concentrations, and acidity, water content, and sodium content of the blood.
+2. Some similarities between glia and neurons are that both are found in the brain, and both have some sort of electrical communication. Some differences include the functions of the cells. Neurons are the communicators, while glia are the house-keepers responsible for the brain structure, eliminating waste, and supplying nutrients.
+3. The process of neuronal communication is complicated. It begins with an input received through the Dendrites. This signal is transferred down the Axon and across the Synapses to another Neuron through the controlled transfer of ions causing polarization. By opening channels in the Axon, the polarization is transferred down to the Axon Terminals and to the Synapses.
+4. The neurotransmitter for the parasympathetic branch is acetylcholine, while norepinephrine is the neurotransmitter for the sympathetic branch. Some instances where the two branches oppose each other are that the sympathetic branch dilates pupils and increases the heart rate while the parasympathetic branch constricts the pupils and decreases the heart rate.
+5. The primary purpose of the basal ganglia is to maintain proper muscle tone. The neurotransmitter involved with the basal ganglia seems to be dopamine as the primary component of the basal ganglia is the striatum ,with resides in the nigrostriatal dopamine pathway.
+6. The most prominent neurochemical theory of drug abuse believes that the mesolimbic dopamine pathway plays the role of the reward system during drug use.
+7. Alzheimer's disease has been observed to decrease the amount of acetylcholine in the cerebral cortex.
+8. GABA is the neurotransmitter that seems to only have inhibitory receptors.
+9. After a neurotransmitter is synthesized, it is stored in synaptic vesicles near the terminal from which they will be released.
+10. The two ways drugs can act on neurotransmitter systems are by either interfering in the removal of neurotransmitters that have made it into the synapse, and by acting directly upon the receptors that sense the neurotransmitters.
+11. PET and MRI scans are both examples of body-imaging technologies which give incredibly high resolutions.

@@ -1,0 +1,10 @@
+a. {{4},e,4,9,f}
+b. {EMPTYSET,{b,x},7,{b,{x}},{EMPTYSET}}
+c. {EMPTYSET}
+d. EMPTYSET
+e. EMPTYSET
+f. {EMPTYSET}
+g. {EMPTYSET,{{4}},{e},{{4},e}}
+h. {7}
+i. {{4}}
+j. {[{4},4],[{4},9],[{4},e],[{4},f],[e,4],[e,9],[e,e],[e,f]}

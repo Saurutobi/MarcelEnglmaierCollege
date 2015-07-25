@@ -1,0 +1,99 @@
+/**
+ * JavaCC template file created by SF JavaCC plugin 1.5.17+ wizard for JavaCC 1.5.0+
+ */
+options
+{
+  JDK_VERSION = "1.6";
+  static = true;
+}
+
+PARSER_BEGIN(CalcParser)
+
+package parser;
+
+import ast.*;
+
+public class CalcParser
+{
+  public static void main(String args []) throws ParseException
+  {
+    CalcParser parser = new CalcParser(System.in);
+
+    System.out.println("Reading from standard input...");
+    System.out.print("Enter an expression like \"1+(2+3)*4;\" :");
+    try {
+        CalcParser.C();
+    }
+    catch (Exception e) {
+        System.out.println("NOK.");
+        System.out.println(e.getMessage());
+    }
+    catch (Error e) {
+        System.out.println("Oops.");
+        System.out.println(e.getMessage());
+    }
+  }
+}
+
+PARSER_END(CalcParser)
+
+SKIP :
+{
+  " "
+| "\r"
+| "\t"
+| "\n"
+}
+
+TOKEN : /* OPERATORS */
+{
+  < PLUS : "+" >
+| < MINUS : "-" >
+| < MULTIPLY : "*" >
+| < DIVIDE : "/" >
+}
+
+TOKEN :
+{
+  < CONSTANT : (< DIGIT >)+ >
+| < #DIGIT : [ "0"-"9" ] >
+| <#ALPHA: ["a" - "z"] | ["A" - "Z"] >
+| <ID: <ALPHA> (<ALPHA> | <DIGIT>)*>
+}
+
+ASTNode C() : 
+{
+  ASTNode node;
+}
+{
+  node = E()
+  {    return node;
+  }
+}
+
+ASTNode E() :
+{	ASTNode node;
+}
+{  node = T() (< PLUS > T() | < MINUS > T())*
+  {    return node;
+  }
+}
+
+ASTNode T() :
+{
+  ASTNode node;}
+{  node = F() (< MULTIPLY > F() | < DIVIDE > F())*
+  {    return node;
+  }
+}
+
+ASTNode F() :
+{  ASTNode node;
+  Token id;
+}
+{ 	id = < ID >
+    {
+      node = new IdNode(id.image);
+      return node;
+    }
+}

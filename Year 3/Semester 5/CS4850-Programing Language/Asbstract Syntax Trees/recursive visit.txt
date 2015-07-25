@@ -1,0 +1,13 @@
+void visit(ASTNode n) 
+}
+	switch(n.type)
+	{
+		case MINUS:
+		case PLUS: 	visit(n.left);
+					visit(n.right);
+					System.out.print(" + ");
+					break;
+		case ID:	System.out.print(n.name);
+					break;
+	}
+}

@@ -1,0 +1,63 @@
+Mass Storage Structure
+
+10.4 Balance file-system I/O
+-Because this gives you more performance by spreading out over bottlenecks, rather
+	than concentrating on one bottleneck. Concentrating I/O on one disk can cause disk
+	overuse and cause the disk to fail prematurely.
+
+10.5 What are the tradeoffs
+-pros: quicker loading into main memory
+-cons: time to copy from disk to swap space causing slow startup, extra space need for
+	code and data pages
+
+10.6 Is there any way to implement truly stable storage?
+-no. but, having multiple backups can make it virtually truly stable. not being stable
+	would mean losing data, and there is no storage solution that can and will never
+	die. until somebody makes a hard drive that lasts forever, this is a no.
+	
+10.9 None of the disk
+-a. new requests for the same track can arrive as quickly as the requests are being
+	serviced, starving a process looking for another track
+-b. you can have a timer count how long it's been waiting, and force the read once
+	the count exceeds a specified limit. in SSTF, you can reorder the queue to prioritize
+	older requests.
+-c. to prevent long response times, stop lag, speed up processing.
+-d. paging/swapping I/O, kernel I/0(like file system info), and higher priority processes
+
+10.10 Explain why
+-because read time is uniform, so there is no need for any more complicated algorithm
+
+10.14 Describe some advantages 
+-SSDs have great performance, but suffer from much faster degredation, and cost much much more
+	magnetic disks are cheaper, and live longer, but suffer from seek time and rotational
+	latency
+	
+File System Interface
+
+11.8 Researchers have
+-File Control List: access control is centralized and in one place, so it's easier to
+	change the info, and uses less space
+-User Control List: less work(overhead) when opening a file, so it's faster
+
+11.10 The open-file table
+-The operating system should keep the table, and should keep track of the states of the file
+	for each user. If the info was in a table for each user, there would need to be checks
+	done for each time the file is deleted, so the operating system deletes it only when each
+	user has closed the file. There should only be one entry with a list of who's got
+	that file open. basically, performance.
+	
+11.14 If the operating system
+-the OS could prefetch the next block making the system faster and preventing lag
+
+File System Implementation
+
+12.6 How do caches help
+-caches keep information that is used often at the ready to speed up performance. increasing
+	cache size would mean more expensive hardware, since caches are mostly SSDs, and they're
+	expensive
+	
+12.8  Explain how the VFS layer allows
+-It provides generic functions to programs that each file system serves on their own
+
+Does Windows-7 have an equivelant to VFS?
+-yes, the Installable File System.

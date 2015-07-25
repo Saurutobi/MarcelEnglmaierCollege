@@ -1,0 +1,91 @@
+OS Concepts book
+9.7 consider the two dimensional array a:
+
+a. 5001 page faults: 1 row = 1/2page, (100x100/)2 + 1 for initial page reference
+b. 51 pages
+
+
+9.15 A simplified view of thread states is ...
+
+a. yes, it'll change from Running to Blocked
+b. it could. depends on if the index and page table processing finds the page in main memory.
+	if it does, processing continues, if not, a page fault occurs and it goes to Blocked
+c. No, the page is already in main memory
+
+
+9.18 A certain computer provides...
+
+Since the page size is 2^12, the page table is 2^20 big. The 12 low bits are used for page
+	displacement, and the other 20 bits are used to page table displacement. The offset bits
+	are used to make the physical page number to get the physical page address from the
+	page table.
+The binary is: 0001 0001 0001 0010 0011 0100 0101 0110
+
+
+9.24 Discuss situations in which...
+
+1123451 running through a 4-page system
+LFU    vs. LRU
+1-1xxx vs. 1xxx
+1-1xxx vs. 1xxx
+2-12xx vs. 12xx
+3-123x vs. 123x
+4-1234 vs. 1234
+5-1534 vs. 5234
+1-1534 vs. 5134
+
+1 fault vs. 2 faults
+but using 1123452, the LFU would make more faults that LRU
+
+
+9.27 Consider a demand-paging system...
+
+a. It could help, yes, at least to speed up CPU-bound processes, but it looks like they're mostly
+	I/O bound, so it won't do anything in this system(so that's a No).
+b. This could, but it just makes more space, not speed.
+c. This could help with CPU-bound processes, but not I/O. In this system, it'll make thrashing worse.
+d. yes, this could stop trashing(if that's what's happening)
+e. yes, if it's also faster, it'll help even more with thrashing.
+f. No. the problem is main memory size and speed.
+g. I would think so. The CPU will do more work for algorithms, and the I/O will go down.
+h. This could, but it doesn't doesn't change actual main memory size.
+
+
+Windows internals part 2 Chapter 10
+
+1. Explain large pages and how this can lead to kernel code corruptions.
+
+It is a page that contains many small pages. this means that pages in there could have
+	RO or WRO or WO protections, and so some pages can overwrite parts of others causing
+	corruptions.
+
+
+2. What is data execution prevention and how does it help protect against maleware?
+
+It scans system memory to make sure a program uses it safely. If it doesn't, it closes the
+	program and notifies the user. It protects against maleware because that's what maleware
+	does.
+
+3. What is lazy evaluation in the paging system?  How does it work and how does it speed things up?
+
+When a lot of pages are requested, the managers don't construct the page tables immediately
+	but wait for a page fault to create them, speeding up the average seek time instead
+	of dragging the system for a second or two all the time.
+
+
+4. How does the prioritized standby lists relate to the priority of the processes that are using them?
+	What does it mean when the OS takes a page from a standby list?
+
+The page priority comes from the priority of the process requesting it. When the OS takes
+	a page from the Standby list, the process that needs it consumes it.
+
+
+Linux and Windows
+Compare and contrast the algorythms for pre-fetching page sets in the two Operating systems.  
+
+The Windows System Monitors a program's startup, and remembers what pages came with the first
+	10 seconds of it, then loads those each time.
+The Linux System loads the adjacent pages along with the current page because writing can write to
+	multiple adjacent pages, so reading should happen that way too. Both systems have the possibility
+	of loading adjacent pages, but Windows is a much smarter approach for speeding up program startup.
+

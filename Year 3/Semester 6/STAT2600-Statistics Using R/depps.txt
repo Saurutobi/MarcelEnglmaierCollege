@@ -1,0 +1,12 @@
+depps <- function(s1,s2,n) #alt-c("grader.","lees","two.sided")
+{
+	p1 <- s1/n;
+	p2 <- s2/n;
+	se <-sqrt((p1+p2)/n);
+#not done yet
+	
+}
+if(alt=="two.sided")
+{
+	pval<-2*CI-beacon(abs(zed));
+}

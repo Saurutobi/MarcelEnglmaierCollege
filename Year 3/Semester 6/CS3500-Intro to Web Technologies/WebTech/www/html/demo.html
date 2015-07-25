@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+  <head>
+    <title>formDemo.html</title>
+    <meta charset = "UTF-8" />
+	<script>
+		function resetForm()
+		{
+			document.getElementById('mainForm').reset();
+		}
+		
+		function validateForm()
+		{
+			var x = document.forms["mainForm"]["f_name"].value;
+			
+			if (x == null || x == "")
+			{
+				alert("First name must be filled out");
+				form.username.focus();
+				form.username.select();
+				return false;
+			}
+			else if (form.pwd.value.length < 6)
+			{
+				alert("Error: Password must contain at least six characters!"); 
+				form.pwd.focus(); 
+				return false;				
+			}
+			else if (form.pwd.value == form.username.value)
+			{
+				alert("Error: Password must be different from Username!"); 
+				form.pwd.focus(); 
+				return false;		
+			
+			}
+			alert("You entered a valid password: " + form.pwd.value); 
+			return true;
+			
+		
+		}
+	</script>
+  </head>
+  <body>
+    <h1>Form Demo</h1>
+    <form id="mainForm" onsubmit="return validateForm(this);">
+	  <fieldset>
+        <legend>Text input</legend>
+        <p>
+          <label>User Name</label>
+          <input type = "text"
+                 id = "f_name"
+				 name = "username"
+                 value = "Name" />
+        </p>
+        <p>
+          <label>Password</label>
+          <input> type = "password"
+				  name = "pwd"
+                  id = "myPwd"
+                  value = "secret" />
+        </p>
+        <p>
+          <label>Text Area</label>
+          <textarea> id = "myTextArea"
+                  rows = "3"
+                  cols = "80">Your text here</textarea>
+        </p>
+      </fieldset>           
+      <fieldset>
+       <legend>Selecting elements</legend>
+	   <p>
+           <label>Select list</label>
+           <select id = "myList">
+               <option value = "1">one</option>
+               <option value = "2">two</option>
+               <option value = "3">three</option>
+               <option value = "4">four</option>
+           </select>
+       </p>
+	   <p>
+           <label>Check boxes</label>
+             <input type = "checkbox"
+                 id = "chkEggs"
+                 value = "greenEggs" />
+             <label for = "chkEggs">Green Eggs</label>
+           
+             <input type = "checkbox"
+                 id = "chkHam"
+                 value = "ham" />
+             <label for = "chkHam">Ham</label>
+         </p>
+       <p>
+          <label>Radio buttons</label>            
+          <input type = "radio"
+                 name = "radSize"
+                 id = "sizeSmall"
+                 value = "small"
+                 checked = "checked" />
+          <label for = "sizeSmall">small</label>
+          
+          <input type = "radio"
+                 name = "radSize"
+                 id = "sizeMed"
+                 value = "medium" />
+          <label for = "sizeMed">medium</label>
+ 
+          <input type = "radio"
+                 name = "radSize"
+                 id = "sizeLarge"
+                 value = "large" />
+          <label for = "sizeLarge">large</label>
+        </p>       
+      </fieldset>  
+	  <fieldset>
+        <legend>Buttons</legend>
+        <p>
+          <button type = "button">
+            standard button
+          </button>
+          
+          <input type = "button"
+                 value = "input button" />
+          <input type = "reset" onClick="resetForm();" />
+          <input type = "submit" value="Submit" />
+        </p>       
+      </fieldset>  
+    </form>
+  </body>
+</html

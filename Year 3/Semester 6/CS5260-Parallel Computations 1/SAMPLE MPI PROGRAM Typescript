@@ -1,0 +1,269 @@
+[elise@thor examples]$ module avail
+
+------------------------------------------------------------------------------------------ /opt/scyld/modulefiles ------------------------------------------------------------------------------------------
+exec                maui                mpich/pgi/3.0.4     mpich2/pgi/1.5      mvapich2/pgi/2.0a   nvidia/cuda/5.0     openmpi/gnu/1.7.3   openmpi/pgi/1.6.5   python/2.6.5
+gcc/4.6.4           mpich/gnu/3.0.4     mpich2/gnu/1.5      mvapich2/gnu/2.0a   net-snmp-scyld      nvidia/cuda/5.5     openmpi/intel/1.6.5 openmpi/pgi/1.7.3
+gcc/4.7.3           mpich/intel/3.0.4   mpich2/intel/1.5    mvapich2/intel/2.0a nvidia/cuda/4.2     openmpi/gnu/1.6.5   openmpi/intel/1.7.3 pgi64/mpi/12.9
+[elise@thor examples]$ module load openmpi/gnu/1.7.3
+[elise@thor examples]$ mpicc cpi.c -o cpi
+[elise@thor examples]$ mpirun -np 4 ./cpi
+Process 0 on thor.cs.wmich.edu
+Process 1 on thor.cs.wmich.edu
+Process 2 on thor.cs.wmich.edu
+Process 3 on thor.cs.wmich.edu
+Enter the number of intervals: (0 quits) 1000000
+pi is approximately 3.1415926535899033, Error is 0.0000000000001101
+wall clock time = 0.005639
+Enter the number of intervals: (0 quits) 10000000
+pi is approximately 3.1415926535896861, Error is 0.0000000000001070
+wall clock time = 0.056439
+Enter the number of intervals: (0 quits) 0
+[elise@thor examples]$ vi myhostfile
+[elise@thor examples]$ bpsh n3 ps -edalf
+F S UID        PID  PPID  C PRI  NI ADDR SZ WCHAN  STIME TTY          TIME CMD
+0 R elise     3019     1  7  80   0 - 27026 -      23:02 ?        00:00:00 ps -edalf
+5 S nscd      5091     1  0  80   0 - 174431 ep_pol Jan04 ?       00:00:09 /usr/sbin/nscd
+1 S root     10317     1  0  80   0 -  5352 ep_pol Jan04 ?        00:00:01 rpc.idmapd
+5 S root     11184     1  0  80   0 - 16090 poll_s Jan04 ?        00:00:00 /usr/sbin/sshd
+1 S root     12011     1  0  80   0 - 15907 skb_re Jan04 ?        00:00:00 /usr/sbin/trqauthd
+5 S root     12095     1  0  80   0 - 25060 poll_s Jan04 ?        01:13:47 /usr/sbin/pbs_mom -c /var/spool/torque/mom_priv/config -l /var/spool/torque/mom_logs/3
+5 S rpc      12225     1  0  80   0 -  4797 poll_s Jan04 ?        00:00:02 /sbin/rpcbind
+5 S rpcuser  12232     1  0  80   0 -  6878 poll_s Jan04 ?        00:00:00 /sbin/rpc.statd
+1 S root     93593     1  0  80   0 - 20506 ep_pol Jan04 ?        00:00:16 /usr/sbin/kickbackproxy 10.54.0.1
+[elise@thor examples]$ bpsh n4 ps -edalf
+F S UID        PID  PPID  C PRI  NI ADDR SZ WCHAN  STIME TTY          TIME CMD
+0 R elise     3022     1  0  80   0 - 27026 -      23:02 ?        00:00:00 ps -edalf
+1 S root     14650     1  0  80   0 - 20506 ep_pol Jan04 ?        00:00:16 /usr/sbin/kickbackproxy 10.54.0.1
+5 S nscd     14733     1  0  80   0 - 174431 ep_pol Jan04 ?       00:00:09 /usr/sbin/nscd
+1 S root     15141     1  0  80   0 -  5352 ep_pol Jan04 ?        00:00:01 rpc.idmapd
+5 S root     15195     1  0  80   0 - 16090 poll_s Jan04 ?        00:00:00 /usr/sbin/sshd
+1 S root     15265     1  0  80   0 - 15907 skb_re Jan04 ?        00:00:00 /usr/sbin/trqauthd
+5 S root     15268     1  0  80   0 - 25059 poll_s Jan04 ?        01:14:38 /usr/sbin/pbs_mom -c /var/spool/torque/mom_priv/config -l /var/spool/torque/mom_logs/4
+5 S rpc      15280     1  0  80   0 -  4797 poll_s Jan04 ?        00:00:02 /sbin/rpcbind
+5 S rpcuser  15283     1  0  80   0 -  6878 poll_s Jan04 ?        00:00:00 /sbin/rpc.statd
+[elise@thor examples]$ mpirun -np 1 --hostfile myhostfile ./cpi
+Enter the number of intervals: (0 quits) Process 0 on n3
+10000000
+pi is approximately 3.1415926535897309, Error is 0.0000000000000622
+wall clock time = 0.220836
+Enter the number of intervals: (0 quits) 0
+[elise@thor examples]$ mpirun -np 2 --hostfile myhostfile ./cpi
+Process 0 on n3
+Process 1 on n3
+Enter the number of intervals: (0 quits) 100000000
+pi is approximately 3.1415926535900223, Error is 0.0000000000002292
+wall clock time = 1.113820
+Enter the number of intervals: (0 quits) 100000000
+pi is approximately 3.1415926535900223, Error is 0.0000000000002292
+wall clock time = 1.113553
+Enter the number of intervals: (0 quits) 10000000
+pi is approximately 3.1415926535899850, Error is 0.0000000000001918
+wall clock time = 0.111150
+Enter the number of intervals: (0 quits) 0
+[elise@thor examples]$ mpirun -np 4 --hostfile myhostfile ./cpi
+Process 0 on n3
+Process 1 on n3
+Process 2 on n3
+Process 3 on n3
+Enter the number of intervals: (0 quits) 10000000
+pi is approximately 3.1415926535896861, Error is 0.0000000000001070
+wall clock time = 0.055448
+Enter the number of intervals: (0 quits) 10000000
+pi is approximately 3.1415926535896861, Error is 0.0000000000001070
+wall clock time = 0.055600
+Enter the number of intervals: (0 quits) 100000000
+pi is approximately 3.1415926535902168, Error is 0.0000000000004237
+wall clock time = 0.555183
+Enter the number of intervals: (0 quits) 0
+^[[A[elise@thor examples]$ mpirun -np 8 --hostfile myhostfile ./cpi
+Process 5 on n5
+Process 2 on n3
+Process 3 on n3
+Process 6 on n5
+Process 7 on n5
+Process 4 on n5
+Process 0 on n3
+Enter the number of intervals: (0 quits) Process 1 on n3
+10000000
+pi is approximately 3.1415926535898069, Error is 0.0000000000000138
+wall clock time = 0.028043
+Enter the number of intervals: (0 quits) 0
+^[[A[elise@thor examples]$ mpirun -np 16 --hostfile myhostfile ./cpi
+Process 8 on n5
+Process 2 on n3
+Process 9 on n5
+Process 3 on n3
+Process 10 on n5
+Process 4 on n3
+Process 11 on n5
+Process 5 on n3
+Process 12 on n5
+Process 6 on n3
+Process 13 on n5
+Process 7 on n3
+Process 14 on n5
+Process 15 on n5
+Process 0 on n3
+Enter the number of intervals: (0 quits) Process 1 on n3
+10000000
+pi is approximately 3.1415926535897936, Error is 0.0000000000000004
+wall clock time = 0.013923
+Enter the number of intervals: (0 quits) 100000000
+pi is approximately 3.1415926535897749, Error is 0.0000000000000182
+wall clock time = 0.139042
+Enter the number of intervals: (0 quits) 0
+[elise@thor examples]$ mpirun -np 24 --hostfile myhostfile ./cpi
+Process 0 on n3
+Process 1 on n3
+Process 12 on n5
+Process 13 on n5
+Process 2 on n3
+Process 3 on n3
+Process 14 on n5
+Process 4 on n3
+Process 15 on n5
+Process 5 on n3
+Process 16 on n5
+Process 6 on n3
+Process 17 on n5
+Process 7 on n3
+Process 18 on n5
+Process 8 on n3
+Process 19 on n5
+Process 9 on n3
+Process 20 on n5
+Process 10 on n3
+Process 21 on n5
+Process 11 on n3
+Process 22 on n5
+Process 23 on n5
+Enter the number of intervals: (0 quits) 10000000
+pi is approximately 3.1415926535897913, Error is 0.0000000000000018
+wall clock time = 0.009415
+Enter the number of intervals: (0 quits) 100000000
+pi is approximately 3.1415926535897540, Error is 0.0000000000000391
+wall clock time = 0.092531
+Enter the number of intervals: (0 quits) 
+
+
+10000000
+pi is approximately 3.1415926535897913, Error is 0.0000000000000018
+wall clock time = 0.009276
+Enter the number of intervals: (0 quits) 100000000
+pi is approximately 3.1415926535897540, Error is 0.0000000000000391
+wall clock time = 0.092660
+Enter the number of intervals: (0 quits) 0
+[elise@thor examples]$ mpirun -np 32 --hostfile myhostfile ./cpi
+Process 16 on n5
+Process 4 on n3
+Process 18 on n5
+Process 5 on n3
+Process 20 on n5
+Process 6 on n3
+Process 21 on n5
+Process 0 on n3
+Process 17 on n5
+Process 1 on n3
+Process 22 on n5
+Process 2 on n3
+Process 23 on n5
+Process 24 on n5
+Process 7 on n3
+Enter the number of intervals: (0 quits) Process 25 on n5
+Process 8 on n3
+Process 26 on n5
+Process 9 on n3
+Process 10 on n3
+Process 11 on n3
+Process 27 on n5
+Process 28 on n5
+Process 29 on n5
+Process 12 on n3
+Process 30 on n5
+Process 13 on n3
+Process 31 on n5
+Process 14 on n3
+Process 19 on n5
+Process 15 on n3
+Process 3 on n3
+10000000
+pi is approximately 3.1415926535897847, Error is 0.0000000000000084
+wall clock time = 0.007020
+Enter the number of intervals: (0 quits) 100000000
+pi is approximately 3.1415926535897736, Error is 0.0000000000000195
+wall clock time = 0.069614
+Enter the number of intervals: (0 quits) 0
+[elise@thor examples]$ cat cpi.c
+#include "mpi.h"
+#include <stdio.h>
+#include <math.h>
+
+double f( double );
+double f( double a )
+{
+    return (4.0 / (1.0 + a*a));
+}
+
+int main( int argc, char *argv[])
+{
+    int done = 0, n, myid, numprocs, i;
+    double PI25DT = 3.141592653589793238462643;
+    double mypi, pi, h, sum, x;
+    double startwtime = 0.0, endwtime;
+    int  namelen;
+    char processor_name[MPI_MAX_PROCESSOR_NAME];
+
+    MPI_Init(&argc,&argv);
+    MPI_Comm_size(MPI_COMM_WORLD,&numprocs);
+    MPI_Comm_rank(MPI_COMM_WORLD,&myid);
+    MPI_Get_processor_name(processor_name,&namelen);
+
+    fprintf(stderr,"Process %d on %s\n",
+	    myid, processor_name);
+
+    n = 0;
+    while (!done)
+    {
+        if (myid == 0)
+        {
+            printf("Enter the number of intervals: (0 quits) ");
+            fflush(stdout);
+            scanf("%d",&n);
+/*   if (n==0) n=100; else n=0; */
+
+	    startwtime = MPI_Wtime();
+        }
+        MPI_Bcast(&n, 1, MPI_INT, 0, MPI_COMM_WORLD);
+        if (n == 0)
+            done = 1;
+        else
+        {
+            h   = 1.0 / (double) n;
+            sum = 0.0;
+            for (i = myid + 1; i <= n; i += numprocs)
+            {
+                x = h * ((double)i - 0.5);
+                sum += f(x);
+            }
+            mypi = h * sum;
+
+            MPI_Reduce(&mypi, &pi, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+
+            if (myid == 0)
+	    {
+		endwtime = MPI_Wtime();
+                printf("pi is approximately %.16f, Error is %.16f\n",
+                       pi, fabs(pi - PI25DT));
+		printf("wall clock time = %f\n",
+		       endwtime-startwtime);	       
+	    }
+        }
+    }
+    MPI_Finalize();
+
+    return 0;
+}
+
+            
+[elise@thor examples]$ 
+

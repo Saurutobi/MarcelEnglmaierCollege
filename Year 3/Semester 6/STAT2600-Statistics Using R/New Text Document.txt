@@ -1,0 +1,5 @@
+problem 10.10
+
+x<- c(data)
+fit<-test(x,conf.level=.95)
+fit$conf.int

@@ -1,0 +1,161 @@
+/* Cascading Style Sheet For Group 8 main website
+	
+   Group Members: Marcel Englmaier, Thinh Nguyen, David Rice
+*/
+
+body, html
+{
+	margin: 0;
+	padding: 0;
+	color: #000;
+	background: #D0D0D0;
+	overflow: auto;
+}
+
+#wrap {
+    	max-width: 100%;
+    	margin:0 auto;
+    	background:#D0D0D0;
+		
+}
+
+
+#header {
+	
+	padding: 5px 10px;	
+    	background:#D0D0D0;
+}
+
+h1 {
+	text-align: center;
+	margin: 0;
+}
+
+#header p {
+	text-align: center;
+}
+
+#navbar {
+
+	padding: 5px 10px;
+    	background:red;
+}
+
+#main {
+	margin: 0 auto;
+	padding: 10px;
+	background:#D0D0D0;
+	max-width: 50%;
+	
+}
+
+h2 {
+	margin: 0 0 1em;
+	text-align: center;
+}
+
+td {
+	text-align: center;
+}
+
+#setdT {
+	width: 30px;
+}
+
+#setT {
+	width: 30px;
+}
+
+#setS {
+	width: 600px
+}
+
+#setI {
+	width: 600px
+}
+
+#setR {
+	width: 600px
+}
+
+#setb {
+	width: 280px
+}
+
+#setk { 
+	width: 280px
+}
+
+
+#sidebar {
+	position: fixed;
+	top: 30%;
+	left: 0;
+	max-width: 15%;
+	min-height: 650px;
+	padding: 0;
+   	background:#D0D0D0;
+	
+}
+
+#footer {
+	clear:both;
+	background:#a7a09a;	
+	
+	
+}
+
+#sidebar ul {
+	/*overflow: scroll;*/
+}
+
+#sidebar ul li {
+		
+	
+}
+
+#sidebar ul li a {
+	font-size: 100%;
+}
+
+#sidebar ul li a:hover {
+	color: #fff;
+	background-color: #D0D0D0;
+}
+
+
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	text-align: center;
+}
+
+#navbar ul li {
+	display: inline;
+}
+
+#navbar ul li a {
+	text-decoration: none;
+	padding: .2em 1em;
+	color: #fff;
+	background-color: #036;
+}
+
+#navbar ul li a:hover {
+	color: #fff;
+	background-color: #369;
+}
+
+* html #footer {
+	height: 1px;
+	background: #D0D0D0;
+}
+
+.top_sliders { display: inline-block; }
+.bottom_sliders { display: inline-block; }
+
+
+
+

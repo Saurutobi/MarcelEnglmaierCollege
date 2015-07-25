@@ -1,0 +1,64 @@
+#check version
+svn -version
+#create repo
+mkdir /home/mike/svn-repos
+svnadmin create /home/mike/svn-repos
+#add files to a tmpdir in that mir
+svn import -m "importing Sesame project" . file:///home/mike/svn-repos/sesame/trunk
+#check out the source to working directory 'work'
+svn co file:///home/mike/svn-repos/sesame/trunk sesame
+#see if file is changed
+svn status Day.txt
+#see the diffs
+svn diff Day.txt
+#update
+svn commit -m "Client wants us to work on weekends"
+#see log for file
+svn log Day.txt
+#check for updates
+svn status --show-updates
+#check diff against most recent using -rHEAD
+svn diff -rHEAD Number.txt
+#update
+svn update
+#after having resolved conflict then check in after
+svn resolved Number.txt
+#add file or directory
+svn add timelib
+#open property edit to ignore files
+svn propedit svn:ignore timelib
+#copy using svn doesn't copy full file, just reference
+svn copy origin destination
+#rename or move using then commit afterwards
+svn move origin destination
+#create a patch
+svn diff > mychanges.patch
+#patch in changes in the same directory in which it was createdd
+patch -p0 -i mychanges.patch
+#decided you don't like your changes after a conflict? revert to the repo version and then update
+svn revert filename
+#decided yours is better? replace repo version and resolve
+cp filename.mine filename
+svn resolved filename
+#see changes in each file appropriately
+svn blame filename
+
+A indicates Subversion has added a file to your working
+copy in order to bring it up-to-date with a new file in the
+repository.
+• U shows a file that was out-of-date in your working copy
+because a newer version was checked into the repository.
+Subversion has updated your working copy of the file to
+the new version.
+• D indicates that Subversion has removed a file from your
+working copy because the file has been deleted from the
+repository.
+• G shows a file that was out-of-date in your working copy,
+which you had modified locally. Subversion successfully
+merged the changes from the repository with your local
+modifications.
+• C shows a file that was out-of-date in your working copy,
+which you had also modified locally. Subversion tried to
+merge the changes from the repository with your local
+modifications but encountered a conflict. You’ll need to
+resolve the conflict before you can check in.

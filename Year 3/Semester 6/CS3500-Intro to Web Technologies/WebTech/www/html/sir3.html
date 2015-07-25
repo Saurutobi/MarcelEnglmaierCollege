@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" dir="ltr">
+<head>
+<title>- SIR Model -</title>
+	<head>
+		<link rel="stylesheet" type="text/css" href="mainWebsiteCSS.css">
+		
+	
+		<script src="jquery.js"></script> 
+		<script> 
+			$(function()
+			{
+				$("#navbarInclude").load("navbar.html");
+				$("#sidebarInclude").load("sidebar.html");
+			});
+		</script> 
+	</head>
+
+</head>
+<body>
+<div id="globalWrapper">
+
+
+
+	<div id="spanholder" style="position: absolute; top: 650px; left: 450px;">
+    <pre>		
+		*<span style="color:Blue">Blue: Rate of susceptible population</span>
+		*<span style="color:red">Red: Rate of infected population</span>
+		*<span style="color:green">Green: Rate of recovered population</span>
+		 <span style="color:green">(which means: immune, isolated or dead)</span>
+    </pre>
+	</div>
+<p>
+<form><input type="button" value="clear and run a simulation of 100 days" style="position: absolute; left: 505px; top: 175px;" onClick="clearturtle();run()">
+<input type="button" value="stop" style="position: absolute; left: 757px; top: 175px; " onClick="stop()">
+<input type="button" value="continue" style="position: absolute; left: 815px; top: 175px; " onClick="goOn()"></form>
+<!--<link rel='stylesheet' type='text/css' href='http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css' />-->
+
+</p><p><!-- JSXGraph MediaWiki extension 0.3.1 --><link rel="stylesheet" type="text/css" href="jsxgraph.css.css"><script src='http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js' type='text/javascript'></script><script src='http://jsxgraph.uni-bayreuth.de/distrib/GeonextReader.js' type='text/javascript'></script><div id='box' class='jxgbox' style='width:600px; height:450px;'></div><script type='text/javascript'>
+var brd = JXG.JSXGraph.initBoard('box', {axis: true, boundingbox: [-5, 1.2, 100, -1.2]});
+
+var S = brd.create('turtle',[],{strokeColor:'blue',strokeWidth:3});
+var I = brd.create('turtle',[],{strokeColor:'red',strokeWidth:3});
+var R = brd.create('turtle',[],{strokeColor:'green',strokeWidth:3});
+            
+var s = brd.create('slider', [[0,-0.3], [30,-0.3],[0,1.27E-6,1]], {name:'s'});
+brd.create('text', [40,-0.3, "initially infected population rate (on load: I(0)=1.27E-6)"]);
+var beta = brd.create('slider', [[0,-0.4], [30,-0.4],[0,0.5,1]], {name:'&beta;'});
+brd.create('text', [40,-0.4, "&beta;: infection rate"]);
+var gamma = brd.create('slider', [[0,-0.5], [30,-0.5],[0,0.3,1]], {name:'&gamma;'});
+brd.create('text', [40,-0.5, "&gamma;: recovery rate = 1/(days of infection)"]);
+
+var t = 0; // global
+
+brd.create('text', [40,-0.2, 
+        function() {return "Day "+t+": infected="+(7900000*I.Y()).toFixed(1)+" recovered="+(7900000*R.Y()).toFixed(1);}]);
+            
+S.hideTurtle();
+I.hideTurtle();
+R.hideTurtle();
+
+function clearturtle() {
+  S.cs();
+  I.cs();
+  R.cs();
+
+  S.hideTurtle();
+  I.hideTurtle();
+  R.hideTurtle();
+}
+            
+function run() {
+  S.setPos(0,1.0-s.Value());
+  R.setPos(0,0);
+  I.setPos(0,s.Value());
+                
+  delta = 1; // global
+  t = 0;  // global
+  loop();
+}
+             
+function turtleMove(turtle,dx,dy) {
+  turtle.moveTo([dx+turtle.X(),dy+turtle.Y()]);
+}
+             
+function loop() {
+  var dS = -beta.Value()*S.Y()*I.Y();
+  var dR = gamma.Value()*I.Y();
+  var dI = -(dS+dR);
+  turtleMove(S,delta,dS);
+  turtleMove(R,delta,dR);
+  turtleMove(I,delta,dI);
+                
+  t += delta;
+  if (t<100.0) {
+    active = setTimeout(loop,10);
+  }
+}
+
+function stop() {
+  if (active) clearTimeout(active);
+  active = null;
+}
+function goOn() {
+   if (t>0) {
+     if (active==null) {
+       active = setTimeout(loop,10);
+     }
+   } else {
+     run();
+   }
+
+}
+</script>
+
+
+
+<div class="printfooter">
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-81309-13']);
+  _gaq.push(['_gat._anonymizeIp']);
+  _gaq.push(['_trackPageview']);
+
+</script>
+
+<div id="footer">
+
+</div>
+</div>
+
+<script>if (window.runOnloadHook) runOnloadHook();</script>
+<!-- Served in 0.447 secs. --></body></html>

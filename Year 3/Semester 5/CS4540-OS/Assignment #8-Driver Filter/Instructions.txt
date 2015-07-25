@@ -1,0 +1,33 @@
+You are going to create, install and use a File System Mini (or regular) Filter Driver in the kernel of your W-7 Virtual machine (unless you want to do it in a real W-7).
+http://msdn.microsoft.com/en-us/library/windows/hardware/ff551834(v=vs.85).aspx
+http://msdn.microsoft.com/en-us/library/windows/hardware/ff540402(v=vs.85).aspx
+
+The purpose of this driver is to intercept I/O to any file named “dos.txt”.  It will convert the DOS end of line characters to the Linux end of line and the Dos EOF to the Linux EOF.
+Vice Versa, it will intercept I/O to any file named “linux.txt”  and convert the Linux end of line char to the DOS end of line characters as well as the EOF.
+
+Make dos.txt and linux.txt with their respective characters.
+Make the driver.
+Install the driver.
+use right-click copy to copy both original files and paste them somewhere else(this uses your driver).
+rename the two resulting files per #7/#8
+
+Turn in a .zip file with:
+1.	The install file for the driver(.inf).
+2.	The source code for your driver.
+3.	A copy of the original dos.txt file.
+4.	A copy of the original linux.txt file.
+5.	Screen shot of the dos.txt file opened in notepad and wordpad and notepad++ with wrong end of line characters and EOF.
+6.	Screen shot of the linux.txt file opened in notepad and wordpad and notepad++ with wrong end of line characters and EOF.
+7.	Copy of the file created using right-click copy of dos.txt to another file renamed to "copy of dos.txt".
+8.	Copy of the file created using right-click copy of linux.txt to another file renamed to "copy of linux.txt".
+
+
+Due: Monday 11:59 PM Dec. 2.  This gives you till Wed Noon to do the assignment before the recess.
+
+-10% per day for late as in Tuesday -10% Wed. -20% etc.
+
+ 
+
+ 
+
+ 

@@ -1,0 +1,7 @@
+Due 19.02.2014
+
+Short Description with goals
+methods, what they kind of do
+parallel environment(MPI,OpenMP,CUDA)
+Team Members
+References

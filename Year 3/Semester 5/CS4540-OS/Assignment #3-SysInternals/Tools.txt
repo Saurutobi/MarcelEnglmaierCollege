@@ -1,0 +1,31 @@
+Process Explorer-super damn useful better windows task manager
+Hex2dec-convert hex to decimal and vice versa
+
+
+look up how to:
+	LiveKd-Use Microsoft kernel debuggers to examine a live System
+
+
+
+
+Sigcheck-check digitally signed things
+PsExec-Execute processes on remote systems
+PsList-show information about processes and threads
+PsKill-terminate local or remote processes
+PsSuspend-Suspend and resume processes
+PsService-View and Control Services
+RAMMap-advanced physical memory usage analysis
+FindLinks-reports the file index and any hard links
+RootkitRevealer-scan system for rootkit based malware
+
+
+
+TCPView-very nice Active Socket command-line viewer
+ShareEnum-check shared files safety and permittions on the network
+Registry Usage(RU)-shows registry space usage for a specific key
+PsLogList-Dump event Log records
+PsGetSid-displays the SID of a computer or a user
+PortMon-monitof serial and parallel port activity
+PendMoves-Enumerate the list of file rename and delete commands for the next boot
+NTFSInfo-detailed NTFS viewer
+LogonSessions-List the active logon sessions on a system

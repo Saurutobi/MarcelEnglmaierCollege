@@ -1,0 +1,16 @@
+Included:
+the inf, the .sys, and the user program
+2 images(pre and post driverinstall with notepad)
+the source
+the original dos.txt file
+the dos.txt from after renamed to copyofdos.txt
+
+to run:
+install the .inf
+run cmd as admin. type: sc start scanner
+run another cmd as admin, using cmd, run scanuser.exe(this must be running). if it doesn't say "ERROR blablablabla" then good. don't close
+open dos.txt. save it. tada!
+
+Note: the EOF was not replaced due to this being tested on my machine, and I really didn't want to break anything.
+	But, as proof I can do it, it would be another "if" statement in the 'for' loop checking for the DOS EOF character,
+	and swapping it to linux EOF instead of making it a space. I did it once, but broke a bunch of stuff, and didn't dare do it again.

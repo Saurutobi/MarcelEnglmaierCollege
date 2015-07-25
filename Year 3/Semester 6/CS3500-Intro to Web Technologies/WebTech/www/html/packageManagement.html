@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="mainWebsiteCSS.css">
+		<title>Homepage of VPS08, Home of Group 8</title>
+	
+		<script src="jquery.js"></script> 
+		<script> 
+			$(function()
+			{
+				$("#navbarInclude").load("navbar.html");
+				$("#sidebarInclude").load("sidebar.html"); 
+			});
+		</script> 
+	</head>
+
+	<body>
+	<div id="wrap">
+		<div id="header">
+			<h1>CentOS Package Management</h1>
+	
+			<p>Group Members: Marcel Englmaier, Thinh Nguyen, David Rice</p>
+		</div>
+		<div id="navbarInclude">
+		</div>
+		
+		<div id="main">
+			Basic Package Management With Yum<br><br>
+			
+			<h3>Installing New Software</h3>
+			To install a package 'mypackage', enter the command:<br>
+			sudo yum install mypackage<br><br>
+			To install a package group 'MyGroupPackage', enter the command:<br>
+			sudo yum groupinstall "MyGroupPackage"<br><br>
+			
+			<h3>Updating Software</h3>
+			To update a package 'mypackage' to the latest version, enter the command:<br>
+			sudo yum update mypackage<br><br>
+			To update all of the packages in a package group 'MyGroupPackage', enter the command:<br>
+			sudo yum groupupdate "MyGroupPackage"<br><br>
+			
+			<h3>Removing Software</h3>
+			When removing software, yum checks your system for the specified software and its dependencies.<br>
+			Both the specified software and the dependencies will be removed<br><br>
+			To remove a package 'mypackage' from your system, enter the command:<br>
+			sudo yum remove mypackage<br><br>
+			To remove all of the packages in a package group 'MyGroupPackage', enter the command:<br>
+			sudo yum groupremove "MyGroupPackage"<br><br>
+			
+			<h3>Searching for Packages</h3>
+			The search feature of yum returns software available from the configured repositories or already installed on your system.<br><br>
+			To search for specific package by name, use the 'list' function. To search for package 'mypackage', use command:<br>
+			sudo yum list mypackage<br><br>
+			To search for specific versions of a package, say version 0.123, use the command: <br>
+			sudo yum list mypackage-0.123<br><br>
+			
+			<h3>Advanced Searches</h3>
+			When the name of a specific package is unknown, the 'search' and 'provides' commands can be used.<br><br>
+			The 'search' command checks the names, descriptions, summaries and listed package maintainers.<br>
+			To search for all packages that relate to 'PalmPilot', use the command:<br>
+			sudo yum search PalmPilot<br><br>
+			The 'provides' command checks both the files included in the packages and the functions the software provides.<br>
+			To search for all packages that include files called 'libneon', use the command:<br>
+			sudo yum provides libneon<br><br>
+			When searching with partial word or name, use the escape character '\' followed by '?' to represent one character or '*' to mean zero or more characters.<br>
+			To 'list' all packages with names that begin with 'tsc', use the command:<br>
+			sudo yum list tsc\*<br><br>
+		<div id="sidebarInclude">
+		</div>
+		<div id="footer">
+		</div>
+	</div>
+	</body>
+</html>

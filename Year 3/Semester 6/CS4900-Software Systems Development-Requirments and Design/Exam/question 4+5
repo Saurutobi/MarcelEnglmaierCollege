@@ -1,0 +1,10 @@
+4. Describe a typical XSS attack and what can be done to try and prevent them
+The client logs in, does their stuff. The hacker realizes that there's a vulnerability, and writes some javascript
+to take advantage of it. He realizes this can be run through the browser's URL, and so send a URL that will run the
+bad javascript on the client machine to a bunch of people. Those people, suspecting a valid link, click it and not have
+malicious javascript running on their system.
+A good way to 
+
+
+5. Why is is usually an error when two floating point numbers x and y are being compared as equal? Show how it 
+	should be done ignoring NaNs, INfs, etc

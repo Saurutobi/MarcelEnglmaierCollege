@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script type="text/javascript">
+	window.onload = function () {
+	
+      var i;
+			var S = 999;
+			var I = 1;
+			var R = 0;
+			var totalPop = S + I + R;
+			var Sn = (S/totalPop);
+			var In = (I/totalPop);
+			var Rn = (R/totalPop);
+			var Sprev = Sn;
+			var Iprev = In;
+			var Rprev = Rn;
+			var b = .5;
+			var k = .33;
+			var dT = 1;
+			var totalTime = 300;
+      var dpS = [{x: 0, y: S},];   //dataPoints. 
+      var dpI = [{x: 0, y: I},];
+      var dpR = [{x: 0, y: R},];
+      for (i = 0; i < totalTime; i+=dT) {
+      	Sn = Sprev - (b*Sprev*Iprev*dT);
+				In = Iprev + ((b*Sprev*Iprev - (k*Iprev))*dT);
+				Rn = Rprev + (k*Iprev*dT);
+				Sprev = Sn;
+				Iprev = In;
+				Rprev = Rn;
+				S = totalPop * Sn;
+				I = totalPop * In;
+				R = totalPop * Rn;
+				S = Math.round(S);
+				I = Math.round(I);
+				R = Math.round(R);
+      	
+      	dpS.push({x: i,y: S});
+      	dpI.push({x: i,y: I});
+      	dpR.push({x: i,y: R});
+      	}
+
+      var chart = new CanvasJS.Chart("chartContainer",{
+      	title :{
+      		text: "SIR Model"
+      	},
+      	legend: {
+      	  horizontalAlign: "right",
+      	  verticalAlign: "top"
+      	},
+      	axisX: {						
+      		title: "Days"
+      	},
+      	axisY: {						
+      		title: "Population"
+      	},
+      	data: [{
+      		type: "line",
+      		dataPoints : dpS,
+      		showInLegend: true,
+      		legendText: "S"
+      	},
+      	{ type: "line",
+      	  dataPoints : dpI,
+      	  showInLegend: true,
+      		legendText: "I"
+      	},
+      	{ type: "line",
+      	  dataPoints : dpR,
+      	  showInLegend: true,
+      		legendText: "R"
+      	}]
+      });
+
+      chart.render();
+
+}
+</script>
+<script type="text/javascript" src="source/canvasjs.min.js"></script>
+</head>
+<body>
+	<div id="chartContainer" style="height: 500px; width: 90%;">
+	</div>
+</body>
+</html>

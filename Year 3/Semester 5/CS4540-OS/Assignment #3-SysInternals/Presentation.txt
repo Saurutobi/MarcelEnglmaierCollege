@@ -1,0 +1,60 @@
+http://technet.microsoft.com/en-us/sysinternals/bb842062
+http://technet.microsoft.com/en-us/sysinternals/bb545027
+
+
+What program can you use to mimic a BlueScreen complete wth CHKDSK?
+-BlueScreen.
+What is your system clock's maximum timer resolution?-find the appropriate program and use it to find the answer
+-The answers vary, but are in ms.
+How much of your disk is being used by the system32 folder? Take a screenshot.
+-Screenshot of Disk Usage(DU)
+Give the steps for giving process explorer admin priviledges(from inside the program), and end a process tree.
+-File->Show Details for All Processes. Then rightclick on a process and click on "Kill Process Tree"
+What sys internal tool would you use if you want to see UDP or TCP ports information
+-TCP VIEW
+What is whois?
+-Whois displays the registration record for the domain name or IP address that you specify. This includes contact information and geographic information.
+Which tool would allow you to create a virtual disk out of your disk?
+-Disk2vhd
+What program would you run if you want to flush all the file system data to the disk?
+-Sync
+What is the syntax to create a stream called Quiz?
+-Quiz:Stream
+Which program would you run to display all of windows objects?
+-winObj
+What makes contig different from a typical disk defragmenter?
+-Contig can defragment specific files
+What does diskmon monitor?
+-Idividual disk reads/writes
+What does the handle utility do?
+-It shows every handle on the system
+
+Process Explorer
+Hex2dec
+PsExec
+PsList
+PsSuspend
+PsService
+RAMMap
+LiveKd
+
+
+
+Process Explorer-super damn useful better windows task manager
+Hex2dec-convert hex to decimal and vice versa
+LiveKd-Use Microsoft kernel debuggers to examine a live System, must have kernel debugging tools from the Microsoft SDK
+    use -hvl to list names and ids of active VMs
+    use -hv {name of machine} to specify the one you want to examine
+    use -p to pause the machine giving you a frozen-in-time view of the virtual machine while you poke around. 
+The LiveKD tool simulates local kernel debugging. This tool creates a "snapshot" dump file of the kernel memory, without actually stopping the kernel while this snapshot is made. (Therefore, the snapshot might not actually show a single instant state of the computer.)
+
+Sigcheck-check digitally signed things
+PsExec-Execute processes on remote systems
+    run with PsExec.exe {location of program}
+PsList-show information about processes and threads
+PsKill-terminate local or remote processes
+PsSuspend-Suspend and resume processes
+PsService-View and Control Services
+RAMMap-advanced physical memory usage analysis
+FindLinks-reports the file index and any hard links
+RootkitRevealer-if searches for rootkits

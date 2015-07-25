@@ -1,0 +1,46 @@
+What program can you use to mimic a BlueScreen complete wth CHKDSK?
+Answer:BlueScreen.
+
+What is your system clock's maximum timer resolution?-find the appropriate program and use it to find the answer
+Answer:1ms, but sometimes it tells me 0.5ms
+
+How much of your disk is being used by the system32 folder? Take a screenshot.
+Answer: I didn't take a screenshot, but my cmd.exe outputted:
+Du v1.5 - report directory disk usage
+Copyright (C) 2005-2013 Mark Russinovich
+Sysinternals - www.sysinternals.com
+
+Files:        18928
+Directories:  1412
+Size:         4,385,471,280 bytes
+Size on disk: 4,433,829,888 bytes
+
+Give the steps for giving process explorer admin priviledges(from inside the program), and end a process tree.
+Answer:File->Show Details for All Processes. Then rightclick on a process and click on "Kill Process Tree"
+
+What sys internal tool would you use if you want to see UDP or TCP ports information
+Answer:TCP VIEW
+
+What is whois?
+Answer: it show a domain or IP's registration info
+
+Which tool would allow you to create a virtual disk out of your disk?
+Answer:Disk2vhd
+
+What program would you run if you want to flush all the file system data to the disk?
+Answer:Sync
+
+What is the syntax to create a stream called Quiz?
+Answer:Quiz:Stream
+
+Which program would you run to display all of windows objects?
+Answer:winObj
+
+What makes contig different from a typical disk defragmenter?
+Answer:Contig can defragment specific files
+
+What does diskmon monitor?
+Answer: DiskI/O
+
+What does the handle utility do?
+Answer:shows every handle on the system

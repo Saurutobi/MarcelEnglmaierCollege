@@ -1,0 +1,28 @@
+cscan in: simple, just needs file path. do same with italian. make sure some new lines are at the end
+1.
+hist(x,prob=t)
+lines(density(x))
+
+2.
+c1<-c(fivenum(x),mean(x),sd(x))
+c1
+
+3.
+I DON'T KNOW THIS
+
+4.
+copypaste function
+
+5.
+fences <- function(x){
+	#returns lower and upper fences for a vector of data x
+	fn <- fivenum(x)
+	q1 <- fn[2]
+	q3 <- fn[4]
+	iq <- q3 - q1
+	lower <- q1 - 1.5*iq
+	upper <- q3 - 1.5*iq
+	return(c(lower,upper))
+}
+
+6. Answer the question, and why

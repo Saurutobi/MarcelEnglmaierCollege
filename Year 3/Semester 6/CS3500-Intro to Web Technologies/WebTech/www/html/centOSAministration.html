@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="mainWebsiteCSS.css">
+		<title>Homepage of VPS08, Home of Group 8</title>
+	
+		<script src="jquery.js"></script> 
+		<script> 
+			$(function()
+			{
+				$("#navbarInclude").load("navbar.html");
+				$("#sidebarInclude").load("sidebar.html");
+			});
+		</script> 
+	</head>
+
+	<body>
+	<div id="wrap">
+		<div id="header">
+			<h1>CentOS Administration</h1>
+	
+			<p>Group Members: Marcel Englmaier, Thinh Nguyen, David Rice</p>
+		</div>
+		<div id="navbarInclude">
+		</div>
+		
+		<div id="main">
+			Note: The "$" refers to the command's prompt. Don't type in the $ when you copy these commands. Also, you must be logged in as root to do most of these commands.
+			
+			<h3>Changing your password(for root or for a user)</h3>
+			#First thing to do is Change your password. Do this with<br>
+			$ passwd<br><br>
+			
+			<h3>Adding a user</h3>
+			#Type<br>
+			$ useradd <username><br>
+			#<username> is the name of the user you'd like to create<br>
+			#Now you need to activate it by setting a passwd. Do this with<br>
+			$ passwd <username><br>
+			#You can also use this command to change other users' passwords from root<br><br>
+			
+			<h3>Creating a group and adding users to it</h3>
+			#Use this to create a group with the name <groupname><br>
+			$ groupadd <groupname><br>
+			#Now add a user to that group<br>
+			$ usermod -a -G <groupname> <username><br><br>
+			
+			<h3>Adding a user to the sudoers list</h3>
+			#Find and open the sudoers file in <br>
+			/etc/sudoers<br>
+			#At the very bottom, add this line:<br>
+			<username>	ALL=(ALL)	ALL<br>
+			#This will give <username> the permission to use the sudo command with their personal password.<br><br>
+			
+			<h3>ssh</h3>
+			ssh requires two things: a public key and a private key. These are made on seperate machines. The public key
+			is made on the server machine, while the private key is made on the connecting machine. The public key must be
+			on the connecting key, and the private key must be on the server machines(this requires simply copying and pasting
+			the files into the /.ssh/authorized_keys file.<br>
+			When using pretty much any modern machine, this is done automatically and usually prompts the user for a logon password.
+			To do this without passwords, both machines need each others keys<br><br>
+			
+			<h3>Disable Root Logins</h3>
+			#Open the sshd config file located here:<br>
+			/etc/ssh/sshd_config<br>
+			#Make sure you have the following entry<br>
+			PermitRootLogin no<br>
+			#Now restart the sshd service with<br>
+			$ service sshd restart<br><br>
+		<div id="sidebarInclude">
+		</div>
+		<div id="footer">
+		</div>
+	</div>
+	</body>
+</html>

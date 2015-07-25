@@ -1,0 +1,51 @@
+problem 1
+take out last fuckin' line
+
+
+
+problem 2
+
+r1<-scan()
+then enter a line
+r2<-scan()
+then enter a line
+for all lines in file
+
+
+mat <- rbind(r1,r2,r3) etc
+
+
+chisq.test(mat)
+
+ruleind <- function(mat)
+{
+numr <- dim(mat)[1]
+numc <- dim(mat)[2]
+df <- (numr-1)*(numc-1)
+ruleind <- df + 2*sqrt(2*df)
+return(ruleind)
+}
+
+see <-chisq.test(mat)
+see
+
+ruleind(mat)
+
+THIS DOES x=2 y=1 I think
+apply(mat,1,sum)
+px2 <- 68/sum(mat)
+px2 now contains probability
+FUCK THIS, DO IT MANUALLY
+put in number at x=3 y=4, then divide by sum(mat) like
+px3y4 <- 5/sum(mat)
+px3y4 now has it
+
+
+apply(mat,2,sum)
+sums all columns
+
+pix3y4 <- the row/sum(mat)
+find pix3
+piy4
+then pix3*piy4=independence prob
+but IDK if that's right, look it up on the internet

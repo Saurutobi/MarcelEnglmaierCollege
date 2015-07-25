@@ -1,0 +1,58 @@
+/**
+ * JavaCC template file created by SF JavaCC plugin 1.5.17+ wizard for JavaCC 1.5.0+
+ */options{  JDK_VERSION = "1.6";  static = true;}PARSER_BEGIN(L485Parser)package parser;
+
+public class L485Parser{}PARSER_END(L485Parser)SKIP :{  " "| "\r"| "\t"| "\n"
+| < "//" (~["\n","\r"])* ("\r")? "\n" >}
+TOKEN : /* Keywords */
+{  < DEFUNC : "defunc" >
+| < DEFCLASS : "defclass" >
+| < METHOD : "method" >
+| < FUNC : "func" >
+| < COND : "cond" >
+| < IF : "if" >
+| < THEN : "then" >
+| < ELSE: "else" >
+| < FI: "fi" >
+| < LOAD : "load" >
+| < NEW : "new" >
+| < VARS: "vars" >
+| < ASSIGN: "assign" >
+| < TO: "to" >
+| < WITH: "with" >
+| < TRUE: "true" >
+| < FALSE: "false" >
+
+}
+TOKEN : /* OPERATORS */{  < PLUS : "+" >| < MINUS : "-" >| < MULTIPLY : "*" >| < DIVIDE : "/" >
+| < OR : "||" >
+| < AND : "&&" >
+| < NOT : "!" >
+| < EQUAL : "==" >
+| < NOTEQUAL : "!=" >
+| < LESS : "< " >
+| < LESSEQUAL : "<=" >
+| < GREATER: ">" >
+| < GREATEREQUAL: ">=" >
+| < INVOKE: "->" >}TOKEN :{
+  <STRING: "'"(~["'"])*"'">
+| <#DIGIT: ["0" - "9"] >
+| <#ALPHA: ["a" - "z"] | ["A" - "Z"] >
+| <ID: <ALPHA> (<ALPHA> | <DIGIT>)*>
+| <#EXPONENT: ("e" | "E") ("+" | "-")? (<DIGIT>)+ >
+| <FLOATNUM: <INTNUM> (< DOT > (<DIGIT>)+ (<EXPONENT>)? | <EXPONENT>) >
+| < #POSITIVE : ["1" - "9"] >
+| <INTNUM: "0" | < POSITIVE > (<DIGIT>)* >
+| < DOT : "." >
+| < LP : "(" >
+| < RP : ")" >
+| < LB : "{" >
+| < RB : "}" >
+| < LBK: "[" >
+| < RBK: "]" >
+| < COMMA: "," >}
+void program() :
+{}
+{
+	< ID >
+}

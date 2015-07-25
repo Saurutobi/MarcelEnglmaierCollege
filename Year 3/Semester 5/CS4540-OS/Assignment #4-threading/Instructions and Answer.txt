@@ -1,0 +1,42 @@
+Compile Instructions:
+	This is a netbeans project, and can be run in netbeans.
+	There is a jar included, but I can't say I know how to 
+	run/compile that or the sourcecode outside of netbeans.
+
+Run Instructions:
+	Simply run the application. It will prompt you for two numbers:
+	Array Size, and maximum number in array. Array Size determines
+	how many numbers are in the array, and maximum number in array
+	determines the boundary of randomization. The application will
+	randomize the input, and present the original array as proof.
+	Then, it will present the sorted subarrays from each of the two
+	threads. Then, it will present the fully merged and sorted array.
+	Sample output is down below.
+
+Answers:
+	My project does not use shared memory, I split the array when I 
+	pass the info to the thread. I would have to detect the cores
+	on my system, and then use 3 foreach loops to spawn the
+	threads first, and then a second loop to join them so they're
+	all done. Then, I'd use a foreach loop to merge two threads at
+	a time, and then merge the resulting threads again until I end
+	with 1 array. I would also have to modify my bubblesort to a
+	modified insertionsort so it doesn't run in O(n^2).
+		
+Sample Output:
+
+run:
+Enter the amount of integers in the array
+15
+Enter the maximum integer
+50
+Your Array is of size: 15.
+Your starting array looks like:
+2,10,33,24,22,9,10,43,37,1,18,3,32,9,24
+Top part of array:
+2,9,10,10,22,24,33
+Bottom part of array:
+1,3,9,18,24,32,37,43
+Fully Sorted Array:
+1,2,3,9,9,10,10,18,22,24,24,32,33,37,43
+BUILD SUCCESSFUL (total time: 3 seconds)

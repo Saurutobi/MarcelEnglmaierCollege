@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="mainWebsiteCSS.css">
+		<title>Homepage of VPS08, Home of Group 8</title>
+	
+		<script src="jquery.js"></script> 
+		<script> 
+			$(function()
+			{
+				$("#navbarInclude").load("navbar.html");
+				$("#sidebarInclude").load("sidebar.html");
+		
+				
+			var iValue = $('#iValue');
+			$('#setI').change(function(){
+			iValue.html(this.value);
+			});
+			
+			$('#setI').change();
+			
+			var rValue = $('#rValue');
+			$('#setR').change(function(){
+			rValue.html(this.value);
+			});
+			
+			$('#setR').change();
+			
+			var sValue = $('#sValue');
+			$('#setS').change(function(){
+			sValue.html(this.value);
+			});
+			
+			$('#setS').change();
+			
+			var betaValue = $('#betaValue');
+    	$('#setb').change(function(){
+      betaValue.html(this.value);
+    	});
+    		
+    	$('#setb').change();
+    		
+    	var gammaValue = $('#gammaValue');
+    	$('#setk').change(function(){
+     	gammaValue.html(this.value);
+    	});
+    		
+    	$('#setk').change();
+			});
+		</script> 
+		<script type="text/javascript">
+		
+		function saveData(a, filename)
+		{
+			var Si = document.getElementById("setS").value;
+			this.setS = Si;
+			var Ii = document.getElementById("setI").value;
+			this.setI = Ii;			
+			var Ri = document.getElementById("setR").value;
+			this.setR = Ri;
+			var bi = document.getElementById("setb").value;
+			this.setb = bi;
+			var ki = document.getElementById("setk").value;
+			this.setk = ki;
+			var dti = document.getElementById("setdT").value;
+			this.setdT = dti;
+			var ti = document.getElementById("setT").value;
+			this.setT = ti;
+			var data = Si + 
+				       ";" +
+					   Ii +
+				       ";" +
+				       Ri +
+				       ";" +
+				       bi +
+				       ";" +
+				       ki +
+				       ";" +
+				       dti +
+				       ";" +
+				       ti;
+			
+			contentType = 'data:application/octet-stream,';
+			uriContent = contentType + encodeURIComponent(data);
+			a.setAttribute('href', uriContent);
+			a.setAttribute('download', filename);
+			
+		}
+		
+		var text = "";
+		var stateNames = {};
+		stateNames[FileReader.EMPTY]   = 'EMPTY';
+		stateNames[FileReader.LOADING] = 'LOADING';
+		stateNames[FileReader.DONE]    = 'DONE';
+		var openFile = function(event) {
+		var input = event.target;
+
+			var reader = new FileReader();
+			reader.onload = function(event){
+			var reader = event.target;
+
+			text = reader.result;
+			console.log(reader.result.substring(0, 200));
+			console.log(text);
+			fileSIRModel(text);
+	  
+			};
+			reader.readAsText(input.files[0]);
+	
+		};
+		
+		</script>
+		
+		
+	</head>
+
+	<body>
+	
+	
+	<div id="wrap">
+		<div id="header">
+			<h1>SIR Influenza Model</h1>
+	
+			<p>Group Members: Marcel Englmaier, Thinh Nguyen, David Rice</p>
+		</div>
+		<div id="navbarInclude"></div>
+		
+		
+		<div id="main">
+		
+	
+			<fieldset>
+			<legend><b>Please Enter Values<b></legend>
+	
+			<table>				
+    		<tr>
+        	<td>Time Increment:
+        	<input  id="setdT" type="text" value="1" autofocus> days</td>
+        	<td>Total Time:
+        	<input  id="setT" type="text" value="100"> days</td>
+    		</tr>	
+    		
+    		<tr>
+        	<td colspan="2"><p class="note">S value: <span id="sValue">0</span></p></td>
+    		</tr>
+    		<tr>
+        	<td colspan="2"><input id="setS" type="range" min="0" max="1000" step="1" value="999"/></td>
+    		</tr>
+    		
+    		<tr>
+        	<td colspan="2"><p class="note">I value: <span id="iValue">0</span></p></td>
+        </tr>
+        <tr>
+        	<td colspan="2"><input id="setI" type="range" min="0" max="1000" step="1" value="1"/></td>
+        </tr>	
+        
+    		<tr>
+        	<td colspan="2"><p class="note">R value: <span id="rValue">0</span></p></td>
+        </tr>	
+        <tr>
+        	<td colspan="2"><input id="setR" type="range" min="0" max="1000" step="1" value="0"/>	</td>
+        </tr>
+        
+    		
+    		<tr>
+        	<td><p class="note">Beta value: <span id="betaValue">0</span></p></td>
+        	<td><p class="note">Gamma value: <span id="gammaValue">0</span></p></td>	
+    		</tr>
+    		
+    		<tr>
+        	<td><input id="setb" type="range" min=".0" max="1.00" step=".01"/></td>
+        	<td><input id="setk" type="range" min=".0" max="1.00" step=".01"/></td>	
+    		</tr>
+    		
+			</table>
+			</fieldset>
+			</br>
+			<style>
+			section { display: inline; }
+			</style>
+			<section>
+			<p>Click the button to start the model</p>
+			<button onclick="SIRModel()">Graph it!</button></br>
+			<input type="file" accept='text/plain' onChange='openFile(event)' style="padding-right: 30px;" />	
+			
+			<a href="#" onClick="saveData(this, 'graph.txt');" style="padding-left: 30px;">&nbsp;&nbsp;Save Graph</a>
+			</section>
+			</br>
+
+		<div id="chartContainer" style="height: 500px; width: 90%;"></div>		
+		
+		</div>
+		
+		<div id="sidebarInclude">
+		</div>
+		<div id="footer">
+		</div>
+	</div>
+	
+	
+
+<script>
+	function foo(text)
+	{
+		var temp = text.split(';');
+		for(i = 0;i < temp.length;i++)
+		{
+			console.log(temp[i]);
+		}
+	}
+
+
+function SIRModel()
+{
+	
+	localStorage.setItem('S', document.getElementById("setS").value);
+	localStorage.setItem('I', document.getElementById("setI").value);
+	localStorage.setItem('R', document.getElementById("setR").value);
+	localStorage.setItem('b', document.getElementById("setb").value);
+	localStorage.setItem('k', document.getElementById("setk").value);
+	localStorage.setItem('dt', document.getElementById("setdT").value);
+	localStorage.setItem('t', document.getElementById("setT").value);
+	var i;
+	var S = parseInt(localStorage.getItem('S'));
+	var I = parseInt(localStorage.getItem('I'));
+	var R = parseInt(localStorage.getItem('R'));
+	var b = parseFloat(localStorage.getItem('b'));
+	var k = parseFloat(localStorage.getItem('k'));
+	var dT = parseInt(localStorage.getItem('dt'));
+	var totalTime = parseInt(localStorage.getItem('t'));
+	var totalPop = (S + I + R);
+	var Sn = (S/totalPop);
+	var In = (I/totalPop);
+	var Rn = (R/totalPop);
+	var Sprev = Sn;
+	var Iprev = In;
+	var Rprev = Rn;
+	
+  var dpS = [{x: 0, y: S}];   //dataPoints. 
+  var dpI = [{x: 0, y: I}];
+  var dpR = [{x: 0, y: R}];
+  for (i = dT; i < totalTime; i+=dT)
+	{
+		Sn = (Sprev - (b*Sprev*Iprev*dT));
+		In = (Iprev + ((b*Sprev*Iprev - (k*Iprev))*dT));
+		Rn = (Rprev + (k*Iprev*dT));
+		Sprev = Sn;
+		Iprev = In;
+		Rprev = Rn;
+		S = (totalPop * Sn);
+		I = (totalPop * In);
+		R = (totalPop * Rn);
+		S = Math.round(S);
+		I = Math.round(I);
+		R = Math.round(R);
+    dpS.push({x: i,y: S});
+		dpI.push({x: i,y: I});
+    dpR.push({x: i,y: R});
+    }
+
+      var chart = new CanvasJS.Chart("chartContainer",{
+	
+		backgroundColor: "Gold",
+      	title :{
+      		text: "SIR Model",
+			fontFamily: "modern",
+      	},
+      	legend: {
+		  fontWeight: "bold",
+      	  horizontalAlign: "right",
+      	  verticalAlign: "top",
+      	},
+	
+		
+      	axisX: {						
+      		title: "Days",
+			titleFontFamily: "modern",			
+      	},
+      	axisY: {						
+      		title: "Population",
+			titleFontFamily: "modern",	
+      	},
+      	data: [{			
+      		type: "line",			
+			lineThickness: 3,			
+      		dataPoints : dpS,
+      		showInLegend: true,
+      		legendText: "S"
+      	},
+      	{ type: "line",		  
+		  lineThickness: 3,		  
+      	  dataPoints : dpI,
+      	  showInLegend: true,
+      		legendText: "I"
+      	},
+      	{ type: "line",		  
+		  lineThickness: 3,
+      	  dataPoints : dpR,
+      	  showInLegend: true,
+      		legendText: "R"
+      	}]
+      });
+
+      chart.render();
+
+}
+</script>
+<script>
+
+	
+
+function fileSIRModel(text)
+{
+	var temp = text.split(';');
+	document.getElementById('setdT').value = temp[5];
+	document.getElementById('setT').value = temp[6];
+	document.getElementById('setS').value = temp[0];
+	document.getElementById('setI').value = temp[1];
+	document.getElementById('setR').value = temp[2];
+	document.getElementById('setb').value = temp[3];
+	document.getElementById('setk').value = temp[4];
+	$('#setI').change();
+	$('#setR').change();
+	$('#setS').change();
+  $('#setb').change();	
+  $('#setk').change();
+		
+	var i;
+	var S = parseInt(temp[0]);
+	var I = parseInt(temp[1]);	
+	var R = parseInt(temp[2]);
+	var b = parseFloat(temp[3]);
+	var k = parseFloat(temp[4]);
+	var dT = parseInt(temp[5]);
+	var totalTime = parseInt(temp[6]);
+	var totalPop = (S + I + R);
+	var Sn = (S/totalPop);
+	var In = (I/totalPop);
+	var Rn = (R/totalPop);
+	var Sprev = Sn;
+	var Iprev = In;
+	var Rprev = Rn;
+	
+  var dpS = [{x: 0, y: S}];   //dataPoints. 
+  var dpI = [{x: 0, y: I}];
+  var dpR = [{x: 0, y: R}];
+  for (i = dT; i < totalTime; i+=dT)
+	{
+		Sn = (Sprev - (b*Sprev*Iprev*dT));
+		In = (Iprev + ((b*Sprev*Iprev - (k*Iprev))*dT));
+		Rn = (Rprev + (k*Iprev*dT));
+		Sprev = Sn;
+		Iprev = In;
+		Rprev = Rn;
+		S = (totalPop * Sn);
+		I = (totalPop * In);
+		R = (totalPop * Rn);
+		S = Math.round(S);
+		I = Math.round(I);
+		R = Math.round(R);
+    dpS.push({x: i,y: S});
+		dpI.push({x: i,y: I});
+    dpR.push({x: i,y: R});
+    }
+	      var chart = new CanvasJS.Chart("chartContainer",{
+	
+		backgroundColor: "Gold",
+      	title :{
+      		text: "SIR Model",
+			fontFamily: "modern",
+      	},
+      	legend: {
+		  fontWeight: "bold",
+      	  horizontalAlign: "right",
+      	  verticalAlign: "top",
+      	},
+	
+		
+      	axisX: {						
+      		title: "Days",
+			titleFontFamily: "modern",			
+      	},
+      	axisY: {						
+      		title: "Population",
+			titleFontFamily: "modern",	
+      	},
+      	data: [{			
+      		type: "line",			
+			lineThickness: 3,			
+      		dataPoints : dpS,
+      		showInLegend: true,
+      		legendText: "S"
+      	},
+      	{ type: "line",		  
+		  lineThickness: 3,		  
+      	  dataPoints : dpI,
+      	  showInLegend: true,
+      		legendText: "I"
+      	},
+      	{ type: "line",		  
+		  lineThickness: 3,
+      	  dataPoints : dpR,
+      	  showInLegend: true,
+      		legendText: "R"
+      	}]
+      });
+
+      chart.render();
+
+}
+</script>
+<script type="text/javascript" src="canvasjs.min.js"></script>
+
+<div id="text"></div>
+<script>
+	
+function SetFocus()
+	{
+    // safety check, make sure its a post 1999 browser
+    if (!document.getElementById)
+    {
+        return;
+    }
+
+    var userinput = document.getElementById("setdT");
+	
+	
+
+    if (userinput != null)
+    {
+        userinput.focus();
+		userinput.select();
+    }
+	}
+	SetFocus();
+</script>
+</body>
+</html>

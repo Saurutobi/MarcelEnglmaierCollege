@@ -1,0 +1,133 @@
+Script started on Fri 18 Apr 2014 12:47:36 PM EDT
+[mgf0712@thor ~]$ gcc sequentialadd.c 
+[mgf0712@thor ~]$ cat sequentialadd.c 
+#include <stdio.h>
+#include <time.h>
+#include <sys/time.h>
+
+int main(int argc, char *argv[])
+{
+	int n = atoi(argv[1]);
+	float A[n][n];
+	float B[n][n];
+	float C[n][n];
+	int i;
+	int j;
+	struct timeval start;
+	struct timeval end;
+		
+	for(i = 0; i < n; i++)
+	{
+		for(j = 0; j < n; j++)
+		{
+			A[i][j] = 2 * i + j + 1;
+			B[i][j] = i + 4 * j + 2;
+		}
+	}
+	
+	gettimeofday(&start, NULL);
+	for(i = 0; i < n; i++)
+	{
+		for(j = 0; j < n; j++)
+		{
+			C[i][j] = A[i][j] + B[i][j];
+		}
+	}
+	gettimeofday(&end, NULL);
+	int timeran = (((end.tv_sec - start.tv_sec) * 1000000) +(end.tv_usec - start.tv_usec));
+	printf("Completed in %d Nano Seconds\n", timeran);
+	
+	return(0);
+[mgf0712@thor ~]$ ./a.out 10
+Completed in 2 Nano Seconds
+[mgf0712@thor ~]$ ./a.out 20
+Completed in 6 Nano Seconds
+[mgf0712@thor ~]$ ./a.out 100
+Completed in 153 Nano Seconds
+[mgf0712@thor ~]$ ./a.out 200
+Completed in 526 Nano Seconds
+[mgf0712@thor ~]$ ./a.out 300
+Completed in 1185 Nano Seconds
+[mgf0712@thor ~]$ ./a.out 400
+Completed in 1965 Nano Seconds
+[mgf0712@thor ~]$ ./a.out 500
+Completed in 3276 Nano Seconds
+[mgf0712@thor ~]$ ./a.out 600
+Completed in 4734 Nano Seconds
+[mgf0712@thor ~]$ ./a.out 700
+Completed in 3039 Nano Seconds
+[mgf0712@thor ~]$ ./a.out 800
+Completed in 4029 Nano Seconds
+[mgf0712@thor ~]$ ./a.out 900
+Completed in 4586 Nano Seconds
+[mgf0712@thor ~]$ ./a.out 1000
+Completed in 5743 Nano Seconds
+[mgf0712@thor ~]$ nvcc paralleladd.cu 
+bash: nvcc: command not found
+[mgf0712@thor ~]$ module load nvidia/cuda/5.5[mgf0712@thor ~]$ qsub cuda.pbs
+6347.thor.cs.wmich.edu
+[mgf0712@thor ~]$ cat CudaMatrixAddition.o6347 
+
+
+Running with n=10
+We Did It!!
+Completed in 91 Nano Seconds
+
+
+Running with n=20
+We Did It!!
+Completed in 93 Nano Seconds
+
+
+Running with n=100
+We Did It!!
+Completed in 180 Nano Seconds
+
+
+Running with n=200
+We Did It!!
+Completed in 388 Nano Seconds
+
+
+Running with n=300
+We Did It!!
+Completed in 795 Nano Seconds
+
+
+Running with n=400
+We Did It!!
+Completed in 1379 Nano Seconds
+
+
+Running with n=500
+We Did It!!
+Completed in 2100 Nano Seconds
+
+
+Running with n=600
+We Did It!!
+Completed in 2737 Nano Seconds
+
+
+Running with n=700
+We Did It!!
+Completed in 3680 Nano Seconds
+
+
+Running with n=800
+We Did It!!
+Completed in 4605 Nano Seconds
+
+
+Running with n=900
+We Did It!!
+Completed in 5759 Nano Seconds
+
+
+Running with n=1000
+We Did It!!
+Completed in 6372 Nano Seconds
+[mgf0712@thor ~]$ exit
+exit
+
+Script done on Fri 18 Apr 2014 12:51:08 PM EDT

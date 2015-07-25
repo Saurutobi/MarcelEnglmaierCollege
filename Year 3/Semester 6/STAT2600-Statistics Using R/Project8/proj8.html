@@ -1,0 +1,90 @@
+<html>
+<body>
+<h3><center>
+Stat 2600 Project 8 Due: March 18, 2014 <br>
+Confidence Intervals </center></h3><hr>
+<p>
+<ol>
+<li> Determine the necessary sample size to estimate the populaton mean within 4 units,
+with confidence 95\%.   For your determination, make use of the following
+sample of data (a pilot study):
+<pre>
+92  69  88  80  98  98  58  81  20  84  74 114
+</pre>
+<pre>
+
+
+
+</pre>
+<li> Source (copy and paste into the R session) the following function. It returns a table containing two columns:
+column one contains the confidence percentages 80, 85, 90, 95, 99 and column 2 contains the sample
+size determinations for estimating the mean mu.   Input consists of the bound B (within B) and a sigma from a pilot study.
+Run it for the last problem and verify, for confidence 95%, that it produces the same n as you got.
+<pre>    
+         ssd <- function(vecpct=c(80, 85, 90, 95, 99),B,sig){
+    
+             ss <- c()
+             m <- length(vecpct)
+             for(i in 1:m){
+                 alp2 <- (1-(vecpct[i]/100))/2
+                 zc <- abs(qnorm(alp2))
+                 ss[i] <- (zc*sig/B)^2 
+             }
+             mat <- cbind(vecpct,round(ss))
+             return(mat)
+         }
+     
+</pre>
+<pre>
+
+
+
+</pre>
+<li>  Determine the necessary sample size to estimate the populaton proportion within .08,
+with confidence 95%, using the conservative rule.
+<pre>
+
+
+
+</pre>
+<li> Write a function which returns a table containing two columns:
+column one contains the confidence percentages 80, 85, 90, 95, 99 and column 2 contains the corresponding
+sample
+size determinations  for estimating the population proportion within B, using the conservative rule.
+Input is the vector of percentages and B.
+Verify the program for the last problem.
+<pre>
+
+
+
+
+
+
+</pre>
+
+<li> A store stocks 5 brands on an item including Brand A.
+The table below consists of the poll results on the purchases of  item A and not A before and
+after an intensive marketing campaign on Brand A.
+Has the campaign been effective.   Answer based on a 95% confidence interval.
+<pre>
+
+         Bought Brand A    Bought another brand
+Before         28                82
+After          45                93
+
+
+
+
+
+
+</pre>
+
+<li> Let mu1 be the maximum head breadth for an ancient Etruscan and
+let mu2 be the maximum head breadth for a modern Italian.
+Using the class data (look <a href="http://fisher.stat.wmich.edu/joe/Stat5660/Data/"> here </a>)
+obtain a 99% confidence interval for mu1 - mu2.
+On the basis of this CI make a conclusion in terms of the problem.
+</ol>
+</body>
+</html>
+

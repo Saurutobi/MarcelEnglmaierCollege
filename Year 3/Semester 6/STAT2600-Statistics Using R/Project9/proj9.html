@@ -1,0 +1,71 @@
+<html>
+<body>
+<h3><center>
+Stat 2600 Project 9 Due: March R2018, 2014 <br>
+Confidence Intervals </center></h3><hr>
+<p>
+<ol>
+<li> Let the R vector <i>x</i> contain the the sample X_1, .... , X_n.
+Write an R function (call it twilci.R) which obtains 
+<p>
+<ul>
+<li> the estimate of the mean and the t-confidence interval using the R function t.test
+<li> the estimate of the mean and the confidence interval based on the Wilcoxon (Hoges-Lehmann) using the R function wilcox.test
+</ul>
+For input besides the vector of observations  <i>x</i> input conf.int=TRUE.
+<p>
+For example, these lines of code obtains the estimate and CI for the Wilcoxon:
+<p>
+<pre>
+          fitwil <- wilcox.test(x,conf.int=T)
+          estci <- c(fitwil$est,fitwil$conf.int)
+</pre>
+So in your function, add the lines of code for the t-confidence interval and then rbind the results together and return the matrix.
+
+<li> Run your function  on the Darwin data.    In an experiment, Darwin took 15 pots.   In each pot, he planted
+a cross-fertilized seed and a self-fertilized seed.
+Hence, a paired design.
+At the end of the study period, he recorded the heights of both plants.
+Just form the differences in heights, Cross-Self.   Then obtain the results via your function twilci.R.
+Conclude for both analyses (one sentence each) in terms of the data.
+Then comment on any differences in the results.
+<p>
+The data is:
+<p>
+<pre>
+Cross    Self
+23.500  17.375
+12.000  20.375
+21.000  20.000
+22.000  20.000
+19.125  18.375
+21.550  18.625
+22.125  18.625
+20.375  15.250
+18.250  16.500
+21.625  18.000
+23.250  16.250
+21.000  18.000
+22.125  12.750
+23.000  15.500
+12.000  18.000
+</pre>
+<li>   Edit your function (call it twilci2.R), so that for each analysis it returns the correct sentence from the choices:
+<pre>
+ans <- "The confidence interval contains 0, so the result is inconclusive"
+ans <- "The confidence interval does not contain 0, and at this conf. the mean of X is positive"
+ans <- "The confidence interval does not contain 0, and at this conf. the mean of X is negative"
+</pre>
+Report the results for each of the samples (these are for debugging):
+<pre>
+sample1:  83 74 18 39 58 44 45 74 93 63
+sample2:   -83 -74 -18 -39  58  44  45  74  93  63
+sample3:  -83 -74 -18 -39 -58 -44 -45 -74 -93 -63
+</pre>
+<li>  For the Darwin data change the last row to 12 and 81 (slight typo).
+Run this through your function twilci.R and twilci2.R and report the results.
+Comment on differences.
+</ol>
+</body>
+</html>
+

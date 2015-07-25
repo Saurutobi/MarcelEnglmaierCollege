@@ -1,0 +1,6 @@
+C:\Users\Saurutobi\Dropbox\College\Current\CS4540-OS\Assignment #4-Scheduling\CPUSchedulingEmulator\CPUSchedulingEmulator\bin\Debug\CPUSchedulingEmulator.exe.config
+C:\Users\Saurutobi\Dropbox\College\Current\CS4540-OS\Assignment #4-Scheduling\CPUSchedulingEmulator\CPUSchedulingEmulator\bin\Debug\CPUSchedulingEmulator.exe
+C:\Users\Saurutobi\Dropbox\College\Current\CS4540-OS\Assignment #4-Scheduling\CPUSchedulingEmulator\CPUSchedulingEmulator\bin\Debug\CPUSchedulingEmulator.pdb
+C:\Users\Saurutobi\Dropbox\College\Current\CS4540-OS\Assignment #4-Scheduling\CPUSchedulingEmulator\CPUSchedulingEmulator\obj\Debug\CPUSchedulingEmulator.csprojResolveAssemblyReference.cache
+C:\Users\Saurutobi\Dropbox\College\Current\CS4540-OS\Assignment #4-Scheduling\CPUSchedulingEmulator\CPUSchedulingEmulator\obj\Debug\CPUSchedulingEmulator.exe
+C:\Users\Saurutobi\Dropbox\College\Current\CS4540-OS\Assignment #4-Scheduling\CPUSchedulingEmulator\CPUSchedulingEmulator\obj\Debug\CPUSchedulingEmulator.pdb

@@ -1,0 +1,4 @@
+1.	scientific: (-|+)(0|1|2|...|9)*.(0|1|...|9)*E(0|1|...|9)*
+	decimal: (-|+)(0|1|2|...|9)*.(0|1|...|9)*
+2.	with each character within a quote:('(a|b|...|z)')*
+	using only one quote: '(a|b|...|z)*'
